@@ -1,0 +1,32 @@
+@media screen and (max-width: 777px){
+.horiz-link-block {
+  display: none;
+}
+  .top-row-links {
+    display: flex;
+  }
+}
+@media screen and (min-width: 778px){
+  .horiz-link-block {
+    display: flex;
+
+  }
+  .top-row-links {
+    display: none;
+  }
+}
+@media screen and (max-width: 500px){
+  .center {
+    width: 90vw;
+  }
+}
+@media screen and (min-width: 501px) and (max-width: 800px){
+  .center {
+    width: 77vw;
+  }
+}
+@media screen and (min-width: 1000px){
+  .center {
+    width: 30vw;
+  }
+}
