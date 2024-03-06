@@ -3,9 +3,10 @@
       position: sticky;
       top: 0;
       /* height: 77px; */
+      background: rgb(var(--bg-color-1));
       z-index: 2;
     }
-    #bg-element {
+    .bg-element {
       position: absolute;
       top: 0;
       right: 0;
@@ -38,8 +39,30 @@
       background-attachment: fixed;
       background-image:  linear-gradient(rgba(var(--bg-color-1), 0.33), rgba(var(--bg-color-1), 0.33)), url('/assets/img/jumbo-page.jpg');
     }
+    .header-top, .header-bottom {
+      position: relative;
+    }
+    header ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: end;
+      justify-content: end;
+      gap: 11px;
+    }
+    .header-top-menu {
+      flex-direction: column;
+      align-items: end;
+      justify-content: end;
+    }
+    .header-bottom-menu {
+    }
     h1 {
       color: #0ff;
+  font-size:  clamp(1.66rem, 4vw, 3rem);
+      margin: 0;
+
     } 
     section {
       color: #ff07;
@@ -50,17 +73,23 @@
       height: 200vh;
       background: #ff07;
     }
-    h1, article, section  {
+    article, section  {
       /* z-index: 1; */
       margin: 0;
       position: relative;
       font-size: 10vh;
     }
-    #bg-element:not(.gone){
+    header:not(.gone) .bg-element {
       opacity: 0.99;
     } 
-    #bg-element.gone {
+    header.gone .bg-element {
       opacity: 0.01;
+    }
+    header.gone {
+      --logo-color-1: var(--fg-color-1);
+    }
+    header:not(.gone) {
+      --logo-color-1: var(--granite);
     }
     header {
       display: flex;
@@ -75,4 +104,24 @@
     }
     .header-bottom {
       justify-content: end;
+    }
+    header li {
+background: linear-gradient(to right,rgba(var(--fg-color-1),.11),rgba(var(--fg-color-1),.11));
+  background-size: 0 100%;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: 333ms;
+      padding: 3px;
+    }
+    header li:hover {
+      background-size: 100% 100%;
+      
+    }
+    header li a {
+  color: inherit !important;
+      text-decoration: none;
+      padding: 2px;
+    }
+    .header-bottom-menu:not(.open){
+      background: blue;
     }

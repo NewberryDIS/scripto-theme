@@ -3,11 +3,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="/assets/js/htmx-1.9.10.js"></script>
+    <script src="/assets/js/jquery-3.7.1.min.js"  crossorigin="anonymous"></script>
     <script src="/assets/js/newberry-logo.js"></script>
     <script src="/assets/js/dark-mode-toggle.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="/assets/js/menu-icon.js"></script>
+    <script src="/assets/html/toggle-menu.js"></script>
+    
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
     <link rel="stylesheet" href="/assets/css/home.css">
     <link rel="stylesheet" href="/assets/css/newberry.css">
     <style>
@@ -15,29 +20,30 @@
   </head>
   <body>
       <dark-mode-toggle></dark-mode-toggle>
-    <header>
-      <div id="bg-element">
+    <header id="header">
+      <div class="bg-element">
         <div class="page"></div>
         <div class="julia"></div>
       </div>
       <div class="header-top">
       <newberry-logo></newberry-logo>
-      <h1>title</h1>
+      <h1>Newberry Transcrib3</h1>
       <div class="header-top-menu">
         <ul>
-          <li><a href="#" target="_blank">Log in</a></li>
-          <li><a href="#" target="_blank">Sign up</a></li>
+          <li><a class="no-lines" href="#" target="_blank">Log In</a></li>
+          <li><a class="no-lines" href="#" target="_blank">Sign Up</a></li>
         </ul>
       </div>
+        <toggle-menu></toggle-menu>
       </div>
       <div class="header-bottom">
-      <div class="header-bottom-menu">
+      <div id="header-bottom-menu" class="header-bottom-menu">
         <ul>
-          <li><a href="#" target="_blank">About</a></li>
-          <li><a href="#" target="_blank">Tutorial</a></li>
-          <li><a href="#" target="_blank">Educational Resources</a></li>
-          <li><a href="#" target="_blank">News</a></li>
-          <li><a href="#" target="_blank">Contact</a></li>
+          <li><a class="no-lines" href="#" target="_blank">About</a></li>
+          <li><a class="no-lines" href="#" target="_blank">Tutorial</a></li>
+          <li><a class="no-lines" href="#" target="_blank">Educational Resources</a></li>
+          <li><a class="no-lines" href="#" target="_blank">News</a></li>
+          <li><a class="no-lines" href="#" target="_blank">Contact</a></li>
         </ul>
       </div>
 
@@ -51,7 +57,7 @@
     </main>
     <script>
       $(document).ready(function() {
-        var $headerEleement = $("#bg-element");
+        var $headerEleement = $("#header");
         var logoColorThreshold = $(window).height() - 77; 
       
         $(window).scroll(function() {

@@ -18,12 +18,16 @@ class NewberryLogo extends HTMLElement {
             </g>
         </svg>`
         const style = document.createElement('style');
-        style.textContent = `
+            style.textContent = `
                 :host {
                   transform-origin: left top;
                   transform: scale(0.77);
+                  overflow: hidden;
                 }
-                @media screen and (max-width: 777px){
+                @media screen and (max-width: 776px){
+                    :host {
+                        width: 77px;
+                    }
                     #dc-text {
                         display: none;
                     }
@@ -32,10 +36,14 @@ class NewberryLogo extends HTMLElement {
                         transform-origin: center left;
                     }
                 }
+                @media screen and (min-width: 777px) {
+                    :host {
+                        width: 277px;
+                    }
+                }
                 svg, text, path {
                     transition: 300ms;
                     fill: rgba(var(--logo-color-1, 234, 235, 231));
-                    fill: var(--logo-color-1);
                 }
                 a:hover :is(svg, path, text) {
                     fill: rgba(var(--splash-color, 4, 1, 163),1);
