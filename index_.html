@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/assets/js/newberry-logo.js"></script>
+    <script src="/assets/js/dark-mode-toggle.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/assets/css/css.css">
+    <link rel="stylesheet" href="/assets/css/newberry.css">
+  </head>
+  <body class="dark">
+    <dark-mode-toggle></dark-mode-toggle>
+    <header id="header">
+      <!-- <div class="bg"></div> -->
+      <div class="header-top-row">
+
+        <newberry-logo></newberry-logo>
+        <h1>Newberry Transcribe</h1>
+        <div class="horiz-link-block">
+          <ul>
+            <li><a href="#" target="_blank" >Log In</a></li>
+            <li><a href="#" target="_blank" >Sign Up</a></li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="header-bottom-row">
+        <ul>
+          <li class="top-row-links"><a href="#" target="_blank" >Log In</a></li>
+          <li class="top-row-links"><a href="#" target="_blank" >Sign Up</a></li>
+          <li class="bottom-row-links"><a href="#" target="_blank"  >About</a></li>
+          <li class="bottom-row-links"><a href="#" target="_blank"  >Tutorial</a></li>
+          <li class="bottom-row-links"><a href="#" target="_blank"  >Educational Resources</a></li>
+          <li class="bottom-row-links"><a href="#" target="_blank"  >News</a></li>
+          <li class="bottom-row-links"><a href="#" target="_blank"  >Contact</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="wrapper">
+      <div class="jumbotron">
+        <div class="jumbo-content">
+        </div>
+          <div class="julia-wedge"></div>
+      </div>
+      <!-- <article> -->
+      <!--   Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. -->
+      <!-- </article> -->
+    </div>
+
+          <div class="center">
+            <h2>
+              Unlock history!
+            </h2>
+            <p>
+              Help preserve the past by improving access to handwritten letters and diaries at Newberry Digital Collections
+            </p>
+            <p>
+              [icon: Start now] [icon: Learn more]
+            </p>
+            <p>
+              PAGES TRANSCRIBED: XX,XXX!
+            </p>
+            <p>
+              [lock icon]  
+            </p>
+          </div>
+      <div class="content">
+       
+;lorem ipsum dolor
+      </div>
+  </body>
+  <script>
+
+$(document).ready(function() {
+  var $headerEleement = $("#header"); // Replace with the actual ID of your element
+  var logoColorThreshold = $(window).height() - 77; // Change this value to your desired scroll point
+  // var opacityThreshold = 77;
+
+  $(window).scroll(function() {
+    var scrollPosition = $(window).scrollTop();
+    if (scrollPosition >= logoColorThreshold) {
+      $headerEleement.addClass("opaque"); // Replace with your desired class name
+    } else {
+      $headerEleement.removeClass("opaque");
+    }
+    // if (scrollPosition >= $('.opacity-changer').offset().top - opacityThreshold) {
+    //
+    // }
+  });
+});
+
+  </script>
+</html>

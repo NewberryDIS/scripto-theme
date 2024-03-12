@@ -21,5 +21,5 @@ app = FastAPI()
 #     allow_headers=["*"],
 # )
 
-app.mount("/", StaticFiles(directory='/Users/nicolas/omeka/htmx/'), name="testing_files")
+app.mount("/", StaticFiles(directory='./'), name="testing_files")
 

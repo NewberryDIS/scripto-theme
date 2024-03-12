@@ -1,96 +1,152 @@
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="/assets/js/htmx-1.9.10.js"></script>
+    <script src="/assets/js/jquery-3.7.1.min.js"  crossorigin="anonymous"></script>
     <script src="/assets/js/newberry-logo.js"></script>
     <script src="/assets/js/dark-mode-toggle.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/assets/css/css.css">
+    <script src="/assets/js/toggle-menu.js"></script>
+    <script src="/assets/js/logo-loader.js"></script>
+
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png">
+    <link rel="stylesheet" href="/assets/css/home.css">
     <link rel="stylesheet" href="/assets/css/newberry.css">
+    <style>
+    </style>
   </head>
-  <body class="dark">
+  <body>
     <dark-mode-toggle></dark-mode-toggle>
     <header id="header">
-      <!-- <div class="bg"></div> -->
-      <div class="header-top-row">
-
+      <div class="bg-element">
+        <div class="page"></div>
+        <div class="julia"></div>
+      </div>
+      <div class="header-top">
         <newberry-logo></newberry-logo>
-        <h1>Newberry Transcribe</h1>
-        <div class="horiz-link-block">
+        <h1>Newberry Transcrib3</h1>
+        <div class="button-wrapper">
+          <toggle-menu></toggle-menu>
+        </div>
+      </div>
+      <div class="header-bottom">
+        <div id="header-bottom-menu" class="header-bottom-menu">
           <ul>
-            <li><a href="#" target="_blank" >Log In</a></li>
-            <li><a href="#" target="_blank" >Sign Up</a></li>
-
+            <li><a class="no-lines" href="#" target="_blank">Log In</a></li>
+            <li><a class="no-lines" href="#" target="_blank">Sign Up</a></li>
+            <li><a class="no-lines" href="#" target="_blank">About</a></li>
+            <li><a class="no-lines" href="#" target="_blank">Tutorial</a></li>
+            <li><a class="no-lines" href="#" target="_blank">Educational Resources</a></li>
+            <li><a class="no-lines" href="#" target="_blank">News</a></li>
+            <li><a class="no-lines" href="#" target="_blank">Contact</a></li>
           </ul>
         </div>
-      </div>
-      <div class="header-bottom-row">
-        <ul>
-          <li class="top-row-links"><a href="#" target="_blank" >Log In</a></li>
-          <li class="top-row-links"><a href="#" target="_blank" >Sign Up</a></li>
-          <li class="bottom-row-links"><a href="#" target="_blank"  >About</a></li>
-          <li class="bottom-row-links"><a href="#" target="_blank"  >Tutorial</a></li>
-          <li class="bottom-row-links"><a href="#" target="_blank"  >Educational Resources</a></li>
-          <li class="bottom-row-links"><a href="#" target="_blank"  >News</a></li>
-          <li class="bottom-row-links"><a href="#" target="_blank"  >Contact</a></li>
-        </ul>
+
       </div>
     </header>
-
-    <div class="wrapper">
-      <div class="jumbotron">
-        <div class="jumbo-content">
+    <main>
+      <div class="page"></div>
+      <div class="julia"></div>
+      <section class="jumbotron">
+        <div class="center">
+          <logo-loader></logo-loader>
+          <h2>
+            Unlock history!
+          </h2>
+          <p>
+            Help preserve the past by improving access to handwritten letters and diaries at Newberry Digital Collections
+          </p>
+          <p>
+            [icon: Start now] [icon: Learn more]
+          </p>
+          <p>
+            PAGES TRANSCRIBED: XX,XXX!
+          </p>
+          <p>
+            [lock icon]  
+          </p>
         </div>
-          <div class="julia-wedge"></div>
-      </div>
-      <!-- <article> -->
-      <!--   Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. -->
-      <!-- </article> -->
-    </div>
+      </section>
+      <article>
+        <section class="instructions">
+          <ul>
+            <li>
+              <img src="/assets/img/favicon.png" alt="" />
+              <p>
+              Select a manuscript page 
+              </p>
+            </li>
+            <li>
+              <img src="/assets/img/favicon.png" alt="" />
+              <p>
+              Type what you see!
+              </p>
+            </li>
+            <li>
+              <img src="/assets/img/favicon.png" alt="" />
+              <p>
+              That's it!              </p>
+            </li>
+          </ul>
+          <p class="inst-extra"> Your transcription will be reviewed and added to our catalog, allowing scholars to search handwritten text
+</p>
+        </section>
+        <section class="tile-section">
+        <div  class="tile" style="background-image: url('https://collections.newberry.org/IIIF3/Image/2KXJ8ZS5W9CGO/square/300,/0/default.jpg')">
+          <!-- <div  class="tile" style="background-image: url('/assets/img/jack_tile.jpg')"> -->
+          <h4>Tile Title</h4>
+          <p>
+            Tile Subtitle
+          </p>
+        </div>
+        <div  class="tile" style="background-image: url('https://collections.newberry.org/IIIF3/Image/2KXJ8ZS5W9CGO/square/300,/0/default.jpg')">
+          <!-- <div  class="tile" style="background-image: url('/assets/img/jack_tile.jpg')"> -->
+          <h4>Tile Title</h4>
+          <p>
+            Tile Subtitle
+          </p>
+        </div>
+        <div  class="tile" style="background-image: url('https://collections.newberry.org/IIIF3/Image/2KXJ8ZS5W9CGO/square/300,/0/default.jpg')">
+          <!-- <div  class="tile" style="background-image: url('/assets/img/jack_tile.jpg')"> -->
+          <h4>Tile Title</h4>
+          <p>
+            Tile Subtitle
+          </p>
+        </div>
+        <div  class="tile" style="background-image: url('https://collections.newberry.org/IIIF3/Image/2KXJ8ZS5W9CGO/square/300,/0/default.jpg')">
+          <!-- <div  class="tile" style="background-image: url('/assets/img/jack_tile.jpg')"> -->
+          <h4>Tile Title</h4>
+          <p>
+            Tile Subtitle
+          </p>
+        </div>
+        <div  class="tile" style="background-image: url('https://collections.newberry.org/IIIF3/Image/2KXJ8ZS5W9CGO/square/300,/0/default.jpg')">
+          <!-- <div  class="tile" style="background-image: url('/assets/img/jack_tile.jpg')"> -->
+          <h4>Tile Title</h4>
+          <p>
+            Tile Subtitle
+          </p>
+        </div>
 
-          <div class="center">
-            <h2>
-              Unlock history!
-            </h2>
-            <p>
-              Help preserve the past by improving access to handwritten letters and diaries at Newberry Digital Collections
-            </p>
-            <p>
-              [icon: Start now] [icon: Learn more]
-            </p>
-            <p>
-              PAGES TRANSCRIBED: XX,XXX!
-            </p>
-            <p>
-              [lock icon]  
-            </p>
-          </div>
-      <div class="content">
-       
-;lorem ipsum dolor
-      </div>
+        </section>
+      </article>
+    </main>
+    <script>
+    $(document).ready(function() {
+      var $headerEleement = $("#header");
+      var logoColorThreshold = $(window).height() - 77; 
+
+      $(window).scroll(function() {
+        var scrollPosition = $(window).scrollTop();
+        if (scrollPosition >= logoColorThreshold) {
+          $headerEleement.addClass("gone");
+        } else {
+          $headerEleement.removeClass("gone");
+        }
+      });
+    });
+    </script>
   </body>
-  <script>
-
-$(document).ready(function() {
-  var $headerEleement = $("#header"); // Replace with the actual ID of your element
-  var logoColorThreshold = $(window).height() - 77; // Change this value to your desired scroll point
-  // var opacityThreshold = 77;
-
-  $(window).scroll(function() {
-    var scrollPosition = $(window).scrollTop();
-    if (scrollPosition >= logoColorThreshold) {
-      $headerEleement.addClass("opaque"); // Replace with your desired class name
-    } else {
-      $headerEleement.removeClass("opaque");
-    }
-    // if (scrollPosition >= $('.opacity-changer').offset().top - opacityThreshold) {
-    //
-    // }
-  });
-});
-
-  </script>
-</html>
