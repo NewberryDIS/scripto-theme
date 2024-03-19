@@ -1,0 +1,704 @@
+{
+  "@context": "http://transcribe.newberry.org/ohmekas/api-context",
+  "@id": "http://transcribe.newberry.org/ohmekas/api/items/436",
+  "@type": [
+    "o:Item",
+    "dctype:Text"
+  ],
+  "o:id": 436,
+  "o:is_public": true,
+  "o:owner": {
+    "@id": "http://transcribe.newberry.org/ohmekas/api/users/1",
+    "o:id": 1
+  },
+  "o:resource_class": {
+    "@id": "http://transcribe.newberry.org/ohmekas/api/resource_classes/31",
+    "o:id": 31
+  },
+  "o:resource_template": {
+    "@id": "http://transcribe.newberry.org/ohmekas/api/resource_templates/2",
+    "o:id": 2
+  },
+  "o:thumbnail": null,
+  "o:title": "May Walden papers [01.01], 1892-1959",
+  "thumbnail_display_urls": {
+    "large": "http://transcribe.newberry.org/ohmekas/files/large/a6cc694f082b4dda2c48274437f2c081861540fe.jpg",
+    "medium": "http://transcribe.newberry.org/ohmekas/files/medium/a6cc694f082b4dda2c48274437f2c081861540fe.jpg",
+    "square": "http://transcribe.newberry.org/ohmekas/files/square/a6cc694f082b4dda2c48274437f2c081861540fe.jpg"
+  },
+  "o:created": {
+    "@value": "2024-03-08T20:10:31+00:00",
+    "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+  },
+  "o:modified": {
+    "@value": "2024-03-08T20:41:53+00:00",
+    "@type": "http://www.w3.org/2001/XMLSchema#dateTime"
+  },
+  "o:primary_media": {
+    "@id": "http://transcribe.newberry.org/ohmekas/api/media/437",
+    "o:id": 437
+  },
+  "o:media": [
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/437",
+      "o:id": 437
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/438",
+      "o:id": 438
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/439",
+      "o:id": 439
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/440",
+      "o:id": 440
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/441",
+      "o:id": 441
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/442",
+      "o:id": 442
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/443",
+      "o:id": 443
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/444",
+      "o:id": 444
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/445",
+      "o:id": 445
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/446",
+      "o:id": 446
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/447",
+      "o:id": 447
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/448",
+      "o:id": 448
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/449",
+      "o:id": 449
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/450",
+      "o:id": 450
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/451",
+      "o:id": 451
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/452",
+      "o:id": 452
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/453",
+      "o:id": 453
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/454",
+      "o:id": 454
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/455",
+      "o:id": 455
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/456",
+      "o:id": 456
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/457",
+      "o:id": 457
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/458",
+      "o:id": 458
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/459",
+      "o:id": 459
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/460",
+      "o:id": 460
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/461",
+      "o:id": 461
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/462",
+      "o:id": 462
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/463",
+      "o:id": 463
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/464",
+      "o:id": 464
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/465",
+      "o:id": 465
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/466",
+      "o:id": 466
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/467",
+      "o:id": 467
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/468",
+      "o:id": 468
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/469",
+      "o:id": 469
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/470",
+      "o:id": 470
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/471",
+      "o:id": 471
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/472",
+      "o:id": 472
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/473",
+      "o:id": 473
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/474",
+      "o:id": 474
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/475",
+      "o:id": 475
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/476",
+      "o:id": 476
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/477",
+      "o:id": 477
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/478",
+      "o:id": 478
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/479",
+      "o:id": 479
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/480",
+      "o:id": 480
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/481",
+      "o:id": 481
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/482",
+      "o:id": 482
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/483",
+      "o:id": 483
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/484",
+      "o:id": 484
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/485",
+      "o:id": 485
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/486",
+      "o:id": 486
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/487",
+      "o:id": 487
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/488",
+      "o:id": 488
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/489",
+      "o:id": 489
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/490",
+      "o:id": 490
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/491",
+      "o:id": 491
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/492",
+      "o:id": 492
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/493",
+      "o:id": 493
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/494",
+      "o:id": 494
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/495",
+      "o:id": 495
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/496",
+      "o:id": 496
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/497",
+      "o:id": 497
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/498",
+      "o:id": 498
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/499",
+      "o:id": 499
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/500",
+      "o:id": 500
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/501",
+      "o:id": 501
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/502",
+      "o:id": 502
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/503",
+      "o:id": 503
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/504",
+      "o:id": 504
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/505",
+      "o:id": 505
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/506",
+      "o:id": 506
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/507",
+      "o:id": 507
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/508",
+      "o:id": 508
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/509",
+      "o:id": 509
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/510",
+      "o:id": 510
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/511",
+      "o:id": 511
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/512",
+      "o:id": 512
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/513",
+      "o:id": 513
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/514",
+      "o:id": 514
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/515",
+      "o:id": 515
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/516",
+      "o:id": 516
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/517",
+      "o:id": 517
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/518",
+      "o:id": 518
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/519",
+      "o:id": 519
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/520",
+      "o:id": 520
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/521",
+      "o:id": 521
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/522",
+      "o:id": 522
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/523",
+      "o:id": 523
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/524",
+      "o:id": 524
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/525",
+      "o:id": 525
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/526",
+      "o:id": 526
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/527",
+      "o:id": 527
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/528",
+      "o:id": 528
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/529",
+      "o:id": 529
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/530",
+      "o:id": 530
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/531",
+      "o:id": 531
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/532",
+      "o:id": 532
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/533",
+      "o:id": 533
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/534",
+      "o:id": 534
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/535",
+      "o:id": 535
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/536",
+      "o:id": 536
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/537",
+      "o:id": 537
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/538",
+      "o:id": 538
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/539",
+      "o:id": 539
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/540",
+      "o:id": 540
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/541",
+      "o:id": 541
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/542",
+      "o:id": 542
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/543",
+      "o:id": 543
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/544",
+      "o:id": 544
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/545",
+      "o:id": 545
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/546",
+      "o:id": 546
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/547",
+      "o:id": 547
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/548",
+      "o:id": 548
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/549",
+      "o:id": 549
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/550",
+      "o:id": 550
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/551",
+      "o:id": 551
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/552",
+      "o:id": 552
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/553",
+      "o:id": 553
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/554",
+      "o:id": 554
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/555",
+      "o:id": 555
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/556",
+      "o:id": 556
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/557",
+      "o:id": 557
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/558",
+      "o:id": 558
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/559",
+      "o:id": 559
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/560",
+      "o:id": 560
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/561",
+      "o:id": 561
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/562",
+      "o:id": 562
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/563",
+      "o:id": 563
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/564",
+      "o:id": 564
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/565",
+      "o:id": 565
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/566",
+      "o:id": 566
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/567",
+      "o:id": 567
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/568",
+      "o:id": 568
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/569",
+      "o:id": 569
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/570",
+      "o:id": 570
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/571",
+      "o:id": 571
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/572",
+      "o:id": 572
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/573",
+      "o:id": 573
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/574",
+      "o:id": 574
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/575",
+      "o:id": 575
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/576",
+      "o:id": 576
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/577",
+      "o:id": 577
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/578",
+      "o:id": 578
+    },
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/media/579",
+      "o:id": 579
+    }
+  ],
+  "o:item_set": [
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/item_sets/580",
+      "o:id": 580
+    }
+  ],
+  "o:site": [
+    {
+      "@id": "http://transcribe.newberry.org/ohmekas/api/sites/1",
+      "o:id": 1
+    }
+  ],
+  "dcterms:title": [
+    {
+      "type": "literal",
+      "property_id": 1,
+      "property_label": "Title",
+      "is_public": true,
+      "@value": "May Walden papers [01.01], 1892-1959"
+    }
+  ],
+  "dcterms:identifier": [
+    {
+      "type": "literal",
+      "property_id": 10,
+      "property_label": "Identifier",
+      "is_public": false,
+      "@value": "midwest_ms_walden_m_box_001"
+    },
+    {
+      "type": "literal",
+      "property_id": 10,
+      "property_label": "Identifier",
+      "is_public": false,
+      "@value": "NL11CECE"
+    }
+  ],
+  "dcterms:coverage": [
+    {
+      "type": "literal",
+      "property_id": 14,
+      "property_label": "Coverage",
+      "is_public": false,
+      "@value": "IMLS"
+    }
+  ],
+  "dcterms:temporal": [
+    {
+      "type": "literal",
+      "property_id": 41,
+      "property_label": "Temporal Coverage",
+      "is_public": true,
+      "@value": "1892-1959"
+    }
+  ],
+  "dcterms:format": [
+    {
+      "type": "literal",
+      "property_id": 9,
+      "property_label": "Format",
+      "is_public": true,
+      "@value": "Letters"
+    }
+  ],
+  "dcterms:subject": [
+    {
+      "type": "literal",
+      "property_id": 3,
+      "property_label": "Subject",
+      "is_public": true,
+      "@value": "Family life"
+    },
+    {
+      "type": "literal",
+      "property_id": 3,
+      "property_label": "Subject",
+      "is_public": true,
+      "@value": "Women"
+    }
+  ],
+  "dcterms:language": [
+    {
+      "type": "literal",
+      "property_id": 12,
+      "property_label": "Language",
+      "is_public": true,
+      "@value": "English"
+    }
+  ]
+}

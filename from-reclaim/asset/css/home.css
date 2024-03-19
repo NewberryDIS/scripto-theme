@@ -1,0 +1,221 @@
+@import './mq.css';
+@import './item-showcase.css';
+@import './instructions.css';
+
+body, * {
+  transition: 200ms ease-in;
+  box-sizing: border-box;
+}
+
+/* header */
+.site-header {
+background: rgba(var(--bg-color-1),0.77);
+  /* position: sticky !important; */
+}
+.sticky-buttons {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 11px;
+  z-index: 3;
+}
+header {
+  padding: 0 33px;
+  /* position: sticky; */
+  top: 0;
+  /* height: 77px; */
+  background: rgb(var(--bg-color-1));
+  z-index: 2;
+}
+.bg-element {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 200px;
+  transition: opacity 0.5s ease-out;
+}
+.jumbotron-wrapper {
+  position: relative;
+}
+header .julia, header .page {
+  position: absolute;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+}
+.jumbotron-wrapper .julia, .jumbotron-wrapper .page {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.julia {
+  /* background-position: center; */
+  background-attachment: fixed;
+  background-size: auto 100%;
+  background-image: url('/ohmekas/themes/papers/asset/img/jumbo-julia.jpg');
+  clip-path: polygon(0 0, 66vh 0, 33vh 100vh, 0 100vh); 
+}
+.page {
+  background-attachment: fixed;
+  background-image:  linear-gradient(rgba(var(--bg-color-1), 0.66), rgba(var(--bg-color-1), 0.66)), url('/ohmekas/themes/papers/asset/img/jumbo-page.jpg');
+}
+.header-top, .header-bottom {
+  position: relative;
+}
+header ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: end;
+  justify-content: end;
+  /* gap: 11px; */
+}
+.header-top-menu {
+  flex-direction: column;
+  align-items: end;
+  justify-content: end;
+}
+.header-bottom-menu {
+}
+h1 {
+  color: #0ff;
+  font-size:  clamp(1.66rem, 4vw, 3rem);
+  margin: 0;
+
+} 
+header:not(.gone) .bg-element {
+  opacity: 0.99;
+} 
+header.gone .bg-element {
+  opacity: 0.01;
+}
+header.gone {
+  --logo-color-1: var(--fg-color-1);
+}
+header:not(.gone) {
+  --logo-color-1: var(--granite);
+}
+header {
+  display: flex;
+  flex-direction: column;
+}
+.header-top, .header-bottom {
+  display: flex;
+  align-items: center;
+}
+.header-top {
+  justify-content: space-between;
+}
+.header-bottom {
+  justify-content: end;
+}
+/* overriding omeka menu display: inline-block */
+header ul.navigation {
+  display: flex;
+}
+header li {
+
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right,rgba(var(--fg-color-1),.11),rgba(var(--fg-color-1),.11));
+  background-size: 0 100%;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: 333ms;
+}
+header li:hover {
+  background-size: 100% 100%;
+
+}
+header li a {
+  color: inherit !important;
+  text-decoration: none;
+  padding: 2px;
+}
+.header-bottom-menu:not(.header-menu-open){
+  /* display: none; */
+}
+
+/* JUMBOTRON */
+
+.jumbotron {
+  height: calc(100vh - 150px);
+  display: flex;
+  /* color: #ff07; */
+
+}
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
+}
+.jumbotron :is(h2, p){
+  /* width: 50%; */
+  text-align: center;
+}
+.jumbotron h2 {
+  font-size: clamp(2rem, 7vw, 3.3rem);
+}
+.jumbotron p {
+  font-family: "styrene";
+  font-size: clamp(1.2rem, 5.5vw, 1.33rem);
+  margin: 11px;
+}
+/* .blocks div:not(:first-child) { */
+/*     background-color: #900 !important; */
+/*     z-index: 10; */
+/* } */
+ 
+article, .jumbotron {
+  /* z-index: 1; */
+  margin: 0;
+  position: relative;
+}
+/* TILES */
+
+article {
+  padding: 33px;
+  /* color: #ff0; */
+  /* background: #ff07; */
+  /* height: 200vh; */
+  background: rgb(var(--bg-color-1));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 22px;
+
+}
+
+.tile-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  justify-content: center;
+  align-items: start;
+}
+.tile {
+  background-size: cover;
+  width: 300px; 
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: stretch;
+
+}
+.tile :is( h4, p ) {
+  background: rgb(var(--bg-color-2));
+  padding: 3px;
+  margin: 0;
+  
+}

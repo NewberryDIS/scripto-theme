@@ -1,0 +1,64 @@
+@font-face {
+	font-family: 'flecha';
+	src: url('../fonts/FlechaM-Regular.woff');
+}
+
+@font-face {
+	font-family: 'flecha';
+	src: url('../fonts/FlechaM-Bold.woff');
+	font-weight: 700;
+}
+
+@font-face {
+	font-family: 'flecha';
+	src: url('../fonts/FlechaM-Black.woff');
+	font-weight: 900;
+}
+
+@font-face {
+	font-family: 'styrene';
+	src: url('../fonts/StyreneB-Regular-Web.woff');
+}
+
+@font-face {
+	font-family: 'styrene-bold';
+	src: url('../fonts/StyreneB-Bold-Web.woff');
+}
+
+@font-face {
+	font-family: 'signifier';
+	src: url('../fonts/signifier-regular.woff2');
+}
+
+@font-face {
+	font-family: 'signifier-bold';
+	src: url('../fonts/signifier-bold.woff2');
+}
+
+h1,
+h2 {
+	font-family: 'flecha';
+}
+
+h3,
+h4,
+h5,
+h6,
+dt {
+	font-family: 'styrene';
+}
+
+body,
+html {
+	font-family: 'signifier';
+}
+
+b {
+	font-family: 'styrene-bold';
+}
+
+h1 {
+	font-size: min(10vh, 13vw);
+	line-height: min(10vh, 13vw);
+}
+

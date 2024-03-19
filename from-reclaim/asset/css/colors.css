@@ -1,0 +1,116 @@
+html {
+
+
+  --success-light: 205, 255, 205;
+  --success-dark: 0, 83, 0;
+
+  --error-light: 255, 205, 205;
+  --error-dark: 83, 0, 0;
+
+	--flame: 241, 97, 81;
+	--park-green: 32, 84, 62;
+	--tile: 146, 88, 64;
+	--sapphire: 64, 81, 163;
+	--lake: 126, 196, 226;
+	--mulberry: 173, 43, 90;
+	--lavender: 205, 184, 209;
+	--midnight: 17, 26, 42;
+	--granite: 234, 235, 231;
+	--sand: 234, 220, 201;
+	--angle: 120deg;
+	--dist: 66vw;
+}
+
+/* body:not(.dark) { */
+/* 	--accent: 136, 58, 234; */
+/* 	--accent-light: 224, 204, 250; */
+/* 	--accent-dark: 49, 10, 101; */
+/* 	--accent-gradient: linear-gradient( */
+/* 		45deg, */
+/* 		rgb(var(--accent)), */
+/* 		rgb(var(--accent-light)) 30%, */
+/* 		white 60% */
+/* 	); */
+/**/
+/* 	--splash-color: var(--midnight); */
+/* 	--bg-color-1: var(--sand); */
+/* 	--bg-color-2: var(--park-green); */
+/* 	--fg-color-1: var(--midnight); */
+/* 	--fg-color-2: var(--park-green); */
+/* } */
+
+/* body.dark { */
+body {
+  --success-bg: rgb(var(--success-dark));
+  --success-fg: rgb(var(--success-light));
+  --error-bg: rgb(var(--error-dark));
+  --error-fg: rgb(var(--error-light));
+	--accent: var(--bg-color-1);
+	--accent-light: var(--fg-color-1);
+	--accent-dark: var(--bg-color-2);
+
+	--splash-color: var(--lavender);
+	--fg-color-1: var(--granite);
+	--fg-color-2: var(--lake);
+	--bg-color-1: var(--sapphire);
+	--bg-color-2: var(--mulberry);
+  --partial-wedge: linear-gradient(var(--angle),rgba(var(--bg-color-1),0) 0vw,var(--dist), rgb(var(--bg-color-2)) var(--dist) 100vw);
+  --wedge: linear-gradient(var(--angle),rgb(var(--bg-color-1)) 0vw,var(--dist), rgb(var(--bg-color-2)) var(--dist) 100vw);
+  --page: url('2KXJ8ZIWK489')
+}
+
+
+body {
+  --nick-dark: 33,37,42;
+  color: rgb(var(--fg-color-1));
+  background: rgb(var(--bg-color-1));
+  background: var(--partial-wedge);
+}
+a:not(.no-lines) {
+
+}
+
+h1,
+h2 {
+	color: rgb(var(--splash-color));
+}
+
+h3,
+h4,
+h5,
+h6,
+dt {
+	color: rgb(var(--brand));
+}
+
+body,
+html {
+	color: rgb(var(--fg-color-1));
+}
+
+b {
+	color: rgb(var(--fg-color-2));
+}
+
+/* julia */
+
+
+body {
+    background-image: url('https://collections.newberry.org/IIIF3/Image/2KXJ8ZS80YQPT/full/,500/0/default.jpg'),  var(--partial-wedge);
+    background-image:  var(--partial-wedge), url('https://collections.newberry.org/IIIF3/Image/2KXJ8ZS80YQPT/full/,500/0/default.jpg');
+    background-size: contain; 
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+
+@media (min-width: 600px) {
+    body {
+        /* background-image: url('https://collections.newberry.org/IIIF3/Image/2KXJ8ZS80YQPT/full/,800/0/default.jpg'); */
+    }
+}
+
+@media (min-width: 1000px) {
+    body {
+        /* background-image: url('https://collections.newberry.org/IIIF3/Image/2KXJ8ZS80YQPT/full/,1000/0/default.jpg'); */
+    }
+}e
