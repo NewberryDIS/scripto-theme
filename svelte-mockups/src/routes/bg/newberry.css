@@ -1,0 +1,139 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body,
+body * {
+  box-sizing: border-box;
+}
+html {
+  --flame: 241, 97, 81;
+  --park-green: 32, 84, 62;
+  --tile: 146, 88, 64;
+  --sapphire: 64, 81, 163;
+  --lake: 126, 196, 226;
+  --mulberry: 173, 43, 90;
+  --lavender: 205, 184, 209;
+  --rev-lav: 96, 66, 102;
+  --midnight: 17, 26, 42;
+  --granite: 234, 235, 231;
+  --sand: 234, 220, 201;
+  --angle: 70deg;
+  --dist: 66%;
+
+  --sm: 640px;
+  --md: 768px;
+  --lg: 1024px;
+  --xl: 1280px;
+  --xxl: 1536px;
+}
+
+/*  dm on */
+:root {
+  /* --splash-color: var(--sapphire); */
+  /* --bg-color-1: var(--midnight); */
+  /* --bg-color-2: var(--mulberry); */
+  /* --fg-color-2: var(--lavender); */
+  /* --fg-color-1: var(--granite); */
+}
+body:not(.dark) {
+  --splash-color: var(--park-green);
+  --fg-color-1: var(--midnight);
+  --fg-color-2: var(--rev-lav);
+  --bg-color-2: var(--lavender);
+  --bg-color-1: var(--granite);
+  --bg-1: linear-gradient(
+    60deg,
+    rgb(var(--bg-color-1)) 0vw,
+    40vw,
+    rgb(var(--bg-color-2)) 40vw 100vw
+  );
+  --bg-2: linear-gradient(
+    60deg,
+    rgb(var(--bg-color-2)) 0vw,
+    40vw,
+    rgb(var(--bg-color-1)) 40vw 100vw
+  );
+}
+body.dark {
+  --splash-color: var(--sand);
+  --bg-color-1: var(--midnight);
+  --bg-color-2: var(--rev-lav);
+  --fg-color-1: var(--granite);
+  --fg-color-2: var(--lavender);
+}
+
+body:not(.dark) :is( header, .jumbotron, .bg ) {
+  --splash-color: var(--sand);
+  --bg-color-1: var(--midnight);
+  --bg-color-2: var(--rev-lav);
+  --fg-color-1: var(--granite);
+  --fg-color-2: var(--lavender);
+}
+
+
+body {
+  background: rgb(var(--bg-color-1));
+  /* background-image: linear-gradient(#f0f, #0f0); */
+}
+@font-face {
+  font-family: "flecha";
+  src: url("/ohmekas/themes/papers/asset/fonts/FlechaM-Regular.woff");
+}
+@font-face {
+  font-family: "styrene";
+  src: url("/ohmekas/themes/papers/asset/fonts/StyreneB-Regular-Web.woff");
+}
+@font-face {
+  font-family: "styrene-bold";
+  src: url("/ohmekas/themes/papers/asset/fonts/StyreneB-Bold-Web.woff");
+}
+@font-face {
+  font-family: "signifier";
+  src: url("/ohmekas/themes/papers/asset/fonts/signifier-regular.woff2");
+}
+@font-face {
+  font-family: "signifier-bold";
+  src: url("/ohmekas/themes/papers/asset/fonts/signifier-bold.woff2");
+}
+
+h1,
+h2 {
+  font-family: "flecha";
+  color: rgb(var(--splash-color));
+  color: rgb(var(--fg-color-2));
+}
+h3,
+h4,
+h5,
+h6,
+dt,
+p b {
+  font-family: "styrene";
+  color: rgb(var(--splash-color));
+  color: rgb(var(--fg-color-2));
+}
+
+body,
+html {
+  font-family: "signifier";
+  color: rgb(var(--fg-color-1));
+}
+
+a {
+  color: rgb(var(--fg-color-2));
+  text-decoration: none;
+}
+b {
+  font-family: "styrene-bold";
+}

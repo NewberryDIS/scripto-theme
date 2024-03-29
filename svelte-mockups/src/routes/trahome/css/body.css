@@ -1,0 +1,127 @@
+
+
+body, * {
+  transition: 200ms ease-in;
+  box-sizing: border-box;
+}
+
+.sticky-buttons {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 11px;
+  z-index: 3;
+}
+.jumbotron-wrapper {
+  position: relative;
+}
+
+.jumbotron-wrapper .bg-element {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 300px;
+  transition: opacity 0.5s ease-out;
+}
+.jumbotron-wrapper .julia, .jumbotron-wrapper .page {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.julia {
+  /* background-position: center; */
+  background-attachment: fixed;
+  background-size: auto 100%;
+  background-image: url('/ohmekas/themes/papers/asset/img/jumbo-julia.jpg');
+  clip-path: polygon(0 0, 66vh 0, 33vh 100vh, 0 100vh); 
+}
+.page {
+  background-attachment: fixed;
+  background-image:  linear-gradient(rgba(var(--bg-color-1), 0.66), rgba(var(--bg-color-1), 0.66)), url('/ohmekas/themes/papers/asset/img/jumbo-page.jpg');
+}
+
+/* JUMBOTRON */
+
+.jumbotron {
+  height: calc(100vh - 150px);
+  display: flex;
+  /* color: #ff07; */
+
+}
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: end;
+}
+.jumbotron :is(h2, p){
+  /* width: 50%; */
+  text-align: center;
+}
+.jumbotron h2 {
+  font-size: clamp(2rem, 7vw, 3.3rem);
+}
+.jumbotron p {
+  font-family: "styrene";
+  font-size: clamp(1.2rem, 5.5vw, 1.33rem);
+  margin: 11px;
+}
+/* .blocks div:not(:first-child) { */
+/*     background-color: #900 !important; */
+/*     z-index: 10; */
+/* } */
+ 
+article, .jumbotron {
+  /* z-index: 1; */
+  margin: 0;
+  position: relative;
+}
+/* TILES */
+
+article {
+  padding: 33px;
+  /* color: #ff0; */
+  /* background: #ff07; */
+  /* height: 200vh; */
+  background: rgb(var(--bg-color-1));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 22px;
+
+}
+
+.tile-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  justify-content: center;
+  align-items: start;
+}
+.tile {
+  background-size: cover;
+  width: 300px; 
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: stretch;
+
+}
+.tile :is( h4, p ) {
+  background: rgb(var(--bg-color-2));
+  padding: 3px;
+  margin: 0;
+  
+}
+
+#user-bar {
+  position: relative;
+  z-index: 3;
+}

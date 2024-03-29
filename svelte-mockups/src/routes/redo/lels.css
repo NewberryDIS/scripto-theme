@@ -1,0 +1,14 @@
+
+header {
+  z-index: 100;
+}
+.header-bg{
+  z-index: 50;
+}
+.julia, .peepo {
+
+  z-index: 70;
+}
+.page, .instructions, .preview-block {
+  z-index: 30;
+}

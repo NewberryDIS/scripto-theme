@@ -1,0 +1,21 @@
+.bg-element, header, nav, .content {
+  /* position: relative; */
+}
+.header-bg-element {
+  z-index: 20;
+}
+header {
+  z-index: 30;
+}
+h1, .button-wrapper {
+  z-index: 35;
+}
+nav {
+  z-index: 40;
+}
+nav .header-bottom-menu {
+  z-index: 45;
+}
+.content {
+  z-index: 10;
+}

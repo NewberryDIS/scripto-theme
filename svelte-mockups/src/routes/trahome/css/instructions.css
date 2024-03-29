@@ -1,0 +1,95 @@
+
+body.dark {
+  --instr-bg: var( --sand );
+  --instr-fg: var( --sapphire );
+} 
+body:not(.dark){
+  --instr-bg: var( --flame );
+  --instr-fg: var( --midnight );
+}
+.instructions {
+  color: rgb(var( --instr-fg));
+  background: rgb(var(--instr-bg));
+  position: relative;
+  margin:  auto;
+  /* width: 80vw; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 11px;
+}
+.instructions ul , .inst-extra{
+  text-align: center;
+  padding: 0;
+  margin: 0 auto;
+  /* width: 80%; */
+  display: flex;
+  justify-content: center;
+  
+}
+.instructions :is( ul, li ) {
+  list-style-type: none;
+  padding: 0;
+
+}
+.instructions li {
+  margin: 0;
+  flex: 1;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+}
+.instructions li > * {
+  width: 50%;
+}
+.instructions  :is(p, img):not(.inst-extra){
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+dt, dd {
+  text-align: center;
+}
+
+.instructions .image-pile {
+  overflow: hidden;
+  width: 50%;
+  height: 100%;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  
+  display: grid;
+  align-items: center;
+}
+
+.instructions .image-pile :is(svg, img) {
+  position: absolute;
+  height: 77%;
+  width: 77%;
+}
+#page-icon {
+  top: 0;
+  right: 0;
+}
+#user-icon {
+  top: 22%;
+  left: 0;
+}
+#keys-icon {
+  justify-self: center;
+  /* align-self: center; */
+
+}
+#student-icon {
+  left: 0;
+}
+#search-icon {
+  position: relative;
+  transform: scale(0.77);
+  transform-origin: right;
+  justify-self: end;
+  /* top: 50%; */
+  /* right: 0; */
+}
