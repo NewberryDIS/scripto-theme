@@ -1,0 +1,13 @@
+
+header {
+  z-index: 100;
+}
+.jumbo {
+  z-index: 70;
+}
+.header-bg {
+  z-index: 50;
+}
+.instructions, .preview-block {
+  z-index: 30;
+}

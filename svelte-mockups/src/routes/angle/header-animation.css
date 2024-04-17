@@ -1,0 +1,35 @@
+
+header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #0ff6;
+  border-radius: 50%;
+  opacity: 0.75;
+  aspect-ratio: 1 / 1;
+  scale: 0;
+  transform: translate(-50%, -50%);
+  animation: scroll 1000ms forwards;
+  /* animation: scale_up linear forwards; */
+  animation-timeline: scroll();
+}
+@keyframes scroll {
+  to { scale: 1;}
+}
+@keyframes scale_up {
+0% {
+  scale: 0;
+  /* transform: translate(-50%, -50%) scale(0); */
+  /* opacity: 1; */
+}
+100% {
+  scale: 1;
+  /* transform: translate(-50%, -50%) scale(1); */
+  /* opacity: 0; */
+}
+}
+/* @media (prefers-reduced-motion: no-preference) { */
+/* } */

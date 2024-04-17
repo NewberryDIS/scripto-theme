@@ -1,0 +1,25 @@
+
+header {
+  z-index: 100;
+}
+.julia {
+  z-index: 90;
+}
+.jumbo-content-outside {
+  z-index: 80;
+}
+.header-bg {
+  z-index: 70;
+}
+.page {
+  z-index: 70;
+}
+.peepo .instructions, .preview-block {
+  z-index: 30;
+}
+/* .julia { */
+/*   z-index: 220 !important; */
+/* } */
+/* .peepo { */
+/*   z-index: 200 !important; */
+/* } */
