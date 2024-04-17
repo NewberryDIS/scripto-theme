@@ -1,16 +1,16 @@
 
-header {
-  z-index: 100;
-}
+/* header { */
+/*   z-index: 100; */
+/* } */
 .julia {
   z-index: 90;
 }
 .jumbo-content-outside {
   z-index: 80;
 }
-.header-bg {
-  z-index: 70;
-}
+/* .header-bg { */
+/*   z-index: 70; */
+/* } */
 .page {
   z-index: 70;
 }

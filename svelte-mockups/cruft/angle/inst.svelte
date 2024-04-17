@@ -198,6 +198,7 @@ svg, svg * {
 /*   --fg-color-2: var( --fg-color-2 ); */
 /* } */
 .instructions {
+  padding-top: 110px;
   --instr-bg: var( --flame );
   --instr-fg: var( --midnight );
   color: rgb(var( --instr-fg));

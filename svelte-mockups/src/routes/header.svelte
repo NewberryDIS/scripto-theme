@@ -2,22 +2,23 @@
 <script>
 
 import { onMount } from 'svelte'
+export let over 
 onMount( async ( ) => {
-  // await import( '/ohmekas/themes/papers/asset/js/dark-mode-toggle.js' );
-  // await import( '/ohmekas/themes/papers/asset/js/newberry-logo.js' );
-  // await import( '/ohmekas/themes/papers/asset/js/toggle-menu.js' );
-  await import( './js/dark-mode-toggle.js' );
+  // await import( 'https://transcribe.newberry.org/ohmekas/themes/papers/asset/js/dark-mode-toggle.js' );
+  // await import( 'https://transcribe.newberry.org/ohmekas/themes/papers/asset/js/newberry-logo.js' );
+  // await import( 'https://transcribe.newberry.org/ohmekas/themes/papers/asset/js/toggle-menu.js' );
   await import( './js/newberry-logo.js' );
   await import( './js/toggle-menu.js' );
 })
 let open = false
 
 </script>
-<div class="header-bg"></div>
-<header class:open>
+
+<div class="wrap">
+<div class:over class="header-bg"></div>
+<header class:open class:over>
   <div class="header-top">
-      <newberry-logo></newberry-logo>
-    <!-- <dark-mode-toggle></dark-mode-toggle> -->
+    <newberry-logo></newberry-logo>
     <h1>Newberry Transcrib3</h1>
     <div class="button-wrapper"  on:click={() => open = !open}> 
       <toggle-menu></toggle-menu>
@@ -27,10 +28,10 @@ let open = false
     <div id="header-bottom-menu" class="header-bottom-menu">
       <ul class="navigation">
         <li>
-          <a href="/ohmekas/s/transcribe/item">Browse</a>
+          <a href="https://transcribe.newberry.org/ohmekas/s/transcribe/item">Browse</a>
         </li>
         <li class="active">
-          <a href="/ohmekas/s/transcribe/page/home">Home</a>
+          <a href="https://transcribe.newberry.org/ohmekas/s/transcribe/page/home">Home</a>
         </li>
         <li>
           <a href="#">About</a>
@@ -51,31 +52,45 @@ let open = false
     </div>
   </nav>
 </header>
+</div>
 
 <style>
-.header-bg {
+
+.wrap {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 100px;
-  background: rgb( var(--bg-color-1) );
-  /* scale: 0 1; */
-  /* transform-origin: bottom; */
-  /* animation: scroll-watcher linear; */
-  /* animation-timeline: scroll(); */
+}
+header:not(.over){
+  --text-color: var(--rev-lav);
+  box-shadow: 4px 4px 60px 8px rgba(var(--midnight), 0.1);
+}
+.over {
+  --text-color: var(--lavender);
+}
+  .header-bg.over {
+    display: none;
+  }
+.header-bg:not(.over){
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgb( var(--granite) );
+  bottom: 0;
+}
+h1, nav, li, a {
+  color: rgba(var(--text-color), 1) !important;
 }
 
-header {
-}
 h1, nav ul { 
   margin: 0;
 }
-
 header {
   transition: 200ms;
   overflow: hidden;
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
@@ -101,9 +116,11 @@ header.open {
   align-items: center;
 }
  h1 {
+  padding-inline: 11px;
+  text-align: right;
+  flex: 1;
   font-size: clamp( 1.3rem, 0.3rem + 5.5vw, 4rem )
 }
-
 
 @media screen and (max-width: 500px){
   .header-top {
@@ -114,7 +131,6 @@ header.open {
     width: 50px;
   }
   h1 {
-    text-align: center;
     width: 100%;
     order: 3;
   }

@@ -48,7 +48,7 @@ clip-path: polygon(0 0, 200px 0, 200px 30px, 0 30px);
                 }
                 svg, text, path {
                     transition: 300ms;
-                    fill: rgba(var(--fg-color-1, 234, 235, 231));
+                    fill: rgba(var(--fg-color-1, 234, 235, 231), 0.7);
                 }
                 a:hover :is(svg, path, text) {
                     fill: rgba(var(--splash-color, 4, 1, 163),1);

@@ -69,6 +69,12 @@ body {
   background: rgb(var(--bg-color-1));
   /* background-image: linear-gradient(#f0f, #0f0); */
 }
+.jumbo, .julia, .page, .peepo, h1 {
+  
+  --fg-color-1: var(--granite);
+  --fg-color-2: var(--lavender);
+  --bg-color-1: var(--midnight);
+}
 @font-face {
   font-family: "flecha";
   src: url("/ohmekas/themes/papers/asset/fonts/FlechaM-Regular.woff");
@@ -93,8 +99,8 @@ body {
 h1,
 h2 {
   font-family: "flecha";
-  color: rgb(var(--splash-color));
-  color: rgb(var(--fg-color-2));
+  /* color: rgb(var(--splash-color)); */
+  /* color: rgb(var(--fg-color-2)); */
 }
 h3,
 h4,
