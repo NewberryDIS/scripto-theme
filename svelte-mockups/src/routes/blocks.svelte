@@ -126,6 +126,9 @@ const peepos = [
   background: rgb(var(--bg-color-1));
 
 }
+.preview-block a {
+  color: rgb(var(--peepo-roof));
+}
 @media screen and (max-width: 500px) {
 .preview-block {
     margin: 0;
@@ -181,9 +184,11 @@ const peepos = [
 
 .preview-block .resource-list  h3 {
   background: rgb(var(--bg-color-2));
+  background: rgb(var(--julias-pink));
 }
 .preview-block .resource-list  h3 a {
   background: rgb(var(--bg-color-2));
+  background: rgb(var(--julias-pink));
   left: 0;
   right: 0;
   bottom: 0;
@@ -193,6 +198,7 @@ const peepos = [
 }
 .preview-block .resource-list .browse-all {
   background: rgb(var(--bg-color-2));
+  background: rgb(var(--julias-pink));
   border-bottom: 1px solid rgb(var(--fg-color-2));
   color: rgb(var(--fg-color-2));
 }

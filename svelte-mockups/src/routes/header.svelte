@@ -2,7 +2,7 @@
 <script>
 
 import { onMount } from 'svelte'
-export let over 
+export let pos 
 onMount( async ( ) => {
   // await import( 'https://transcribe.newberry.org/ohmekas/themes/papers/asset/js/dark-mode-toggle.js' );
   // await import( 'https://transcribe.newberry.org/ohmekas/themes/papers/asset/js/newberry-logo.js' );
@@ -15,8 +15,8 @@ let open = false
 </script>
 
 <div class="wrap">
-<div class:over class="header-bg"></div>
-<header class:open class:over>
+<div  class="header-bg {pos}"></div>
+<header class:open class={pos}>
   <div class="header-top">
     <newberry-logo></newberry-logo>
     <h1>Newberry Transcrib3</h1>
@@ -62,23 +62,32 @@ let open = false
   left: 0;
   right: 0;
 }
-header:not(.over){
+.left {
+
+  --text-color: var(--page-bg);
+}
+.under{
+
   --text-color: var(--rev-lav);
+  /* --text-color: var(--page-fg); */
+  /* --text-color: var(--page-bg); */
   box-shadow: 4px 4px 60px 8px rgba(var(--midnight), 0.1);
 }
 .over {
-  --text-color: var(--lavender);
+  --text-color: var(--page-fg);
+  /* --text-color: var(--page-bg); */
+  /* --text-color: var(--lavender); */
 }
-  .header-bg.over {
+  .header-bg.over, .header-bg.left {
     display: none;
   }
-.header-bg:not(.over){
+.header-bg.under{
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  background: rgb( var(--granite) );
   bottom: 0;
+  background: rgb( var(--peepo-roof) );
 }
 h1, nav, li, a {
   color: rgba(var(--text-color), 1) !important;

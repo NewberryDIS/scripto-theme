@@ -8,6 +8,17 @@ html, body {
   box-sizing: border-box;
 }
 html {
+  --julias-pink: 191,77,66;
+  --julias-pink: 130,50,50;
+  --julias-pink: 177,63,63;
+  --julias-pink: 199,81,67;
+
+
+  --julias-peach: 255,214,186;
+  --page-bg: 204,186,150;
+  --page-fg: 31,17,6;
+  --peepo-roof: 231,231,231;
+
   --flame: 241, 97, 81;
   --park-green: 32, 84, 62;
   --tile: 146, 88, 64;
@@ -67,6 +78,7 @@ body.dark {
 body {
   background: rgb(var(--splash-color));
   background: rgb(var(--bg-color-1));
+  background: rgb(var(--peepo-roof));
   /* background-image: linear-gradient(#f0f, #0f0); */
 }
 .jumbo, .julia, .page, .peepo, h1 {
@@ -109,18 +121,18 @@ h6,
 dt,
 p b {
   font-family: "styrene";
-  color: rgb(var(--splash-color));
-  color: rgb(var(--fg-color-2));
+  /* color: rgb(var(--splash-color)); */
+  /* color: rgb(var(--fg-color-2)); */
 }
 
 body,
 html {
   font-family: "signifier";
-  color: rgb(var(--fg-color-1));
+  /* color: rgb(var(--fg-color-1)); */
 }
 
 a {
-  color: rgb(var(--fg-color-2));
+  /* color: rgb(var(--fg-color-2)); */
   text-decoration: none;
 }
 b {

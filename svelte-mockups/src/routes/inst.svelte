@@ -199,8 +199,13 @@ svg, svg * {
 /* } */
 .instructions {
   padding-top: 110px;
-  --instr-bg: var( --flame );
-  --instr-fg: var( --midnight );
+  --instr-bg: var( --julias-pink );
+  --instr-fg: var( --peepo-roof );
+  --instr-bg: var( --julias-peach );
+  --instr-fg: var( --julias-pink );
+  --instr-bg: var( --lavender );
+  --instr-fg: var( --page-fg );
+  /* --instr-fg: var( --page-fg ); */
   color: rgb(var( --instr-fg));
   position: relative;
   display: flex;

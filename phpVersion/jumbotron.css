@@ -1,46 +1,4 @@
-<script>
-import Header from './header.svelte'
-</script>
-<div class="page">
-<Header pos="over" />
-</div>
-<div class="peepo">
-  <div class="jumbo-content-inside">
-    <div class="jumbo-content-liner">
-      <h2>
-        Unlock history!
-      </h2>
-      <p>
-        Help preserve the past by improving access to handwritten letters and diaries at Newberry Digital Collections
 
-      </p>
-      <div class="jumbo-buttons">
-        <button class="jumbo-button">Learn More</button>
-        <button class="jumbo-button">Transcribe Now</button>
-      </div>
-    </div>
-  </div>
-  <Header pos="under" />
-</div>
-<div class="julia">
-
-<Header pos="left" />
-</div>
-<div class="jumbo-content-outside">
-  <div class="jumbo-content-liner">
-    <h2>
-      Unlock history!
-    </h2>
-    <p>
-      Help preserve the past by improving access to handwritten letters and diaries at Newberry Digital Collections
-    </p>
-    <div class="jumbo-buttons">
-      <button class="jumbo-button">Learn Morea</button>
-      <button class="jumbo-button">Transcribe Now</button>
-    </div>
-  </div>
-</div>
-<style>
 .julia, .page, .peepo {
   position: relative;
   height: 100vh;
@@ -193,4 +151,190 @@ import Header from './header.svelte'
   /* clip-path: polygon(33vh 33vh, 300vh 100vh, 33vh 100vh);  */
 } 
 
-</style>
+/* header */
+
+
+
+
+
+.wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.left {
+
+  --text-color: var(--page-bg);
+}
+.under{
+
+  --text-color: var(--rev-lav);
+  /* --text-color: var(--page-fg); */
+  /* --text-color: var(--page-bg); */
+  box-shadow: 4px 4px 60px 8px rgba(var(--midnight), 0.1);
+}
+.over {
+  --text-color: var(--page-fg);
+  /* --text-color: var(--page-bg); */
+  /* --text-color: var(--lavender); */
+}
+  .header-bg.over, .header-bg.left {
+    display: none;
+  }
+.header-bg.under{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgb( var(--peepo-roof) );
+  bottom: 0;
+}
+h1, nav, li, a {
+  color: rgba(var(--text-color), 1) !important;
+}
+
+h1, nav ul { 
+  margin: 0;
+}
+header {
+  transition: 200ms;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+}
+header:not(.open){
+  background: rgba(var(--bg-color-1), 0);
+}
+header.open {
+  background: rgba(var(--bg-color-1), 0.77);
+}
+.header-top, nav{
+  position: relative;
+  z-index: 55;
+}
+
+.header-top {
+  padding: 50px 33px 0 33px;
+  padding: 11px ;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+ h1 {
+  padding-inline: 11px;
+  text-align: right;
+  flex: 1;
+  font-size: clamp( 1.3rem, 0.3rem + 5.5vw, 4rem )
+}
+
+@media screen and (max-width: 500px){
+  .header-top {
+    flex-wrap: wrap;
+  }
+  .logo-wrapper {
+    clip-path: polygon(0 0, 50px 0, 50px 50px, 0 50px);
+    width: 50px;
+  }
+  h1 {
+    width: 100%;
+    order: 3;
+  }
+}
+
+@media screen and (min-width: 500px){
+  
+  .logo-wrapper {
+    clip-path: polygon(0 0, 220px 0, 220px 50px, 0 50px);
+    width: 220px;
+  }
+}
+/* navigation menu */
+/* @media screen and(  min-width:  ) */
+@media screen and (max-width: 1024px){
+  header.open :is(nav, ul) {
+    opacity: 0.99;
+    gap: 11px;
+  }
+
+  header.open li {
+    opacity: 0.99;
+    height: 22px;
+  }
+
+  header:not(.open) :is(nav, ul, li) {
+    opacity: 0.001;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+  }
+
+  header:not(.open) li {
+    height: 0;
+  }
+
+  .button-wrapper {
+    display: block;
+  }
+
+  .header-bottom-menu ul {
+    flex-direction: column;
+    justify-content: start;
+    align-items: stretch;
+  }
+  .header-bottom-menu, .header-bottom-menu * {
+    width: 100%;
+    text-align: center;
+  }
+  header:not(.open) .header-bottom-menu li {
+    padding: 0;
+    margin: 0;
+    height: 0;
+    overflow: hidden;
+
+  }
+  .header-bottom-menu a {
+    transition: opacity 150ms 100ms;
+  }
+  header:not(.open) .header-bottom-menu a {
+    opacity: 0.001;
+  }
+  header.open .header-bottom-menu li {
+    /* height: 22px; */
+    margin: 5px;
+  }
+  header.open .header-bottom-menu a {
+    opacity: 0.99;
+  }
+  header.open nav  {
+    padding-block: 9px;
+  }
+}
+
+@media screen and (min-width: 1024px){
+  ul {
+    gap: 11px;
+    padding-inline: 33px;
+  }
+  .button-wrapper {
+    display: none;
+  }
+}
+
+nav, nav * {
+  transition: 0.5s;
+}
+nav ul {
+  font-family: "styrene";
+  list-style-type: none;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  padding-bottom: 11px;
+}

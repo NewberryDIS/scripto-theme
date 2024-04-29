@@ -1,0 +1,160 @@
+
+
+<div class="page">
+<Header pos="over" />
+
+<div class="wrap">
+<div  class="header-bg over"></div>
+<header class="over">
+  <div class="header-top">
+    <newberry-logo></newberry-logo>
+    <h1>Newberry Transcrib3</h1>
+    <div class="button-wrapper"  on:click={() => open = !open}> 
+      <toggle-menu></toggle-menu>
+    </div>
+  </div>
+  <nav class="header-bottom">
+    <div id="header-bottom-menu" class="header-bottom-menu">
+      <ul class="navigation">
+        <li>
+          <a href="https://transcribe.newberry.org/ohmekas/s/transcribe/item">Browse</a>
+        </li>
+        <li class="active">
+          <a href="https://transcribe.newberry.org/ohmekas/s/transcribe/page/home">Home</a>
+        </li>
+        <li>
+          <a href="#">About</a>
+        </li>
+        <li>
+          <a href="#">Tutorial</a>
+        </li>
+        <li>
+          <a href="#">Educational Resources</a>
+        </li>
+        <li>
+          <a href="#">News</a>
+        </li>
+        <li>
+          <a href="#">Contact</a>
+        </li>
+      </ul>    
+    </div>
+  </nav>
+</header>
+</div>
+
+</div>
+<div class="peepo">
+  <div class="jumbo-content-inside">
+    <div class="jumbo-content-liner">
+      <h2>
+        Unlock history!
+      </h2>
+      <p>
+        Help preserve the past by improving access to handwritten letters and diaries at Newberry Digital Collections
+
+      </p>
+      <div class="jumbo-buttons">
+        <button class="jumbo-button">Learn More</button>
+        <button class="jumbo-button">Transcribe Now</button>
+      </div>
+    </div>
+  </div>
+
+<div class="wrap">
+<div  class="header-bg under"></div>
+<header class="under">
+  <div class="header-top">
+    <newberry-logo></newberry-logo>
+    <h1>Newberry Transcrib3</h1>
+    <div class="button-wrapper"  on:click={() => open = !open}> 
+      <toggle-menu></toggle-menu>
+    </div>
+  </div>
+  <nav class="header-bottom">
+    <div id="header-bottom-menu" class="header-bottom-menu">
+      <ul class="navigation">
+        <li>
+          <a href="https://transcribe.newberry.org/ohmekas/s/transcribe/item">Browse</a>
+        </li>
+        <li class="active">
+          <a href="https://transcribe.newberry.org/ohmekas/s/transcribe/page/home">Home</a>
+        </li>
+        <li>
+          <a href="#">About</a>
+        </li>
+        <li>
+          <a href="#">Tutorial</a>
+        </li>
+        <li>
+          <a href="#">Educational Resources</a>
+        </li>
+        <li>
+          <a href="#">News</a>
+        </li>
+        <li>
+          <a href="#">Contact</a>
+        </li>
+      </ul>    
+    </div>
+  </nav>
+</header>
+</div>
+</div>
+<div class="julia">
+
+<div class="wrap">
+<div  class="header-bg left"></div>
+<header class="left">
+  <div class="header-top">
+    <newberry-logo></newberry-logo>
+    <h1>Newberry Transcrib3</h1>
+    <div class="button-wrapper"  on:click={() => open = !open}> 
+      <toggle-menu></toggle-menu>
+    </div>
+  </div>
+  <nav class="header-bottom">
+    <div id="header-bottom-menu" class="header-bottom-menu">
+      <ul class="navigation">
+        <li>
+          <a href="https://transcribe.newberry.org/ohmekas/s/transcribe/item">Browse</a>
+        </li>
+        <li class="active">
+          <a href="https://transcribe.newberry.org/ohmekas/s/transcribe/page/home">Home</a>
+        </li>
+        <li>
+          <a href="#">About</a>
+        </li>
+        <li>
+          <a href="#">Tutorial</a>
+        </li>
+        <li>
+          <a href="#">Educational Resources</a>
+        </li>
+        <li>
+          <a href="#">News</a>
+        </li>
+        <li>
+          <a href="#">Contact</a>
+        </li>
+      </ul>    
+    </div>
+  </nav>
+</header>
+</div>
+
+</div>
+<div class="jumbo-content-outside">
+  <div class="jumbo-content-liner">
+    <h2>
+      Unlock history!
+    </h2>
+    <p>
+      Help preserve the past by improving access to handwritten letters and diaries at Newberry Digital Collections
+    </p>
+    <div class="jumbo-buttons">
+      <button class="jumbo-button">Learn Morea</button>
+      <button class="jumbo-button">Transcribe Now</button>
+    </div>
+  </div>
+</div>
