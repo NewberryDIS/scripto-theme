@@ -1,0 +1,113 @@
+<!-- NICKW -- this does item page tiles -->
+<?php
+$resourceMedia = $resource->media();
+function getPageContent($itemID, $pageID) {
+  $wikiUrl = "https://transcribe.newberry.org/mw/api.php";
+  $pageTitle = '2:' . $itemID . ':' . $pageID;
+  // Parameters for the API request
+  $params = [
+    "action" => "query",
+    "format" => "json",
+    "prop" => "revisions",
+    "titles" => $pageTitle,
+    "rvprop" => "content",
+  ];
+
+  // Initialize cURL session
+  $ch = curl_init($wikiUrl . '?' . http_build_query($params));
+
+  // Set cURL options
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch, CURLOPT_USERAGENT, "PHP script");
+
+  // Execute cURL session
+  $response = curl_exec($ch);
+
+  // Check for errors
+  if (curl_errno($ch)) {
+    echo 'Error:' . curl_error($ch);
+    return false;
+  }
+
+  // Close cURL session
+  curl_close($ch);
+
+  // Decode JSON response
+  $data = json_decode($response, true);
+
+  // Extract page content
+  $pages = $data["query"]["pages"];
+  foreach ($pages as $page) {
+    if (isset($page["revisions"])) {
+      $content = $page["revisions"][0]["*"];
+      if ( strlen($content) > 0 ) {
+        return 100;
+      } else {
+        return 0;
+      }
+    }
+
+    // If page content not found
+    return 0;
+  }
+}
+?>
+
+<script>
+let pageTitle = "<?php echo "2" . "%3A" . "11318" . "%3A" . "11720";?>"
+let totalCompletion = [0,0]
+  $(document).ready(() => {
+    console.log("Asdfaf");
+    $('.property dd').each(function() {
+      totalCompletion[1]++;
+        
+      let id = $(this).attr('id');
+      let bar = $( this ).find('.progress-bar');
+      let urll = `/htmx/page_completion.php?page_title=2:<?= $resource->id();?>:${id}`
+      console.log(urll)
+
+      $.get(urll, function( data ) {
+        console.log("id, data", id, data)
+        if ( data == 100){
+          totalCompletion[0] += 100
+          bar.addClass('complete');
+          bar.text(  '100% Complete' );
+        } else {
+
+          bar.addClass('incomplete');
+          bar.text( '0% Complete' );
+        }
+      console.log("totalCompletion", totalCompletion)
+      }).then(() => {
+        if(totalCompletion[1] >= $('.property dd').length){
+          const percent = Math.round(totalCompletion[0] / totalCompletion[1])
+          $('#main-progress-bar').css({"--percent-complete": `${percent}%`})
+          $('#main-progress-bar span').text(`${percent}% complete`)
+          // let varrr= $('#main-progress-bar').css("background-image")
+          // console.log("percent",percent)
+          // console.log(varrr)
+        }
+      });
+    })
+    /* if (data){ */
+    /*   $('#') */
+    /* } */
+  })
+  let progressGradient = "background-image: linear-gradient(to right, var(--bg-color) 0% , var(--bg-color) var(--percent-complete), var(--bg-color)c var(--percent-complete), var(--bg-color) 100%);"
+</script>
+
+<?php if ($resourceMedia): ?>
+<div class="progress-bar" id="main-progress-bar"><span>0% complete</span></div>
+<dl class="media-list" id="<?php echo $resource->id(); ?>">
+    <div class="property" style="">
+        <?php foreach ($resourceMedia as $media): ?>
+        <dd class="value" id="<?= $media->id();?>">
+          <?php echo $media->linkPretty(); ?>
+
+          <div class="progress-bar" id="progress-bar-<?php echo $media->id();?>" style="">...</div>
+        </dd>
+        <?php endforeach; ?>
+    </div>
+</dl>
+<?php endif; ?>
+

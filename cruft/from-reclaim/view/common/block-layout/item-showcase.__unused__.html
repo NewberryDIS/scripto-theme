@@ -1,0 +1,37 @@
+<div class="item-showcase">
+<?php foreach ($attachments as $attachment): ?>
+    <?php
+    $counter = 0;
+    $item = $attachment->item();
+    if ($item) && $counter <= 11:
+      $counter++;
+      $id = $item->value('dcterms:identifier');
+    ?>
+    <div class="item resource">
+
+        <?php
+        $media = $attachment->media() ?: $item->primaryMedia();
+        if ($media):
+            echo $this->thumbnail($media, $this->thumbnailType);
+        else: 
+        ?><img src="/ohmekas/themes/papers/asset/img/happy-user.svg" alt="" /><?php
+        endif;
+        ?>
+        <?php $showTitleOption = $this->showTitleOption; ?>
+        <?php if ($showTitleOption == 'item_title'): ?>
+        <h3 class="no-lines"><?php echo $item->title(); ?></h3>
+
+        <?php elseif ($showTitleOption == 'file_name'): ?>
+        <h3 class="no-lines"><?php echo $media->displayTitle(); ?></h3>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <?php
+    $caption = $attachment->caption();
+    if ($caption):
+    ?>
+        <div class="caption"><?php echo $caption; ?></div>
+    <?php endif; ?>
+    </div>
+<?php endforeach; ?>
+</div>

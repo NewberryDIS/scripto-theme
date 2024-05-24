@@ -1,0 +1,84 @@
+<?php
+$this->headLink()->appendStylesheet('https://use.fontawesome.com/releases/v5.0.9/css/all.css');
+$this->headScript()->appendFile($this->assetUrl('js/common/media.js', 'Scripto'));
+$this->headScript()->appendFile($this->assetUrl('js/LmlEditor.js', 'Scripto'));
+
+?>
+<?php echo $this->form()->openTag($mediaForm); ?>
+<?php echo $this->formElement($mediaForm->get('mediapublicappform_csrf')); ?>
+    <div id="wikitext" class="resource-content">
+        <div id="wikitext-layout" class="horizontal">
+<div class="buttons">
+            <button type="button" id="fullscreen"><span class="go-fullscreen"><?php echo $this->translate('Go full screen'); ?></span><span class="exit-fullscreen"><?php echo $this->translate('Exit full screen'); ?></span></button>
+            <div class="layout">
+                <label><?php echo $this->translate('Layout'); ?></label>
+                <button type="button" name="horizontal" id="horizontal-layout" class="active" aria-label="<?php echo $this->escapeHtml($this->translate('Horizontal view')); ?>" title="<?php echo $this->escapeHtml($this->translate('Horizontal view')); ?>" disabled=""></button>
+                <button type="button" name="vertical" id="vertical-layout" aria-label="<?php echo $this->escapeHtml($this->translate('Vertical view')); ?>" title="<?php echo $this->escapeHtml($this->translate('Vertical view')); ?>"></button>
+<span>poop</span>
+            </div>
+            </div>
+            <div class="wikitext-flex">
+                <?php if ($sMedia->isRenderableImage()): ?>
+                <?php echo $this->partial('common/media-viewer'); ?>
+                <?php else: ?>
+                <div class="panzoom-container" style="min-width: 50%;">
+                    <?php echo $media->render(['link' => null]); ?>
+                </div>
+                <?php endif; ?>
+                <div class="textarea-flex">
+                    <div class="wikitext-editor-buttons" data-lml-editor-translations="<?php echo $this->escapeHtml($this->scripto()->getLmlEditorTranslations()); ?>"></div>
+                    <?php echo $this->formTextarea($mediaForm->get('wikitext')); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+// Add wikitext editor buttons to the wikitext textarea.
+Scripto.enableMediaEditor(
+    document.getElementsByClassName('wikitext-editor-text'),
+    document.getElementsByClassName('wikitext-editor-buttons')
+);
+</script>
+<style>
+#wikitext, #wikitext-layout {
+position: relative;
+display: flex;
+width: 100%;
+height: 100%;
+justify-content: stretch;
+align-items: stretch;
+flex: 1;
+
+}
+#wikitext {
+margin: 0;
+padding: 0;
+
+}
+#wikitext-layout {
+margin: 0;
+padding: 33px 0 0 0;
+}
+.media-render , .openseadragon{
+height: 100% !important;
+}
+.buttons {
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+height: 33px;
+display: flex;
+justify-content: start;
+}
+/* main { */
+/* display: flex; */
+/* justify-content: stretch; */
+/* align-items: stretch; */
+/* } */
+/* .wrapper , .wikitext-layout { */
+/* margin: 0; */
+/* height: 100%; */
+/* } */
+</style>

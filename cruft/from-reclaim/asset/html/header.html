@@ -1,0 +1,42 @@
+<header id="header">
+  <div class="bg-element">
+    <div class="page"></div>
+    <div class="julia"></div>
+  </div>
+  <div class="header-top">
+    <newberry-logo></newberry-logo>
+    <h1>Newberry Transcrib3</h1>
+    <div class="button-wrapper">
+      <toggle-menu></toggle-menu>
+    </div>
+  </div>
+  <div class="header-bottom">
+    <div id="header-bottom-menu" class="header-bottom-menu">
+      <ul>
+        <li><a class="no-lines" href="#" target="_blank">Log In</a></li>
+        <li><a class="no-lines" href="#" target="_blank">Sign Up</a></li>
+        <li><a class="no-lines" href="#" target="_blank">About</a></li>
+        <li><a class="no-lines" href="#" target="_blank">Tutorial</a></li>
+        <li><a class="no-lines" href="#" target="_blank">Educational Resources</a></li>
+        <li><a class="no-lines" href="#" target="_blank">News</a></li>
+        <li><a class="no-lines" href="#" target="_blank">Contact</a></li>
+      </ul>
+    </div>
+
+  </div>
+</header>
+<script>
+$(document).ready(function() {
+  var $headerEleement = $("#header");
+  var logoColorThreshold = $(window).height() - 77; 
+
+  $(window).scroll(function() {
+    var scrollPosition = $(window).scrollTop();
+    if (scrollPosition >= logoColorThreshold) {
+      $headerEleement.addClass("gone");
+    } else {
+      $headerEleement.removeClass("gone");
+    }
+  });
+});
+</script>

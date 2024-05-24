@@ -1,0 +1,43 @@
+<header>
+  <section class="header-left">
+  <newberry-logo></newberry-logo>
+  <div class="bcrumbs">
+  &gt;
+  <a href="#" class="header-link">Transcribe Home</a>
+  &gt;
+  <span>Manuscripts</span>
+</div>
+</section>
+<section class="header-right">
+  <h1>Newberry Transcribe <span class="menu-button">x</span></h1>
+  <nav class="site-nav">
+    <div class="trigger">
+      <?php
+        echo $site->publicNav()->menu()->renderMenu(null, [
+          'maxDepth' => $this->themeSetting('nav_depth') - 1
+        ]);
+      ?>
+      <?php if ($this->themeSetting('show_search') == 1): ?>
+        <div id="search">
+          <?php echo $this->partial('common/search-form'); ?>
+        </div>
+      <?php endif; ?>
+    </div>
+  </nav>
+
+</section>
+</header>
+        <script>
+        $(document).ready(() => {
+        $('.navigation').click((e) => {
+        if (e.target !== this ) {
+          $('.navigation').removeClass('show');
+        }
+        })
+        $('.menu-button').click(() => {
+          $('.navigation').addClass('show');
+        })
+        })
+
+
+</script>

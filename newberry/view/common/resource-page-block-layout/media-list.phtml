@@ -1,0 +1,42 @@
+<!-- NICKW -- this does item page tiles -->
+<?php
+$resourceMedia = $resource->media();
+
+$scriptoItem = $this->api()->searchOne('scripto_items', ['item_id' => $resource->id()])->getContent();
+
+if ($scriptoItem !== null && method_exists($scriptoItem, 'mediaCount') && method_exists($scriptoItem, 'isApprovedMediaCount')) {
+  $mediaCount = $scriptoItem->mediaCount();
+  $approvedMediaCount = $scriptoItem->isApprovedMediaCount();
+  $totalPercentApproved = round(($approvedMediaCount / $mediaCount) * 100);
+} else {
+  $totalPercentApproved = 0;
+}
+?>
+
+<?php if ($resourceMedia): ?>
+<div class="progress-bar" style="--percent-complete: <?= $totalPercentApproved; ?>%;" id="main-progress-bar"><span><?= $totalPercentApproved; ?>% complete</span></div>
+  <dl class="media-list" id="<?php echo $resource->id(); ?>">
+    <?php foreach ($resourceMedia as $media): 
+      $scriptoPage = $this->api()->searchOne('scripto_media', ['media_id' => $media->id(), 'limit' => 1,])->getContent();
+      $completed = $scriptoPage->completed();
+      $approved = $scriptoPage->approved();
+      $scriptoData = $scriptoPage->position();
+      $status = ( $scriptoPage->completed() ) ? ( 'Needs Review' ) : ( ( $scriptoPage->edited() ) ? ( "Started / In Progress" ) : ( 'Not Started' ) ); ?>
+
+      <dd class="value card" id="<?= $media->id();?>">
+        <a href="/dohmekas/scripto/2/<?= $resource->id();?>/<?= $media->id();?>/edit" target="_blank">
+          <img src="<?= $media->thumbnailUrl('square'); ?>" alt="" />
+          <div 
+            class="page progress-bar" 
+            id="progress-bar-<?php echo $media->id();?>" 
+          >
+            <span>
+              <?= $status ?>
+            </span>
+          </div>
+        </a>
+      </dd>
+    <?php endforeach; ?>
+</dl>
+<?php endif; ?>
+

@@ -1,0 +1,49 @@
+
+
+.resource-list {
+
+
+
+  & li {
+    & .resource-thumbnail {
+    }
+    & .resource-meta {
+
+      pointer-events: none;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+
+      justify-content: space-between;
+      align-items: center;
+      padding: 0;
+      & .resource-title {
+        width: 100%;
+        text-align: center;
+        background: var(--bg-color);
+        padding: 0.5rem;
+      }
+    }
+    & img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 0;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover;
+      object-position: center;
+      transition: 250ms;
+      transform-origin: center;
+    }
+  }
+}
