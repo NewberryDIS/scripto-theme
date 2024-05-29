@@ -1051,9 +1051,6 @@ body:not([class]) .page-content .wrapper {
 .browse .resource-list .resource {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 30px;
-  border-bottom: 1px solid #8e8e8e;
-  padding-bottom: 30px;
 }
 .browse .resource-list .resource-meta {
   width: 100%;
@@ -1611,7 +1608,6 @@ body {
 
   & li, dd, .link-tile {
     position: relative;
-    transition: 250ms;
     box-shadow: 0 0 5px 5px rgba(var(--fg-rgb), 0.1);
     border: 1px solid var(--fg-color) !important;
     overflow: hidden;
@@ -1628,7 +1624,7 @@ body {
     & .resource-thumbnail  {
       margin: 0 !important;
     }
-    & .resource-meta {
+    & .resource-meta , .resource-metadata{
 
       pointer-events: none;
       position: relative;
@@ -1640,12 +1636,14 @@ body {
       left: 0;
       z-index: 1;
       display: flex;
+      /* flex-direction: column-reverse; */
       flex-direction: column;
 
       justify-content: space-between;
       align-items: center;
       padding: 0;
-      & .resource-title {
+      & .resource-title, h4 {
+        font-weight: 400;
         width: 100%;
         text-align: center;
         background: var(--bg-color);
