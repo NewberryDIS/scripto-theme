@@ -1,5 +1,5 @@
 <script>
-import Header from './header.svelte'
+import Header from '$lib/Jumbo/Header.svelte'
 </script>
 <div class="page">
 <Header pos="over" />

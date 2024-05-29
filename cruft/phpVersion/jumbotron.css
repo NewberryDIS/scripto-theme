@@ -133,13 +133,13 @@
   --overlay-color: rgba(var(--bg-color-1), 0.33);
   --overlay-color: rgba(var(--bg-color-1), 0);
   background-size: auto 110vh;
-  background-image: linear-gradient(var(--overlay-color), var(--overlay-color)), url('https://transcribe.newberry.org/ohmekas/themes/papers/asset/img/jumbo-julia.png');
+  background-image: linear-gradient(var(--overlay-color), var(--overlay-color)), url('ohmekas/themes/papers/asset/img/jumbo-julia.png');
   clip-path: polygon(0 0, 66vh 0, 33vh 100vh, 0 100vh); 
 }
 .page {
   --overlay-color: rgba(var(--bg-color-1), 0.77);
-  background-image: linear-gradient(var(--overlay-color), var(--overlay-color)), url('https://transcribe.newberry.org/ohmekas/themes/papers/asset/img/jumbo-page.webp');
-  background-image: linear-gradient(to bottom, rgba(var(--page-bg),0.77), rgba(var(--page-bg),0.33)), url('https://transcribe.newberry.org/ohmekas/themes/papers/asset/img/jumbo-page.webp');
+  background-image: linear-gradient(var(--overlay-color), var(--overlay-color)), url('ohmekas/themes/papers/asset/img/jumbo-page.webp');
+  background-image: linear-gradient(to bottom, rgba(var(--page-bg),0.77), rgba(var(--page-bg),0.33)), url('ohmekas/themes/papers/asset/img/jumbo-page.webp');
   clip-path: polygon(0 0, 100vw 0, calc(100vw + 100vh) 100vh, 0 16vh); 
 }
 

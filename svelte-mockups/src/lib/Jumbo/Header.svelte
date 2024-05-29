@@ -7,8 +7,8 @@ onMount( async ( ) => {
   // await import( 'https://transcribe.newberry.org/ohmekas/themes/papers/asset/js/dark-mode-toggle.js' );
   // await import( 'https://transcribe.newberry.org/ohmekas/themes/papers/asset/js/newberry-logo.js' );
   // await import( 'https://transcribe.newberry.org/ohmekas/themes/papers/asset/js/toggle-menu.js' );
-  await import( './js/newberry-logo.js' );
-  await import( './js/toggle-menu.js' );
+  await import( '/src/routes/js/newberry-logo.js' );
+  await import( '/src/routes/js/toggle-menu.js' );
 })
 let open = false
 

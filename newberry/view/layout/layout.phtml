@@ -34,7 +34,18 @@ $userBar = $this->userBar();
         <?php echo $this->headScript(); ?>
     </head>
     <?php echo $this->htmlElement('body'); ?>
-      <dark-mode-toggle></dark-mode-toggle>
+        <!-- 
+          <dark-mode-toggle></dark-mode-toggle> 
+            main 5: 
+              - 10 * 5 home
+              - ( 0.61 * 4 ) * 5
+              - 0.85 * 5 ghall
+            back 5: 
+              - 10 * 5 home
+              - 0.78 * 5 desert
+              - 0.22 * 5 cliff
+              - 0.85 * 5 ghall
+        -->
         <a id="skipnav" href="#content"><?php echo $this->translate('Skip to main content'); ?></a>
         <?php include('header.phtml'); ?>
         <main id="content poop" class="page-content" aria-label="<?php echo $this->escapeHtml($this->translate('Content')); ?>">

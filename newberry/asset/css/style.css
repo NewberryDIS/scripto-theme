@@ -34,7 +34,6 @@ body {
   overflow-x: hidden;
 }
 
-
 /**
  * Figures
  */
@@ -603,7 +602,7 @@ ul.messages .error {
 }
 
 .page-content {
-  padding: 30px 0;
+  padding: 77px 0;
   flex: 1;
 }
 
@@ -857,9 +856,6 @@ nav.pagination form {
   padding: 0;
 }
 
-header ul.navigation {
-  display: inline-block;
-}
 
 #search {
   display: inline-block;
@@ -1169,6 +1165,8 @@ body:not([class]) .page-content .wrapper {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
 }
 .resource-link img {
   width: 45px;
@@ -1606,8 +1604,9 @@ body {
 
   display: flex; 
   flex-wrap: wrap; 
+  flex-direction: row !important;
   gap: 1rem;
-  justify-content: start;
+  justify-content: center;
   align-items: start;
 
   & li, dd, .link-tile {

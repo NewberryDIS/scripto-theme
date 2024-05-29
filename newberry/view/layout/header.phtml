@@ -5,18 +5,27 @@
   &gt;
   <a href="#" class="header-link">Transcribe Home</a>
   &gt;
-  <span>Manuscripts</span>
+  <a href="https://transcribe.newberry.org/dohmekas/s/transcribe/manuscripts" class="header-link">Manuscripts</a>
 </div>
 </section>
 <section class="header-right">
-  <h1>Newberry Transcribe <span class="menu-button">x</span></h1>
+<div class="menu-button">
+  <div class="menu-lines">
+    <span class="line line1">.</span>
+    <span class="line line2">.</span>
+    <span class="line line3">.</span>
+  </div>   
+</div>
+<div class="header-menu">  
+<h1>Newberry Transcribe</h1>
+
   <nav class="site-nav">
     <div class="trigger">
-      <?php
-        echo $site->publicNav()->menu()->renderMenu(null, [
-          'maxDepth' => $this->themeSetting('nav_depth') - 1
-        ]);
-      ?>
+<?php
+echo $site->publicNav()->menu()->renderMenu(null, [
+  'maxDepth' => $this->themeSetting('nav_depth') - 1
+]);
+?>
       <?php if ($this->themeSetting('show_search') == 1): ?>
         <div id="search">
           <?php echo $this->partial('common/search-form'); ?>
@@ -24,20 +33,20 @@
       <?php endif; ?>
     </div>
   </nav>
-
+</div>
 </section>
 </header>
-        <script>
-        $(document).ready(() => {
-        $('.navigation').click((e) => {
-        if (e.target !== this ) {
-          $('.navigation').removeClass('show');
-        }
-        })
-        $('.menu-button').click(() => {
-          $('.navigation').addClass('show');
-        })
-        })
+<script>
+$(document).ready(() => {
+  $('.navigation').click((e) => {
+    if (e.target !== this ) {
+      $('.header-right').removeClass('show-header-menu');
+    }
+  })
+  $('.menu-button').click(() => {
+    $('.header-right').toggleClass('show-header-menu');
+  })
+})
 
 
 </script>

@@ -1,5 +1,8 @@
 <style>
+<?php include 'instructions.css'; ?>
+<?php include 'svelte.css'; ?>
 <?php include 'jumbotron.css'; ?>
+<?php include 'lels.css'; ?>
 </style>
 <div class="page">
 

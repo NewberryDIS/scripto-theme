@@ -47,7 +47,7 @@ foreach ($items as $item):
     $heading = $headingTerm ? $item->value($headingTerm, ['default' => $translate('[Untitled]'), 'lang' => $valueLang]) : $item->displayTitle(null, $valueLang);
     $body = $bodyTerm ? $item->value($bodyTerm, ['lang' => $valueLang]) : $item->displayDescription(null, $valueLang);
     $linkContent = '';
-    if ($thumbnail = $this->thumbnail($item, 'medium', ['class' => 'resource-thumbnail'])) {
+    if ($thumbnail = $this->thumbnail($item, 'square', ['class' => 'resource-thumbnail'])) {
         $linkContent .= $thumbnail;
     }
     $linkContent .= $heading;

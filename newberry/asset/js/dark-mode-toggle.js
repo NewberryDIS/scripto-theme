@@ -1,31 +1,31 @@
 class DarkModeToggle extends HTMLElement {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.attachShadow({
-            mode: 'open'
-        });
+    this.attachShadow({
+      mode: 'open'
+    });
 
-        const button = document.createElement('button');
-        
-        button.setAttribute('id', 'mode-switch')
-        button.addEventListener('click', this.toggleDarkMode.bind(this));
+    const button = document.createElement('button');
 
-        // it's a lot of svg isn't it
-        button.innerHTML = `<i class="icon-dark"><svg width="24px" height="24px" stroke-width="1.49" viewBox="0 0 24 24" fill="none" color="var(--color-light, #ccc)"><path d="M3 11.507a9.493 9.493 0 0018 4.219c-8.507 0-12.726-4.22-12.726-12.726A9.494 9.494 0 003 11.507z" stroke="var(--color-light, #ccc)" stroke-width="1.49" stroke-linecap="round" stroke-linejoin="round"></path></svg></i><i class="icon-light"><svg width="24px" height="24px" stroke-width="1.49" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" color="var(--color-light, #ccc)"><path d="M12 18a6 6 0 100-12 6 6 0 000 12zM22 12h1M12 2V1M12 23v-1M20 20l-1-1M20 4l-1 1M4 20l1-1M4 4l1 1M1 12h1" stroke="var(--color-light, #ccc)" stroke-width="1.49" stroke-linecap="round" stroke-linejoin="round"  fill="var(--color-light, #ccc)"></path></svg></i>`
+    button.setAttribute('id', 'mode-switch')
+    button.addEventListener('click', this.toggleDarkMode.bind(this));
 
-        this.shadowRoot.appendChild(button);
+    // it's a lot of svg isn't it
+    button.innerHTML = `<i class="icon-dark"><svg width="24px" height="24px" stroke-width="1.49" viewBox="0 0 24 24" fill="none" color="var(--color-light, #ccc)"><path d="M3 11.507a9.493 9.493 0 0018 4.219c-8.507 0-12.726-4.22-12.726-12.726A9.494 9.494 0 003 11.507z" stroke="var(--color-light, #ccc)" stroke-width="1.49" stroke-linecap="round" stroke-linejoin="round"></path></svg></i><i class="icon-light"><svg width="24px" height="24px" stroke-width="1.49" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" color="var(--color-light, #ccc)"><path d="M12 18a6 6 0 100-12 6 6 0 000 12zM22 12h1M12 2V1M12 23v-1M20 20l-1-1M20 4l-1 1M4 20l1-1M4 4l1 1M1 12h1" stroke="var(--color-light, #ccc)" stroke-width="1.49" stroke-linecap="round" stroke-linejoin="round"  fill="var(--color-light, #ccc)"></path></svg></i>`
 
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    this.shadowRoot.appendChild(button);
 
-        if (prefersDark || isDarkMode) {
-            document.body.classList.add('dark');
-            button.classList.add('dark');
-        }
-        
-        const style = document.createElement('style');
-        style.textContent = `
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+    if (prefersDark || isDarkMode) {
+      document.body.classList.add('dark');
+      button.classList.add('dark');
+    }
+
+    const style = document.createElement('style');
+    style.textContent = `
             :host {
             --color-light: var(--fg-color);
                 position: fixed;
@@ -34,7 +34,7 @@ class DarkModeToggle extends HTMLElement {
            @media screen and (max-width: 1023px) {
                 :host {
                     bottom: 20px;
-                    left: 20px;
+                    right: 20px;
                 }
            }
            @media screen and (min-width: 1024px) {
@@ -82,56 +82,56 @@ class DarkModeToggle extends HTMLElement {
             
         `;
 
-        this.shadowRoot.appendChild(style);
-    }
+    this.shadowRoot.appendChild(style);
+  }
 
-    toggleDarkMode() {
-        const isDark = document.body.classList.toggle('dark');
-        localStorage.setItem('darkMode', isDark);
+  toggleDarkMode() {
+    const isDark = document.body.classList.toggle('dark');
+    localStorage.setItem('darkMode', isDark);
 
-        const btn = this.shadowRoot.querySelector('#mode-switch')
-        btn.classList.toggle('dark')
-    }
+    const btn = this.shadowRoot.querySelector('#mode-switch')
+    btn.classList.toggle('dark')
+  }
 
-    static get observedAttributes() {
-        return ['top', 'left', 'bottom', 'right', 'no-anim'];
-    }
+  static get observedAttributes() {
+    return ['top', 'left', 'bottom', 'right', 'no-anim'];
+  }
 
-    attributeChangedCallback(name, oldValue, newValue) {
-        switch (name) {
-            case 'top':
-                this.style.top = newValue || 'auto';
-                if (newValue && this.hasAttribute('bottom')) {
-                    this.removeAttribute('bottom');
-                }
-                break;
-            case 'left':
-                this.style.left = newValue || 'auto';
-                if (newValue && this.hasAttribute('right')) {
-                    this.removeAttribute('right');
-                }
-                break;
-            case 'bottom':
-                this.style.bottom = newValue || 'auto';
-                if (newValue) {
-                    this.style.top = 'auto';
-                }
-                break;
-            case 'right':
-                this.style.right = newValue || 'auto';
-                if (newValue) {
-                    this.style.left = 'auto';
-                }
-                break;
-            case 'no-anim': 
-                console.log("asdfasfa")
-                this.classList.add('no-anim');
-                break;
-
-            default:
-                break;
+  attributeChangedCallback(name, oldValue, newValue) {
+    switch (name) {
+      case 'top':
+        this.style.top = newValue || 'auto';
+        if (newValue && this.hasAttribute('bottom')) {
+          this.removeAttribute('bottom');
         }
+        break;
+      case 'left':
+        this.style.left = newValue || 'auto';
+        if (newValue && this.hasAttribute('right')) {
+          this.removeAttribute('right');
+        }
+        break;
+      case 'bottom':
+        this.style.bottom = newValue || 'auto';
+        if (newValue) {
+          this.style.top = 'auto';
+        }
+        break;
+      case 'right':
+        this.style.right = newValue || 'auto';
+        if (newValue) {
+          this.style.left = 'auto';
+        }
+        break;
+      case 'no-anim':
+        console.log("asdfasfa")
+        this.classList.add('no-anim');
+        break;
+
+      default:
+        break;
     }
+  }
 
 }
 
