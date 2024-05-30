@@ -318,16 +318,16 @@ table.tablesaw {
   text-align: center;
   position: relative;
 }
-.site-nav:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -9999px;
-  right: -9999px;
-  background-color: rgba(206, 206, 206, 0.5);
-  z-index: -1;
-}
+/* .site-nav:before { */
+/*   content: ""; */
+/*   position: absolute; */
+/*   top: 0; */
+/*   bottom: 0; */
+/*   left: -9999px; */
+/*   right: -9999px; */
+/*   background-color: rgba(206, 206, 206, 0.5); */
+/*   z-index: -1; */
+/* } */
 .site-nav ul {
   list-style: none;
   margin: 0;
