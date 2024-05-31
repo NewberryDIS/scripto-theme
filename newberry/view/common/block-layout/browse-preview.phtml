@@ -39,19 +39,8 @@ foreach ($this->resources as $resource):
     }
 ?>
 
-    <li class="card <?php echo $this->resourceType; ?> resource" >
+    <li class="tile <?php echo $this->resourceType; ?> resource" >
         <div class="resource-meta">
-            <div 
-              class="progress-bar" 
-              style="background-image: 
-                linear-gradient(to right, 
-                  var(--fg-color) 0%, 
-                  var(--fg-color) <?= $percentApproved ?>%, 
-                  var(--bg-color) <?= $percentApproved ?>%, 
-                  var(--bg-color) 100%
-                );">
-                  <?php echo $percentApproved ?>% Complete
-            </div>
             <?php
             if ($showHeading):
                 echo $resource->link($heading, null, ['class' => 'resource-title']); 
@@ -59,6 +48,19 @@ foreach ($this->resources as $resource):
             <?php if ($showBody && $body): ?>
             <div class="description"><?php echo $escape($body); ?></div>
             <?php endif; ?>
+            <div 
+              class="progress-bar" 
+              style="background-image: 
+                linear-gradient(to right, 
+                  var(--progress-color-1) 0%, 
+                  var(--progress-color-1) <?= $percentApproved ?>%, 
+                  var(--progress-color-2) <?= $percentApproved ?>%, 
+                  var(--progress-color-2) 100%
+                );">
+<span>
+                  <?php echo $percentApproved ?>% Complete
+</span>
+            </div>
         </div>
         <?php
         if ($showThumbnail):

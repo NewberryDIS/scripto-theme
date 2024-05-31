@@ -1,8 +1,8 @@
-@import "./card.css";
 @import "./newberry.css";
 @import "./media-list.css";
 @import "./browse-preview.css";
 @import "./header.css";
+@import "./tile.css";
 /**
  * Reset some basic elements
  */
@@ -29,6 +29,12 @@ a {
  * Basic styling
  */
 body {
+  --progress-color-1: color-mix(in oklab, var(--bg-color) 10%, var(--fg-color));
+  --progress-color-2: color-mix(in oklab, var(--fg-color) 10%, var(--bg-color));
+  --tile-width: 333px;
+  --tile-width: 250px;
+  --tile-ratio: 1 / 1.5;
+  /* --tile-ratio: 1 / 2; */
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -1551,46 +1557,13 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  justify-content: start;
+  justify-content: center;
   align-items: start;
   & .item.resource {
-    border: 1px solid var(--fg-color);
-    background: var(--bg-color);
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: center;
-    width: 200px;
-    aspect-ratio: 1 / 1;
-    box-shadow: 0 0 5px 5px var(--fg-color-lite);
-    transition: 250ms;
-    position: relative;
 
     & img {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      object-fit: cover;
-      object-position: center;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      transition: 250ms;
-      transform-origin: center;
     }
     & h4 {
-      position: relative;
-      z-index: 4;
-      margin: 0;
-
-      pointer-events: none;
-      width: 100%;
-      text-align: center;
-      background: var(--bg-color);
-      padding: 0.5rem;
-
     }
   }
 }
@@ -1611,8 +1584,8 @@ body {
     box-shadow: 0 0 5px 5px rgba(var(--fg-rgb), 0.1);
     border: 1px solid var(--fg-color) !important;
     overflow: hidden;
-    width: 200px;
-    aspect-ratio: 1 / 1;
+    width: var(--tile-width);
+    aspect-ratio: var(--tile-ratio);
     margin: 0 !important;
     padding: 0 !important;
     transition: 250ms;
@@ -1640,6 +1613,7 @@ body {
       flex-direction: column;
 
       justify-content: space-between;
+      justify-content: end;
       align-items: center;
       padding: 0;
       & .resource-title, h4 {
@@ -1655,12 +1629,12 @@ body {
 
 .link-tile {
   border: 1px solid var(--fg-color);
-  background: var(--bg-color);
+  background: var(--bg-color) ;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 200px;
-  aspect-ratio: 1 / 1;
+  width: var(--tile-width);
+  aspect-ratio: var(--tile-ratio);
   box-shadow: 0 0 5px 5px rgba(var(--fg-rgb), 0.1);
   transition: 250ms;
   &:hover {
@@ -1669,35 +1643,35 @@ body {
   }
 }
 .progress-bar {
+  & span, h4 {
+    font-family: "styrene";
+    width: 100%;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  }
   text-align: center;
-  height: 33px;
+  height: 1rem;
+  font-size: 0.9rem;
   width: 100%;
   &:not(.page) span {
     mix-blend-mode: difference;
   }
   &.page {
-    background: var(--bg-color);
-    color: var(--fg-color);
+    background: var(--progress-color-2);
+    color: var(--progress-color-1);
   }
 }
 
-.resource-list .progress-bar, .media-list .progress-bar {
-  z-index: 3; 
-  position: absolute; 
-  bottom: 0; 
-  left: 0; 
-  right: 0;
-  border-top: 1px solid var(--fg-color);
-  display: flex; 
-  justify-content: center;
-  align-items: center;
-}
 
 #main-progress-bar {
+    color: var(--progress-color-2);
+    mix-blend-mode: difference;
   display: flex; 
   justify-content: center;
+  height: 33px;
+  font-size; 22px;
   align-items: center;
   margin-block: 22px;
-  border: 1px solid var(--fg-color);
-  background-image: linear-gradient(to right, var(--fg-color) 0% , var(--fg-color) var(--percent-complete), var(--bg-color) var(--percent-complete), var(--bg-color) 100%);
+  border: 1px solid var(--progress-color-2);
 }

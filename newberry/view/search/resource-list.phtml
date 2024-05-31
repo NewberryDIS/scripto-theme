@@ -60,6 +60,7 @@ $sortedResources = array_map( function ( $resource ){
   $outputItem->scriptoItem = $this->api()->searchOne('scripto_items', ['item_id' => $outputItem->id()])->getContent();
   $outputItem->mediaCount = $outputItem->scriptoItem->mediaCount();
   $outputItem->approvedMediaCount = $outputItem->scriptoItem->isApprovedMediaCount();
+  /*$outputItem->percentApproved = 47;*/
   $outputItem->percentApproved = round(($outputItem->approvedMediaCount / $outputItem->mediaCount) * 100);
   return $outputItem;
 }, $resources );
@@ -90,7 +91,7 @@ return $a->percentApproved - $b->percentApproved;
         $body = $body ? $body->asHtml() : $escape($resource->displayDescription(null, $lang));
     ?>
 
-    <li class="resource <?= $resourceType ?>">
+    <li class="resource tile <?= $resourceType ?>">
         <div class="resource-thumbnail">
             <?= $hyperlink->raw($resourceThumbnail, $resourceUrl, ['class' => 'resource-link']) ?>
         </div>
@@ -103,12 +104,14 @@ return $a->percentApproved - $b->percentApproved;
               class="progress-bar" 
               style="background-image: 
                 linear-gradient(to right, 
-                  var(--fg-color) 0%, 
-                  var(--fg-color) <?= $resource->percentApproved ?>%, 
-                  var(--bg-color) <?= $resource->percentApproved ?>%, 
-                  var(--bg-color) 100%
+                  var(--progress-color-1) 0%, 
+                  var(--progress-color-1) <?= $resource->percentApproved ?>%, 
+                  var(--progress-color-2) <?= $resource->percentApproved ?>%, 
+                  var(--progress-color-2) 100%
                 );">
+<span>
                   <?php echo $resource->percentApproved ?>% Complete
+</span>
             </div>
         </div>
     </li>

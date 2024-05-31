@@ -1,0 +1,102 @@
+<?php 
+// noUiSlider
+
+
+$this->headLink()->prependStylesheet($this->assetUrl('js/noUiSlider/nouislider.min.css'));
+$this->headScript()->prependFile($this->assetUrl('js/noUiSlider/nouislider.min.js'));
+
+$filters = [
+  "subjects" => ["people", "arts", "color", "thing", "cadmia", "alabaster"],
+  "language" => [
+    "eng",
+    "fr",
+    "german"
+  ],
+  "format" => [
+    "letters",
+    "diaries"
+  ]
+];
+
+?>
+<style>
+.filter-show {
+display: flex;
+
+}
+.filter-hide {
+display: none;
+}
+</style>
+<script>
+console.log("filtercheck");
+function updateFilters (id) {
+  const selectedValues = $(`#${id} input:checked`).map(function() {
+      return $(this).val();
+  })
+}
+
+$(document).ready(function() {
+  $(".filter-box input").change(function() {
+    const selectedFilters = $(".filter-box input:checked").map(function() {
+      return $(this).val();
+    }).get();
+
+    $(".tile").each(function() {
+      const tileValues = $(this).data("filters").split(" ");
+      
+      let showTile = false; // Flag to track if the item should be shown
+
+      // Loop through all selected filters
+      if (selectedFilters.length === 0) {
+        showTile = true;
+      }
+      for (const filterValue of selectedFilters) {
+      
+        if (tileValues.includes(filterValue)) {
+          showTile = true; // If any filter matches, set the flag to true
+          break; // Exit the loop if a matchqq is found (OR logic)
+        }
+      }
+      if (showTile) {
+        $(this).removeClass("filter-hide")
+      } else {
+        $(this).addClass("filter-hide")
+      }
+    });
+  });
+});
+</script>
+
+<div class="filter-box">
+<h4>filters</h4>
+<?php foreach($filters as $key => $value): ?>
+<h5><?= $key ?></h5>
+<ul class="filter-list" id="<?= $key ?>">
+<?php foreach($value as $val): ?>
+<li>
+  <input type="checkbox" id="<?= $val ?>" value="<?= $val ?>" name="filter">
+  <label for="<?= $val ?>"><?= $val ?></label>
+</li>
+<?php endforeach ?>
+</ul>
+<?php endforeach ?>
+ 
+<div id="slider"></div
+<p>
+  <label for="amount">Date range:</label>
+  <input type="text" id="amount" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+</div>
+<script>
+var slider = document.getElementById('slider');
+
+noUiSlider.create(slider, {
+    start: [20, 80],
+    connect: true,
+    range: {
+        'min': 0,
+        'max': 100
+    }
+});
+</script>
