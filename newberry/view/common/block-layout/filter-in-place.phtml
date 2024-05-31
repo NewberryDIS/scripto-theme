@@ -1,22 +1,8 @@
 <?php 
-// noUiSlider
-
-
+/* noUiSlider */
 $this->headLink()->prependStylesheet($this->assetUrl('js/noUiSlider/nouislider.min.css'));
 $this->headScript()->prependFile($this->assetUrl('js/noUiSlider/nouislider.min.js'));
 
-$filters = [
-  "subjects" => ["people", "arts", "color", "thing", "cadmia", "alabaster"],
-  "language" => [
-    "eng",
-    "fr",
-    "german"
-  ],
-  "format" => [
-    "letters",
-    "diaries"
-  ]
-];
 
 ?>
 <style>
@@ -32,44 +18,59 @@ display: none;
 console.log("filtercheck");
 function updateFilters (id) {
   const selectedValues = $(`#${id} input:checked`).map(function() {
-      return $(this).val();
+    return $(this).val();
   })
 }
-
 $(document).ready(function() {
-  $(".filter-box input").change(function() {
-    const selectedFilters = $(".filter-box input:checked").map(function() {
-      return $(this).val();
-    }).get();
+  resultsCount = $('.tile:not(.filter-hide)').length
+    $('#results-count').text(`${ resultsCount } results.`) 
+    $(".filter-box input").change(function() {
+      const selectedFilters = $(".filter-box input:checked").map(function() {
+        return $(this).val();
+      }).get();
 
-    $(".tile").each(function() {
-      const tileValues = $(this).data("filters").split(" ");
-      
-      let showTile = false; // Flag to track if the item should be shown
-
-      // Loop through all selected filters
-      if (selectedFilters.length === 0) {
-        showTile = true;
-      }
-      for (const filterValue of selectedFilters) {
-      
-        if (tileValues.includes(filterValue)) {
-          showTile = true; // If any filter matches, set the flag to true
-          break; // Exit the loop if a matchqq is found (OR logic)
+      $(".tile").each(function() {
+        let tileValues = []
+        if ($(this).data("subjects")){
+          tileValues = $(this).data("subjects").split(" ");
+        } else if ($(this).data("languages")){
+          tileValues = $(this).data("languages").split(" ");
         }
-      }
-      if (showTile) {
-        $(this).removeClass("filter-hide")
-      } else {
-        $(this).addClass("filter-hide")
-      }
+
+        let showTile = false; // Flag to track if the item should be shown
+
+        // Loop through all selected filters
+        if (selectedFilters.length === 0) {
+          showTile = true;
+        }
+        for (const filterValue of selectedFilters) {
+
+          if (tileValues.includes(filterValue)) {
+            showTile = true; // If any filter matches, set the flag to true
+            break; // Exit the loop if a matchqq is found (OR logic)
+          }
+        }
+        if (showTile) {
+          $(this).removeClass("filter-hide")
+        } else {
+          $(this).addClass("filter-hide")
+        }
+      });
+      resultsCount = $('.tile:not(.filter-hide)').length
+        $('#results-count').text(`${ resultsCount } results.`) 
     });
-  });
 });
 </script>
 
 <div class="filter-box">
 <h4>filters</h4>
+<?php 
+/*foreach($facets as $key => $value): */
+/*echo $value;*/
+/*endforeach */
+?>
+
+<p><em id="results-count"></em></p>
 <?php foreach($filters as $key => $value): ?>
 <h5><?= $key ?></h5>
 <ul class="filter-list" id="<?= $key ?>">
@@ -81,7 +82,7 @@ $(document).ready(function() {
 <?php endforeach ?>
 </ul>
 <?php endforeach ?>
- 
+
 <div id="slider"></div
 <p>
   <label for="amount">Date range:</label>
@@ -92,11 +93,12 @@ $(document).ready(function() {
 var slider = document.getElementById('slider');
 
 noUiSlider.create(slider, {
-    start: [20, 80],
-    connect: true,
-    range: {
-        'min': 0,
-        'max': 100
-    }
+start: [1600, 1900],
+  connect: true,
+  range: {
+  'min': 1600,
+    'max': 1900
+},
+  step: 10,
 });
 </script>

@@ -1,0 +1,39 @@
+
+.search-results-block {
+  display: flex;
+
+  & .filter-box{
+   
+    & .filter-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    
+    }
+    #slider {
+      margin-block: 11px;
+    }
+    /* noUiSlider -- date range slider */
+    & .noUi-target {
+      background: rgba(var(--fg-rgb),0.3) !important;
+
+    }
+    & .noUi-connect {
+      background: rgba(var(--fg-rgb), 0.1) !important;
+    }
+  }
+}
+@media screen and (max-width: 900px) {
+  .search-results-block {
+    flex-direction: column;
+  }
+}
+@media screen and (min-width: 900px) {
+  .search-results-block {
+    flex-direction: row;
+    & .filter-box{
+      flex-basis: min(300px, 25vw);
+    }
+  }
+
+}
