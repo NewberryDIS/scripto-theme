@@ -9,33 +9,58 @@
  * @var array|false $pagination
  */
 
-$plugins = $this->getHelperPluginManager();
-$escape = $plugins->get('escapeHtml');
-$translate = $plugins->get('translate');
-$thumbnail = $plugins->get('thumbnail');
-$siteSetting = $plugins->get('siteSetting');
-$escapeAttr = $plugins->get('escapeHtmlAttr');
+$vari = "asfsfat atata"
+  ?>
+<script>console.log("<?= $vari; ?>")</script><?php
+  $plugins = $this->getHelperPluginManager();
+  $escape = $plugins->get('escapeHtml');
+  $translate = $plugins->get('translate');
+  $thumbnail = $plugins->get('thumbnail');
+  $siteSetting = $plugins->get('siteSetting');
+  $escapeAttr = $plugins->get('escapeHtmlAttr');
 
-$filterLocale = (bool) $siteSetting('filter_locale_values');
-$lang = $filterLocale ? $this->lang() : null;
-$langValue = $filterLocale ? [$this->lang(), ''] : null;
+  $filterLocale = (bool) $siteSetting('filter_locale_values');
+  $lang = $filterLocale ? $this->lang() : null;
+  $langValue = $filterLocale ? [$this->lang(), ''] : null;
 
 
-// get filter values
-function getFilterValues($resource, $term) {
-  $values = array_map(function($r) {
-    $retVal = slugify($r->value());
-    return $retVal;
-  }, $resource->value($term, array('all' => true)));
-  return $values;
-}
+  // get filter values
+  function getFilterValues($resource, $term)
+  {
+    $values = array_map(function ($r) use ($term) {
+      return $r->value();
+    }, $resource->value($term, array('all' => true)));
+    return $values;
+  }
 
-function slugify($text){
+  function dateify($text)
+  {
     // replace non letter or digits by -
     $text = preg_replace('~[^\pL\d]+~u', '-', $text);
 
-    // transliterate
-    $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+    // remove unwanted characters
+    $text = preg_replace('~[^-\w]+~', '', $text);
+
+    // trim
+    $text = trim($text, '-');
+
+    // remove duplicated - symbols
+    $text = preg_replace('~-+~', '-', $text);
+
+    $text = str_replace('-', ' ', $text);
+    // lowercase
+    $text = strtolower($text);
+
+    if (empty($text)) {
+      return 'n-a';
+    }
+
+    return $text;
+  }
+  function slugify($text)
+  {
+    // replace non letter or digits by -
+    $text = preg_replace('~[^\pL\d]+~u', '-', $text);
 
     // remove unwanted characters
     $text = preg_replace('~[^-\w]+~', '', $text);
@@ -54,49 +79,66 @@ function slugify($text){
     }
 
     return $text;
-}
-function createFilterString($resource){
-  $subjects = implode(" ", array_map('slugify', getFilterValues($resource, "dcterms:subject")));
-  $languages = implode(" ", array_map('slugify', getFilterValues($resource, "dcterms:language")));
+  }
+  function createFilterString($resource)
+  {
+    $subjects = implode(" ", array_map('slugify', getFilterValues($resource, "dcterms:subject")));
+    $languages = implode(" ", array_map('slugify', getFilterValues($resource, "dcterms:language")));
+    $format = implode(" ", array_map('slugify', getFilterValues($resource, "dcterms:format")));
+    $dates = implode(" ", array_map('dateify', getFilterValues($resource, "dcterms:temporal")));
 
-  return [$subjects, $languages];
-}
+    return [$subjects, $languages, $format, $dates];
+  }
+  function getFilterLOV($filterType, $resources)
+  {
 
-$filters = [
-  "subjects" => [],
-  "language" => [
-    "eng",
-    "fr",
-    "german"
-  ],
-  "format" => [
-    "letters",
-    "diaries"
-  ],
-];
-$filters["subjects"] = array_unique(array_merge(...array_map(function($resource){
-  $values =  array_map(function($r) {return $r->value();}, $resource->value("dcterms:subject", array('all' => true)));
-  return $values;
-}, $resources)));
-asort($filters["subjects"]);
-?>
+    //return [$value, $slugify($value)];
+  
+    $values = array_reduce($resources, function ($carry, $resource) use ($filterType) {
+      $resourceValues = array_map(function ($r) {
+        return $r->value();
+      }, $resource->value($filterType, array('all' => true)));
+      return array_merge($carry, $resourceValues);
+    }, []);
+
+    $uniqueValues = array_unique($values);
+
+    asort($uniqueValues);
+
+    $slugifiedValues = array_map(function ($value) {
+      return [$value, slugify($value)];
+    }, $uniqueValues);
+
+    return $slugifiedValues;
+  }
+
+
+  $filters = [
+    "subjects" => getFilterLOV("dcterms:subject", $resources),
+    "language" => getFilterLOV("dcterms:language", $resources),
+    "format" => getFilterLOV("dcterms:format", $resources),
+  ];
+
+  ?>
+<script>console.log(<?= json_encode($filters) ?>)</script>
 <?php // This block uses two div by default to comply with common themes. ?>
 <div class="block search-form-block">
-    <form id="search-form">
-        <input type="text" name="search" value="<?= $escapeAttr($query['search']) ?>" placeholder="<?= $translate('Search') ?>">
-        <button type="submit"><?= $translate('Search') ?></button>
-    </form>
+  <form id="search-form">
+    <input type="text" name="search" value="<?= $escapeAttr($query['search']) ?>"
+      placeholder="<?= $translate('Search') ?>">
+    <button type="submit"><?= $translate('Search') ?></button>
+  </form>
 </div>
 <div class="search-results-block">
-        <?php include('filter-in-place.phtml'); ?>
+  <?php include ('filter-in-place.phtml'); ?>
 
-    <ul class="resource-list preview">
+  <ul class="resource-list preview">
     <?php
     $headingTerm = $siteSetting('browse_heading_property_term', 'dcterms:title');
     $bodyTerm = $siteSetting('browse_body_property_term', 'dcterms:description');
     $untitled = $translate('[Untitled]');
 
-    $sortedResources = array_map( function ( $resource ){
+    $sortedResources = array_map(function ($resource) {
       $outputItem = $resource;
       $outputItem->scriptoItem = $this->api()->searchOne('scripto_items', ['item_id' => $outputItem->id()])->getContent();
       $outputItem->mediaCount = $outputItem->scriptoItem->mediaCount();
@@ -104,48 +146,46 @@ asort($filters["subjects"]);
       /*$outputItem->percentApproved = 47;*/
       $outputItem->percentApproved = round(($outputItem->approvedMediaCount / $outputItem->mediaCount) * 100);
       return $outputItem;
-    }, $resources );
-    
-    usort($sortedResources, function($a, $b) {
+    }, $resources);
+
+    usort($sortedResources, function ($a, $b) {
       return $a->percentApproved - $b->percentApproved;
     });
     $options = ["people", "arts", "color", "thing", "cadmia", "alabaster", "english", "fr", "german", "diaries", "letters"];
-
+    ?>
+    <script>console.log(<?= json_encode($sortedResources) ?>)</script>
+    <?php
     foreach ($sortedResources as $resource):
-        $heading = $headingTerm ? $resource->value($headingTerm, ['lang' => $langValue]) : null;
-        $heading = $heading ? $heading->asHtml() : $escape($resource->displayTitle($untitled, $lang));
-        $body = $bodyTerm ? $resource->value($bodyTerm, ['lang' => $langValue]) : null;
-        $body = $body ? $body->asHtml() : $escape($resource->displayDescription(null, $lang));
-        $filterString = $options[rand(0,count($options))] . " " . $options[rand(0, count($options))];
-        $filterString =  createFilterString($resource);
+      $heading = $headingTerm ? $resource->value($headingTerm, ['lang' => $langValue]) : null;
+      $heading = $heading ? $heading->asHtml() : $escape($resource->displayTitle($untitled, $lang));
+      $body = $bodyTerm ? $resource->value($bodyTerm, ['lang' => $langValue]) : null;
+      $body = $body ? $body->asHtml() : $escape($resource->displayDescription(null, $lang));
+      $filterString = $options[rand(0, count($options))] . " " . $options[rand(0, count($options))];
+      $filterString = createFilterString($resource);
 
-?>
+      ?>
 
-
-      <li class="<?= $resourceType ?> resource tile" 
-          data-subjects="<?= $filterString[0] ?>"
-          data-languages="<?= $filterString[1] ?>"
-      >
-            <?= $resource->linkRaw($thumbnail($resource, 'medium', ['title' => $heading])) ?>
-            <h4><?= $resource->link($heading) ?></h4>
-            <?php if ($body): ?>
-            <div class="description"><?= $body ?></div>
-            <?php endif; ?>
-            <div 
-              class="progress-bar" 
-              style="background-image: 
+      <li class="<?= $resourceType ?> resource tile" data-subjects="<?= $filterString[0] ?>"
+        data-language="<?= $filterString[1] ?>" data-format="<?= $filterString[2] ?>"
+        data-dates="<?= $filterString[3] ?>">
+        <?= $resource->linkRaw($thumbnail($resource, 'medium', ['title' => $heading])) ?>
+        <h4><?= $resource->link($heading) ?></h4>
+        <?php if ($body): ?>
+          <div class="description"><?= $body ?></div>
+        <?php endif; ?>
+        <div class="progress-bar" style="background-image: 
                 linear-gradient(to right, 
                   var(--progress-color-1) 0%, 
                   var(--progress-color-1) <?= $resource->percentApproved ?>%, 
                   var(--progress-color-2) <?= $resource->percentApproved ?>%, 
                   var(--progress-color-2) 100%
                 );">
-              <span>
-                  <?php echo $resource->percentApproved ?>% Complete
-              </span>
-            </div>
-        </li>
+          <span>
+            <?php echo $resource->percentApproved ?>% Complete
+          </span>
+        </div>
+      </li>
     <?php endforeach; ?>
-    </ul>
+  </ul>
 
 </div>
