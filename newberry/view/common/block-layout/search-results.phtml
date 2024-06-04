@@ -9,9 +9,6 @@
  * @var array|false $pagination
  */
 
-$vari = "asfsfat atata"
-  ?>
-<script>console.log("<?= $vari; ?>")</script><?php
   $plugins = $this->getHelperPluginManager();
   $escape = $plugins->get('escapeHtml');
   $translate = $plugins->get('translate');
@@ -164,27 +161,8 @@ $vari = "asfsfat atata"
       $filterString = createFilterString($resource);
 
       ?>
+<?php echo $this->TileComponent($resource->percentApproved); ?>
 
-      <li class="<?= $resourceType ?> resource tile" data-subjects="<?= $filterString[0] ?>"
-        data-language="<?= $filterString[1] ?>" data-format="<?= $filterString[2] ?>"
-        data-dates="<?= $filterString[3] ?>">
-        <?= $resource->linkRaw($thumbnail($resource, 'medium', ['title' => $heading])) ?>
-        <h4><?= $resource->link($heading) ?></h4>
-        <?php if ($body): ?>
-          <div class="description"><?= $body ?></div>
-        <?php endif; ?>
-        <div class="progress-bar" style="background-image: 
-                linear-gradient(to right, 
-                  var(--progress-color-1) 0%, 
-                  var(--progress-color-1) <?= $resource->percentApproved ?>%, 
-                  var(--progress-color-2) <?= $resource->percentApproved ?>%, 
-                  var(--progress-color-2) 100%
-                );">
-          <span>
-            <?php echo $resource->percentApproved ?>% Complete
-          </span>
-        </div>
-      </li>
     <?php endforeach; ?>
   </ul>
 

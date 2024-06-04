@@ -29,10 +29,11 @@
     transition: 250ms;
     transform-origin: center;
   }
-  & h4 {
+  & h4, .link-tile {
+    color: var(--fg-color-2);
+    background: var(--bg-color-2);
     font-weight: 400;
     margin: 0;
-    background: var(--bg-color);
     padding: 0.5rem;
 
   }
@@ -53,7 +54,7 @@
     text-align: center;
   }
   .progress-bar {
-    color: var(--progress-color-2);
+    color: var(--fg-color);
   }
 }
 /* .card {  */

@@ -73,6 +73,7 @@ a:hover {
   justify-content: center;
   align-items: start;
   & span {
+    line-height: 1rem;
     position: relative;
     top: 3px;
   }

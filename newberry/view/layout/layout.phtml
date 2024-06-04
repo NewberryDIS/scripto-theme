@@ -5,13 +5,19 @@ $this->headMeta()->setCharset('utf-8');
 $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1');
 $this->headTitle($this->setting('installation_title', 'Omeka S'))->setSeparator(' · ');
 $this->headLink()->prependStylesheet($this->assetUrl('css/style.css'));
+$this->headLink()->prependStylesheet($this->assetUrl('vendor/jquery/jquery-ui-slider/jquery-ui.min.css', 'Omeka'));
+/*$this->headLink()->prependStylesheet($this->assetUrl('vendor/jquery-ui-slider/jquery-ui.min.css'));*/
+/*$this->headLink()->prependStylesheet($this->assetUrl('vendor/jquery/jquery-structure.min.css'));*/
+/*$this->headLink()->prependStylesheet($this->assetUrl('vendor/jquery/jquery-theme.min.css'));*/
 $this->headLink()->prependStylesheet($this->assetUrl('css/iconfonts.css', 'Omeka'));
 $this->headLink()->prependStylesheet($this->assetUrl('vendor/tablesaw/tablesaw.stackonly.css', 'Omeka'));
 $this->headScript()->prependFile($this->assetUrl('js/global.js', 'Omeka'));
+$this->headScript()->prependFile($this->assetUrl('vendor/jquery/jquery-ui-slider/jquery-ui.min.js', 'Omeka'));
 $this->headScript()->prependFile($this->assetUrl('vendor/tablesaw/tablesaw.stackonly.jquery.js', 'Omeka'));
 $this->headScript()->prependFile($this->assetUrl('vendor/jquery/jquery.min.js', 'Omeka'));
 $this->headScript()->prependFile($this->assetUrl('js/newberry-logo.js'));
 $this->headScript()->prependFile($this->assetUrl('js/dark-mode-toggle.js'));
+
 $this->trigger('view.layout');
 $this->jsTranslate();
 $title = $this->pageTitle($site->title());
@@ -20,21 +26,22 @@ $bg = $this->themeSettingAssetUrl('background_image');
 $bgStyle = $this->themeSetting('background_layout');
 $bgColor = $this->themeSetting('bg_color');
 if ($logo):
-    $title = '<img src="' . $this->escapeHtml($logo) . '">';
+  $title = '<img src="' . $this->escapeHtml($logo) . '">';
 endif;
 $userBar = $this->userBar();
 ?>
 <?php echo $this->doctype(); ?>
 <?php echo $this->htmlElement('html'); ?>
-    <head>
-        <?php echo $this->headMeta(); ?>
-        <?php echo $this->headTitle(); ?>
-        <?php echo $this->headLink(); ?>
-        <?php echo $this->headStyle(); ?>
-        <?php echo $this->headScript(); ?>
-    </head>
-    <?php echo $this->htmlElement('body'); ?>
-        <!-- 
+
+<head>
+  <?php echo $this->headMeta(); ?>
+  <?php echo $this->headTitle(); ?>
+  <?php echo $this->headLink(); ?>
+  <?php echo $this->headStyle(); ?>
+  <?php echo $this->headScript(); ?>
+</head>
+<?php echo $this->htmlElement('body'); ?>
+<!-- 
           <dark-mode-toggle></dark-mode-toggle> 
             main 5: 
               - 10 * 5 home
@@ -46,12 +53,13 @@ $userBar = $this->userBar();
               - 0.22 * 5 cliff
               - 0.85 * 5 ghall
         -->
-        <a id="skipnav" href="#content"><?php echo $this->translate('Skip to main content'); ?></a>
-        <?php include('header.phtml'); ?>
-        <main id="content poop" class="page-content" aria-label="<?php echo $this->escapeHtml($this->translate('Content')); ?>">
-            <div class="wrapper">
-            <?php echo $this->content; ?>
-            </div>
-        </main>
-    </body>
+<a id="skipnav" href="#content"><?php echo $this->translate('Skip to main content'); ?></a>
+<?php include ('header.phtml'); ?>
+<main id="content" class="page-content" aria-label="<?php echo $this->escapeHtml($this->translate('Content')); ?>">
+  <div class="wrapper">
+    <?php echo $this->content; ?>
+  </div>
+</main>
+</body>
+
 </html>

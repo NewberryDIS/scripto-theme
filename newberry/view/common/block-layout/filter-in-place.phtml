@@ -1,8 +1,3 @@
-<?php
-/* noUiSlider */
-$this->headLink()->prependStylesheet($this->assetUrl('js/noUiSlider/nouislider.min.css'));
-$this->headScript()->prependFile($this->assetUrl('js/noUiSlider/nouislider.min.js'));
-?>
 <style>
   .filter-show {
     display: flex;
@@ -12,111 +7,15 @@ $this->headScript()->prependFile($this->assetUrl('js/noUiSlider/nouislider.min.j
     display: none;
   }
 </style>
-<script>
-
-  let filters = {
-    subjects: [],
-    languages: [],
-    formats: [],
-    dates: [0, 2000]
-  }
-
-  // console.log("filtercheck");
-
-  function updateFilters(id) {
-    const selectedValues = $(`#${id} input:checked`).map(function () {
-      return $(this).val();
-    })
-  }
-
-  // when any checkbox is clicked
-  // iterate through all checkboxes
-  // add to filters object
-  // loop through tiles
-  // check each filter against each filter list
-
-  // opacity + scale then display ?
-
-  function updateFilters() {
-
-    console.log(filters)
-    const dateRange = dateSlider.noUiSlider.get(true);
-    const dateRangeDisplay = document.getElementById('date-range')
-    dateRangeDisplay.innerHTML = dateRange
-    filters.subjects = $("#subjects input:checked").map(function () {
-      return $(this).val();
-    }).get();
-    filters.languages = $("#languages input:checked").map(function () {
-      return $(this).val();
-    }).get();
-    filters.formats = $("#format input:checked").map(function () {
-      return $(this).val();
-    }).get();
-
-    $(".tile").each(function () {
-      let tileValues = {
-        subjects: [$(this).data("subjects") ? $(this).data("subjects").split(" ").filter(f => f) : [], false],
-        languages: [$(this).data("language") ? $(this).data("language").split(" ").filter(f => f) : [], false],
-        formats: [$(this).data("format") ? $(this).data("format").split(" ").filter(f => f) : [], false],
-        // when there's only one date, jQuery's data() function takes it as a number 
-        dates: [$(this).data("dates") ? typeof $(this).data("dates") === "string" ? $(this).data("dates").split(" ").filter(f => f) : ["" + $(this).data("dates")] : [], false],
-      }
-
-      // let showTile = Array.from({ length: Object.keys(tileValues).length }).map(() => false); // Flag to track if the item should be shown
-
-      for (const key in filters) {
-        // if the tile's filter list is empty, or if any of the values are in the filters list
-        if (key !== 'dates' &&
-          (filters[key].length === 0 ||
-            (tileValues[key][0].some(v => filters[key].includes(v))))) {
-          tileValues[key][1] = true;
-          // if dates, and if date length = 1, then the date value has to be between the slider range values
-        } else if (key === 'dates') {
-          if (tileValues[key].length === 1 && tileValues[key][0] > dateRange[0] && tileValues[key][0] < dateRange[1]) {
-            tileValues[key][1] = true;
-          } else {
-            // if the tile has a top and a bottom, then we need to know whether the ranges overlap 
-            // then the bottom date has to be below the top date and the top date needs to be above the bottom date
-            // (consider the possibility that a user selects 1820-1830, but an item's range is 1800-1850)
-            let sortedDates = tileValues[key][0].map(tv => parseInt(tv)).sort((a, b) => a - b)
-            if (sortedDates[0] < dateRange[1] && sortedDates[sortedDates.length - 1] > dateRange[0]) {
-              tileValues[key][1] = true
-            }
-          }
-        }
-      }
-
-      console.log("tileValues ", tileValues)
-      let showTile = Object.keys(tileValues).map(k => tileValues[k][1]).every(v => v)
-      if (showTile) {
-        $(this).removeClass("filter-hide")
-      } else {
-        $(this).addClass("filter-hide")
-      }
-    });
-    resultsCount = $('.tile:not(.filter-hide)').length
-    $('#results-count').text(`${resultsCount} results.`)
-  };
-  $(document).ready(function () {
-
-    resultsCount = $('.tile:not(.filter-hide)').length;
-    $('#results-count').text(`${resultsCount} results.`);
-
-    dateSlider.noUiSlider.on("end", updateFilters)
-
-    $(".filter-box input").change(function () {
-      updateFilters();
-    });
-  });
-</script>
 
 <div class="filter-box">
+
   <h4>filters</h4>
-  <?php
-  /*foreach($facets as $key => $value): */
-  /*echo $value;*/
-  /*endforeach */
-  ?>
+<?php
+/*foreach($facets as $key => $value): */
+/*echo $value;*/
+/*endforeach */
+?>
 
   <p><em id="results-count"></em></p>
   <?php foreach ($filters as $key => $value): ?>
@@ -131,22 +30,116 @@ $this->headScript()->prependFile($this->assetUrl('js/noUiSlider/nouislider.min.j
     </ul>
   <?php endforeach ?>
 
-  <div id="dateSlider"></div>
-  <p style="margin: 33px;">
-    <label for="amount">Date range:</label>
-    <input type="text" id="date-range" readonly="" style="border:0; color:#f6931f; font-weight:bold;">
-  </p>
+  <div id="date-slider"></div>
+  <p id="date-display"></p>
 </div>
 <script>
-  var dateSlider = document.getElementById('dateSlider');
 
-  noUiSlider.create(dateSlider, {
-    start: [1700, 2000],
-    connect: true,
-    range: {
-      'min': 1700,
-      'max': 2000
-    },
-    step: 10,
+let filters = {
+subjects: [],
+  languages: [],
+  formats: [],
+  dates: [0, 2000]
+  }
+
+// console.log("filtercheck");
+
+/*function updateFilters(id) {*/
+/*  const selectedValues = $(`#${id} input:checked`).map(function () {*/
+/*    return $(this).val();*/
+/*  })*/
+/*}*/
+
+// when any checkbox is clicked
+// iterate through all checkboxes
+// add to filters object
+// loop through tiles
+// check each filter against each filter list
+
+// opacity + scale then display ?
+
+function updateFilters() {
+
+  console.log(filters)
+
+
+    filters.subjects = $("#subjects input:checked").map(function () {
+      return $(this).val();
+    }).get();
+  filters.languages = $("#languages input:checked").map(function () {
+    return $(this).val();
+  }).get();
+  filters.formats = $("#format input:checked").map(function () {
+    return $(this).val();
+  }).get();
+filters.dates = $("#date-slider").slider("values")
+
+  $(".tile").each(function () {
+    let tileValues = {
+    subjects: [$(this).data("subjects") ? $(this).data("subjects").split(" ").filter(f => f) : [], false],
+      languages: [$(this).data("language") ? $(this).data("language").split(" ").filter(f => f) : [], false],
+      formats: [$(this).data("format") ? $(this).data("format").split(" ").filter(f => f) : [], false],
+      // when there's only one date, jQuery's data() function takes it as a number 
+      dates: [$(this).data("dates") ? typeof $(this).data("dates") === "string" ? $(this).data("dates").split(" ").filter(f => f) : ["" + $(this).data("dates")] : [], false],
+  }
+
+    // let showTile = Array.from({ length: Object.keys(tileValues).length }).map(() => false); // Flag to track if the item should be shown
+
+    for (const key in filters) {
+      // if the tile's filter list is empty, or if any of the values are in the filters list
+      if (key !== 'dates' &&
+        (filters[key].length === 0 ||
+        (tileValues[key][0].some(v => filters[key].includes(v))))) {
+        tileValues[key][1] = true;
+        // if dates, and if date length = 1, then the date value has to be between the slider range values
+      } else if (key === 'dates') {
+        if (tileValues[key].length === 1 && tileValues[key][0] > filters.dates[0] && tileValues[key][0] < filters.dates[1]) {
+          tileValues[key][1] = true;
+        } else {
+          // if the tile has a top and a bottom, then we need to know whether the ranges overlap 
+          // then the bottom date has to be below the top date and the top date needs to be above the bottom date
+          // (consider the possibility that a user selects 1820-1830, but an item's range is 1800-1850)
+          let sortedDates = tileValues[key][0].map(tv => parseInt(tv)).sort((a, b) => a - b)
+            if (sortedDates[0] < filters.dates[1] && sortedDates[sortedDates.length - 1] > filters.dates[0]) {
+              tileValues[key][1] = true
+            }
+        }
+      }
+    }
+
+    console.log("tileValues ", tileValues)
+      let showTile = Object.keys(tileValues).map(k => tileValues[k][1]).every(v => v)
+      if (showTile) {
+        $(this).removeClass("filter-hide")
+      } else {
+        $(this).addClass("filter-hide")
+      }
   });
+  resultsCount = $('.tile:not(.filter-hide)').length
+    $('#results-count').text(`${resultsCount} results.`)
+};
+$( function() {
+} );
+$(document).ready(function () {
+
+  resultsCount = $('.tile:not(.filter-hide)').length;
+  $('#results-count').text(`${resultsCount} results.`);
+
+  $( "#date-slider" ).slider({
+  range: true,
+    min: 1800,
+    max: 2024,
+    values: [ 1800, 2024 ],
+    change: function( event, ui ) {
+      updateFilters() 
+    },
+    slide: function( event, ui ) {
+      $( "#date-display" ).text($( "#date-slider" ).slider( "values", 0 ) + " - " + $( "#date-slider" ).slider( "values", 1 ) );
+    }
+  });
+  $( "#date-display" ).text($( "#date-slider" ).slider( "values", 0 ) + " - " + $( "#date-slider" ).slider( "values", 1 ) );
+  $(".filter-box input").change(function () {
+    updateFilters();
+  });
+});
 </script>

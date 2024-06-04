@@ -30,12 +30,9 @@ a {
  * Basic styling
  */
 body {
-  --progress-color-1: color-mix(in oklab, var(--bg-color) 10%, var(--fg-color));
-  --progress-color-2: color-mix(in oklab, var(--fg-color) 10%, var(--bg-color));
   --tile-width: 333px;
   --tile-width: 250px;
   --tile-ratio: 1 / 1.5;
-  /* --tile-ratio: 1 / 2; */
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -1582,7 +1579,7 @@ body {
 
   & li, dd, .link-tile {
     position: relative;
-    box-shadow: 0 0 5px 5px rgba(var(--fg-rgb), 0.1);
+    box-shadow: 0 0 5px 5px var(--shadow);
     border: 1px solid var(--fg-color) !important;
     overflow: hidden;
     width: var(--tile-width);
@@ -1592,8 +1589,7 @@ body {
     transition: 250ms;
 
     &:hover {
-
-      box-shadow: 0 0 10px 10px rgba(var(--fg-rgb), 0.1);
+      box-shadow: 0 0 10px 10px var(--shadow);
     }
     & .resource-thumbnail  {
       margin: 0 !important;
@@ -1617,31 +1613,18 @@ body {
       justify-content: end;
       align-items: center;
       padding: 0;
-      & .resource-title, h4 {
-        font-weight: 400;
-        width: 100%;
-        text-align: center;
-        background: var(--bg-color);
-        padding: 0.5rem;
-      }
     }
   }
 }
 
 .link-tile {
-  border: 1px solid var(--fg-color);
-  background: var(--bg-color) ;
   display: flex;
   justify-content: center;
   align-items: center;
   width: var(--tile-width);
   aspect-ratio: var(--tile-ratio);
-  box-shadow: 0 0 5px 5px rgba(var(--fg-rgb), 0.1);
-  transition: 250ms;
-  &:hover {
-
-    box-shadow: 0 0 10px 10px rgba(var(--fg-rgb), 0.1);
-  }
+    color: var(--fg-color-2);
+    background: var(--bg-color-2);
 }
 .progress-bar {
   & span, h4 {
@@ -1655,24 +1638,23 @@ body {
   height: 1rem;
   font-size: 0.9rem;
   width: 100%;
-  &:not(.page) span {
-    mix-blend-mode: difference;
-  }
+  /* &:not(.page) span { */
+  /*   mix-blend-mode: difference; */
+  /* } */
   &.page {
-    background: var(--progress-color-2);
-    color: var(--progress-color-1);
+    color: var(--fg-color);
   }
 }
 
 
 #main-progress-bar {
-    color: var(--progress-color-2);
-    mix-blend-mode: difference;
+    color: var(--fg-color);
+    /* mix-blend-mode: difference; */
   display: flex; 
   justify-content: center;
   height: 33px;
   font-size; 22px;
   align-items: center;
   margin-block: 22px;
-  border: 1px solid var(--progress-color-2);
+  border: 1px solid var(--fg-color);
 }

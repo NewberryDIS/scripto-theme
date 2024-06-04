@@ -3,6 +3,7 @@
   display: flex;
 
   & .filter-box{
+    min-width: 200px;
    
     & .filter-list {
       display: flex;
@@ -10,17 +11,10 @@
       gap: 3px;
     
     }
-    #slider {
+    #date-slider, #date-display {
       margin-block: 11px;
     }
     /* noUiSlider -- date range slider */
-    & .noUi-target {
-      background: rgba(var(--fg-rgb),0.3) !important;
-
-    }
-    & .noUi-connect {
-      background: rgba(var(--fg-rgb), 0.1) !important;
-    }
   }
 }
 @media screen and (max-width: 900px) {
