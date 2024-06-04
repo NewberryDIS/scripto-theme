@@ -159,9 +159,11 @@
       $body = $body ? $body->asHtml() : $escape($resource->displayDescription(null, $lang));
       $filterString = $options[rand(0, count($options))] . " " . $options[rand(0, count($options))];
       $filterString = createFilterString($resource);
+      $media = $resource->primaryMedia();
+      $linkUrl = "/dohmekas/s/transcribe/item/{$resource->id()}";
 
       ?>
-<?php echo $this->TileComponent($resource->percentApproved); ?>
+<?php echo $this->TileComponent($heading, $linkUrl, $media->thumbnailUrl('square'),  $resource->percentApproved, $filterString ); ?>
 
     <?php endforeach; ?>
   </ul>

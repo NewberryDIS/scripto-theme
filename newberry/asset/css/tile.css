@@ -1,19 +1,21 @@
 .tile {
   width: var(--tile-width);
-  aspect-ratio: var(--tile-aspect-ratio);
+  aspect-ratio: 1 / 1.5;
   display: flex;
   flex-direction: column;
   justify-content: end;
   align-items: center;
-  padding: 0.5em;
   position: relative;
 
-  box-shadow: 0 0 5px 5px var(--fg-color-lite);
+  box-shadow: 0 0 5px 5px color-mix(in oklab, var(--midphire) 10%, transparent);
   border: 1px solid var(--fg-color);
-  border-radius: 3px;
+  border-radius: 9px 9px 0 0;
+  overflow: hidden;
 
   transition: 250ms;
-
+  &:hover {
+    box-shadow: 0 0 5px 5px color-mix(in oklab, var(--midphire) 20%, transparent);
+  }
   & img {
     position: absolute;
     top: 0;
@@ -56,6 +58,13 @@
   .progress-bar {
     color: var(--fg-color);
   }
+}
+
+.red {
+  background: var(--progress-red);
+}
+.green {
+  background: var(--progress-green);
 }
 /* .card {  */
 /*   transform: perspective(800px); */

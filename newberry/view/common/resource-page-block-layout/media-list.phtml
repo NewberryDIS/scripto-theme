@@ -33,21 +33,10 @@ style="<?= $progressCss; ?>"
       $completed = $scriptoPage->completed();
       $approved = $scriptoPage->approved();
       $scriptoData = $scriptoPage->position();
-      $status = ( $scriptoPage->completed() ) ? ( 'Needs Review' ) : ( ( $scriptoPage->edited() ) ? ( "Started / In Progress" ) : ( 'Not Started' ) ); ?>
-
-      <dd class="value tile" id="<?= $media->id();?>">
-        <a href="/dohmekas/scripto/2/<?= $resource->id();?>/<?= $media->id();?>/edit" target="_blank">
-          <img src="<?= $media->thumbnailUrl('square'); ?>" alt="" />
-          <div 
-            class="page progress-bar" 
-            id="progress-bar-<?php echo $media->id();?>" 
-          >
-            <span>
-              <?= $status ?>
-            </span>
-          </div>
-        </a>
-      </dd>
+      $status = ( $scriptoPage->completed() ) ? ( 'Ready for Review' ) : ( ( $scriptoPage->edited() ) ? ( "Started / In Progress" ) : ( 'Not Started' ) ); 
+$linkUrl = "/dohmekas/scripto/2/{$resource->id()}/{$media->id()}/edit";
+?>
+<?php echo $this->TileComponent(null, $linkUrl, $media->thumbnailUrl('square'),  $status, null ); ?>
     <?php endforeach; ?>
 </dl>
 <?php endif; ?>
