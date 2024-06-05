@@ -1,0 +1,85 @@
+<?php
+function createTile($imageUrl, $title, $text) {
+  $html = <<<HTML
+    <a href="$linkUrl" class="tile">
+      <img src="$imageUrl" alt="$title" />
+      <h4>$title</h4>
+      <div class="progress-bar $progressType" 
+        style="background-image: 
+          linear-gradient(to right, 
+            var(--progress-green) 0%, 
+            var(--progress-green) {$$percentApproved}%, 
+            var(--progress-bg) {$$percentApproved}%, 
+            var(--progress-bg) 100%
+          );">
+        <span>$percentApproved ?>% Complete</span>
+      </div>
+    </a>
+HTML;
+
+  return $html;
+}
+?>
+
+
+
+      <li class="<?= $resourceType ?> resource tile" data-subjects="<?= $filterString[0] ?>"
+        data-language="<?= $filterString[1] ?>" data-format="<?= $filterString[2] ?>"
+        data-dates="<?= $filterString[3] ?>">
+        <?= $resource->linkRaw($thumbnail($resource, 'medium', ['title' => $heading])) ?>
+        <h4><?= $resource->link($heading) ?></h4>
+        <?php if ($body): ?>
+          <div class="description"><?= $body ?></div>
+        <?php endif; ?>
+        <div class="progress-bar" style="background-image: 
+                linear-gradient(to right, 
+                  var(--progress-color-1) 0%, 
+                  var(--progress-color-1) <?= $resource->percentApproved ?>%, 
+                  var(--progress-color-2) <?= $resource->percentApproved ?>%, 
+                  var(--progress-color-2) 100%
+                );">
+          <span>
+            <?php echo $resource->percentApproved ?>% Complete
+          </span>
+        </div>
+      </li>
+<?php
+function createCardComponent($title, $imageUrl, $progress) {
+
+    return "
+    <div class='card'>
+        <img src='{$imageUrl}' alt='{$title}' class='card-img-top'>
+        <div class='card-body'>
+            <h5 class='card-title'>{$title}</h5>
+            <p class='card-text'>{$progress}</p>
+        </div>
+    </div>
+    ";
+}
+
+
+    <?php else: ?>
+      <div class="page progress-bar $progColor">
+        <span>$progress</span>
+      </div>
+    <?php endif; ?>
+
+
+
+--- media-list.phtml list item
+
+
+      <dd class="value tile" id="<?= $media->id();?>">
+        <a href="/dohmekas/scripto/2/<?= $resource->id();?>/<?= $media->id();?>/edit" target="_blank">
+          <img src="<?= $media->thumbnailUrl('square'); ?>" alt="" />
+          <div 
+            class="page progress-bar" 
+            id="progress-bar-<?php echo $media->id();?>" 
+          >
+            <span>
+              <?= $status ?>
+            </span>
+          </div>
+        </a>
+      </dd>
+

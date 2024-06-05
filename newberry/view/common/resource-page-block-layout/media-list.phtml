@@ -1,43 +1,50 @@
 <!-- NICKW -- this does item page tiles -->
 <?php
-$resourceMedia = $resource->media();
-$scriptoItem = $this->api()->searchOne('scripto_items', ['item_id' => $resource->id()])->getContent();
-
-if ($scriptoItem !== null && method_exists($scriptoItem, 'mediaCount') && method_exists($scriptoItem, 'isApprovedMediaCount')) {
-  $mediaCount = $scriptoItem->mediaCount();
-  $approvedMediaCount = $scriptoItem->isApprovedMediaCount();
-  $totalPercentApproved = round(($approvedMediaCount / $mediaCount) * 100);
-  $progressCss = $totalPercentApproved > 0 ? "background-image: 
-       linear-gradient(to right, 
-         var(--progress-color-1) 0%, 
-         var(--progress-color-1) {$totalPercentApproved}%, 
-         var(--progress-color-2) {$totalPercentApproved}%, 
-         var(--progress-color-2) 100% 
-        );" : "background: var(--progress-color-1)";
-} else {
-  $totalPercentApproved = 0;
-  $progressCss = "background: var(--progress-color-1)";
-}
+  $resourceMedia = $resource->media();
+  $scriptoItem = $this->api()->searchOne('scripto_items', ['item_id' => $resource->id()])->getContent();
+  
+  if ($scriptoItem !== null && method_exists($scriptoItem, 'mediaCount') && method_exists($scriptoItem, 'isApprovedMediaCount')) {
+    $mediaCount = $scriptoItem->mediaCount();
+    $approvedMediaCount = $scriptoItem->isApprovedMediaCount();
+    $totalPercentApproved = round(($approvedMediaCount / $mediaCount) * 100);
+    $progressCss = $totalPercentApproved > 0 ? "background-image: 
+         linear-gradient(to right, 
+           var(--progress-green) 0%, 
+           var(--progress-green) {$totalPercentApproved}%, 
+           var(--progress-bg) {$totalPercentApproved}%, 
+           var(--progress-bg) 100% 
+          );" : "background: var(--progress-bg)";
+  } else {
+    $totalPercentApproved = 0;
+    $progressCss = "background: var(--progress-bg)";
+  }
 ?>
 
 <?php if ($resourceMedia): ?>
-<div class="progress-bar" 
-style="<?= $progressCss; ?>"
-     id="main-progress-bar">
-      <span>
-        <?= $totalPercentApproved; ?>% complete</span>
-      </div>
-  <dl class="media-list" id="<?php echo $resource->id(); ?>">
-    <?php foreach ($resourceMedia as $media): 
-      $scriptoPage = $this->api()->searchOne('scripto_media', ['media_id' => $media->id(), 'limit' => 1,])->getContent();
-      $completed = $scriptoPage->completed();
-      $approved = $scriptoPage->approved();
-      $scriptoData = $scriptoPage->position();
-      $status = ( $scriptoPage->completed() ) ? ( 'Ready for Review' ) : ( ( $scriptoPage->edited() ) ? ( "Started / In Progress" ) : ( 'Not Started' ) ); 
-$linkUrl = "/dohmekas/scripto/2/{$resource->id()}/{$media->id()}/edit";
-?>
-<?php echo $this->TileComponent(null, $linkUrl, $media->thumbnailUrl('square'),  $status, null ); ?>
-    <?php endforeach; ?>
-</dl>
+  <div class="progress-bar" 
+    style="<?= $progressCss; ?>"
+    id="main-progress-bar"
+  >
+    <span>
+      <?= $totalPercentApproved; ?>% complete
+    </span>
+  </div>
+  <div class="tile-container">
+    <dl class="media-list tiles" id="<?php echo $resource->id(); ?>">
+      <?php 
+        foreach ($resourceMedia as $media) {
+          $scriptoPage = $this->api()->searchOne('scripto_media', ['media_id' => $media->id(), 'limit' => 1,])->getContent();
+          $completed = $scriptoPage->completed();
+          $approved = $scriptoPage->approved();
+          $scriptoData = $scriptoPage->position();
+          $status = ( $scriptoPage->completed() ) ? ( 'Ready for Review' ) : ( ( $scriptoPage->edited() ) ? ( "Started / In Progress" ) : ( 'Not Started' ) ); 
+          $linkUrl = "/dohmekas/scripto/2/{$resource->id()}/{$media->id()}/edit";
+  
+          echo $this->TileComponent(null, $linkUrl, $media->thumbnailUrl('square'), $status, null );
+          
+        } 
+      ?>
+    </dl>
+  </div>
 <?php endif; ?>
 

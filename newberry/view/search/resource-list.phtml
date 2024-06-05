@@ -39,49 +39,31 @@ $gridListMode = $searchConfig ? $searchConfig->subSetting('display', 'grid_list_
 
 $defaultThumbnail = '<img loading="lazy" src="' . $assetUrl('thumbnails/default.png', 'Omeka', true) . '" title="' . $translate('No media') . '"/>';
 
-/*$scriptoItem = $this->api()->searchOne('scripto_items', ['item_id' => $resource->id()])->getContent();*/
-/**/
-/*if ($scriptoItem !== null && method_exists($scriptoItem, 'mediaCount') && method_exists($scriptoItem, 'isApprovedMediaCount')) {*/
-/*  $mediaCount = $scriptoItem->mediaCount();*/
-/*  $approvedMediaCount = $scriptoItem->isApprovedMediaCount();*/
-/*  $totalPercentApproved = round(($approvedMediaCount / $mediaCount) * 100);*/
-/*}*/
-
 ?>
 
 <?php if ($title): ?>
-<h3><?= $escape($title) ?></h3>
+  <h3><?= $escape($title) ?></h3>
 <?php endif; ?>
-<ul class="resource-list search-results-list<?= $gridListMode === 'list_only' ? ' list' : ($gridListMode === 'grid_only' ? ' grid' : '') ?>">
-<?php /** @var \Omeka\Api\Representation\AbstractResourceEntityRepresentation $resource */
+<div class="tile-container">
+  <ul class="tiles resource-list search-results-list<?= $gridListMode === 'list_only' ? ' list' : ($gridListMode === 'grid_only' ? ' grid' : '') ?>">
+    <?php 
+      /** @var \Omeka\Api\Representation\AbstractResourceEntityRepresentation $resource */
+    
+      $sortedResources = array_map( function ( $resource ){
+        $outputItem = $resource;
+        $outputItem->scriptoItem = $this->api()->searchOne('scripto_items', ['item_id' => $outputItem->id()])->getContent();
+        $outputItem->mediaCount = $outputItem->scriptoItem->mediaCount();
+        $outputItem->approvedMediaCount = $outputItem->scriptoItem->isApprovedMediaCount();
+        /*$outputItem->percentApproved = 47;*/
+        $outputItem->percentApproved = round(($outputItem->approvedMediaCount / $outputItem->mediaCount) * 100);
+        return $outputItem;
+      }, $resources );
+      
+      usort($sortedResources, function($a, $b) {
+        return $a->percentApproved - $b->percentApproved;
+      });
 
-$sortedResources = array_map( function ( $resource ){
-  $outputItem = $resource;
-  $outputItem->scriptoItem = $this->api()->searchOne('scripto_items', ['item_id' => $outputItem->id()])->getContent();
-  $outputItem->mediaCount = $outputItem->scriptoItem->mediaCount();
-  $outputItem->approvedMediaCount = $outputItem->scriptoItem->isApprovedMediaCount();
-  /*$outputItem->percentApproved = 47;*/
-  $outputItem->percentApproved = round(($outputItem->approvedMediaCount / $outputItem->mediaCount) * 100);
-  return $outputItem;
-}, $resources );
-/*foreach ($sortedResources as $resource) {*/
-/*  echo $resource->mediaCount;*/
-/*}*/
-    /*foreach ($resources as $resource) {*/
-  /*    $resource->scriptoItem = $this->api()->searchOne('scripto_items', ['item_id' => $resource->id()])->getContent();*/
-  /*$resource->mediaCount = $resource->scriptoItem->mediaCount();*/
-  /*$resource->approvedMediaCount = $resource->scriptoItem->isApprovedMediaCount();*/
-  /*$resource->percentApproved = round(($resource->approvedMediaCount / $resource->mediaCount) * 100);*/
-  /**/
-      /*echo $resource->mediaCount;*/
-  /*array_push($sortedResources, $resource);*/
-    /*}*/
-?><script>console.log(<?= json_encode($sortedResources, JSON_PRETTY_PRINT); ?>)</script><?php
-usort($sortedResources, function($a, $b) {
-return $a->percentApproved - $b->percentApproved;
-});
-    foreach ($sortedResources as $resource):
-        // Can be simplified in the public theme.
+      foreach ($sortedResources as $resource) {
         $resourceUrl = $site ? $resource->siteUrl($siteSlug) : $resource->adminUrl($siteSlug);
         $resourceType = $resource->resourceName();
         $resourceThumbnail = $thumbnail($resource, 'square') ?: $defaultThumbnail;
@@ -89,32 +71,12 @@ return $a->percentApproved - $b->percentApproved;
         $heading = $heading ? $heading->asHtml() : $escape($resource->displayTitle($untitled, $lang));
         $body = $bodyTerm ? $resource->value($bodyTerm, ['lang' => $langValue]) : null;
         $body = $body ? $body->asHtml() : $escape($resource->displayDescription(null, $lang));
+        $media = $resource->primaryMedia();
+        $linkUrl = "/dohmekas/s/transcribe/item/{$resource->id()}";
+    
+        echo $this->TileComponent($heading, $linkUrl, $media->thumbnailUrl('square'),  $resource->percentApproved, null );
+    
+      }
     ?>
-
-    <li class="resource tile <?= $resourceType ?>">
-        <div class="resource-thumbnail">
-            <?= $hyperlink->raw($resourceThumbnail, $resourceUrl, ['class' => 'resource-link']) ?>
-        </div>
-        <div class="resource-metadata">
-            <h4><?= $resource->linkRaw($heading) ?></h4>
-            <div class="description">
-                <?= $body ?>
-            </div>
-            <div 
-              class="progress-bar" 
-              style="background-image: 
-                linear-gradient(to right, 
-                  var(--progress-color-1) 0%, 
-                  var(--progress-color-1) <?= $resource->percentApproved ?>%, 
-                  var(--progress-color-2) <?= $resource->percentApproved ?>%, 
-                  var(--progress-color-2) 100%
-                );">
-<span>
-                  <?php echo $resource->percentApproved ?>% Complete
-</span>
-            </div>
-        </div>
-    </li>
-
-    <?php endforeach; ?>
-</ul>
+  </ul>
+</div>

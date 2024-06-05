@@ -1,9 +1,7 @@
 @import "./newberry.css";
-@import "./media-list.css";
-@import "./browse-preview.css";
 @import "./header.css";
 @import "./tile.css";
-@import "./filters.css";
+@import "./tiles.css";
 /**
  * Reset some basic elements
  */

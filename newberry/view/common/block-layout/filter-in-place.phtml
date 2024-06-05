@@ -10,45 +10,34 @@
 
 <div class="filter-box">
 
-  <h4>filters</h4>
-<?php
-/*foreach($facets as $key => $value): */
-/*echo $value;*/
-/*endforeach */
-?>
-
+  <h4>Filter Items</h4>
   <p><em id="results-count"></em></p>
+
   <?php foreach ($filters as $key => $value): ?>
-    <h5><?= $key ?></h5>
+    <h5><?= ucfirst($key) ?></h5>
     <ul class="filter-list" id="<?= $key ?>">
       <?php foreach ($value as $val): ?>
         <li>
           <input type="checkbox" id="<?= $val[1] ?>" value="<?= $val[1] ?>" name="filter">
           <label for="<?= $val[1] ?>"><?= $val[0] ?></label>
         </li>
-      <?php endforeach ?>
+      <?php endforeach; ?>
     </ul>
-  <?php endforeach ?>
+  <?php endforeach; ?>
 
-  <div id="date-slider"></div>
-  <p id="date-display"></p>
+  <div class="date-filter">
+    <h5 id="date-display"></h5>
+    <div id="date-slider"></div>
+  </div>
 </div>
-<script>
 
+<script>
 let filters = {
-subjects: [],
+  subjects: [],
   languages: [],
   formats: [],
   dates: [0, 2000]
-  }
-
-// console.log("filtercheck");
-
-/*function updateFilters(id) {*/
-/*  const selectedValues = $(`#${id} input:checked`).map(function () {*/
-/*    return $(this).val();*/
-/*  })*/
-/*}*/
+}
 
 // when any checkbox is clicked
 // iterate through all checkboxes
@@ -62,26 +51,28 @@ function updateFilters() {
 
   console.log(filters)
 
+  filters.subjects = $("#subjects input:checked").map(function () {
+    return $(this).val();
+  }).get();
 
-    filters.subjects = $("#subjects input:checked").map(function () {
-      return $(this).val();
-    }).get();
   filters.languages = $("#languages input:checked").map(function () {
     return $(this).val();
   }).get();
+
   filters.formats = $("#format input:checked").map(function () {
     return $(this).val();
   }).get();
-filters.dates = $("#date-slider").slider("values")
+
+  filters.dates = $("#date-slider").slider("values");
 
   $(".tile").each(function () {
     let tileValues = {
-    subjects: [$(this).data("subjects") ? $(this).data("subjects").split(" ").filter(f => f) : [], false],
+      subjects: [$(this).data("subjects") ? $(this).data("subjects").split(" ").filter(f => f) : [], false],
       languages: [$(this).data("language") ? $(this).data("language").split(" ").filter(f => f) : [], false],
       formats: [$(this).data("format") ? $(this).data("format").split(" ").filter(f => f) : [], false],
       // when there's only one date, jQuery's data() function takes it as a number 
       dates: [$(this).data("dates") ? typeof $(this).data("dates") === "string" ? $(this).data("dates").split(" ").filter(f => f) : ["" + $(this).data("dates")] : [], false],
-  }
+    }
 
     // let showTile = Array.from({ length: Object.keys(tileValues).length }).map(() => false); // Flag to track if the item should be shown
 
@@ -100,33 +91,34 @@ filters.dates = $("#date-slider").slider("values")
           // then the bottom date has to be below the top date and the top date needs to be above the bottom date
           // (consider the possibility that a user selects 1820-1830, but an item's range is 1800-1850)
           let sortedDates = tileValues[key][0].map(tv => parseInt(tv)).sort((a, b) => a - b)
-            if (sortedDates[0] < filters.dates[1] && sortedDates[sortedDates.length - 1] > filters.dates[0]) {
-              tileValues[key][1] = true
-            }
+          if (sortedDates[0] < filters.dates[1] && sortedDates[sortedDates.length - 1] > filters.dates[0]) {
+            tileValues[key][1] = true
+          }
         }
       }
     }
 
     console.log("tileValues ", tileValues)
-      let showTile = Object.keys(tileValues).map(k => tileValues[k][1]).every(v => v)
-      if (showTile) {
-        $(this).removeClass("filter-hide")
-      } else {
-        $(this).addClass("filter-hide")
-      }
+
+    let showTile = Object.keys(tileValues).map(k => tileValues[k][1]).every(v => v)
+
+    if (showTile) {
+      $(this).removeClass("filter-hide")
+    } else {
+      $(this).addClass("filter-hide")
+    }
   });
   resultsCount = $('.tile:not(.filter-hide)').length
-    $('#results-count').text(`${resultsCount} results.`)
+  $('#results-count').text(`${resultsCount} results.`)
 };
-$( function() {
-} );
+
 $(document).ready(function () {
 
   resultsCount = $('.tile:not(.filter-hide)').length;
   $('#results-count').text(`${resultsCount} results.`);
 
   $( "#date-slider" ).slider({
-  range: true,
+    range: true,
     min: 1800,
     max: 2024,
     values: [ 1800, 2024 ],
@@ -134,10 +126,10 @@ $(document).ready(function () {
       updateFilters() 
     },
     slide: function( event, ui ) {
-      $( "#date-display" ).text($( "#date-slider" ).slider( "values", 0 ) + " - " + $( "#date-slider" ).slider( "values", 1 ) );
+      $( "#date-display" ).text("Dates: " + $( "#date-slider" ).slider( "values", 0 ) + " - " + $( "#date-slider" ).slider( "values", 1 ) );
     }
   });
-  $( "#date-display" ).text($( "#date-slider" ).slider( "values", 0 ) + " - " + $( "#date-slider" ).slider( "values", 1 ) );
+  $( "#date-display" ).text("Dates: " + $( "#date-slider" ).slider( "values", 0 ) + " - " + $( "#date-slider" ).slider( "values", 1 ) );
   $(".filter-box input").change(function () {
     updateFilters();
   });

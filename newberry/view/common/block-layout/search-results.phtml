@@ -45,15 +45,13 @@
     $text = preg_replace('~-+~', '-', $text);
 
     $text = str_replace('-', ' ', $text);
+    
     // lowercase
     $text = strtolower($text);
 
-    if (empty($text)) {
-      return 'n-a';
-    }
-
     return $text;
   }
+
   function slugify($text)
   {
     // replace non letter or digits by -
@@ -71,12 +69,9 @@
     // lowercase
     $text = strtolower($text);
 
-    if (empty($text)) {
-      return 'n-a';
-    }
-
     return $text;
   }
+
   function createFilterString($resource)
   {
     $subjects = implode(" ", array_map('slugify', getFilterValues($resource, "dcterms:subject")));
@@ -86,10 +81,9 @@
 
     return [$subjects, $languages, $format, $dates];
   }
+
   function getFilterLOV($filterType, $resources)
   {
-
-    //return [$value, $slugify($value)];
   
     $values = array_reduce($resources, function ($carry, $resource) use ($filterType) {
       $resourceValues = array_map(function ($r) {
@@ -116,56 +110,66 @@
     "format" => getFilterLOV("dcterms:format", $resources),
   ];
 
-  ?>
+?>
+
 <script>console.log(<?= json_encode($filters) ?>)</script>
-<?php // This block uses two div by default to comply with common themes. ?>
+
 <div class="block search-form-block">
   <form id="search-form">
-    <input type="text" name="search" value="<?= $escapeAttr($query['search']) ?>"
+    <input 
+      type="text" 
+      name="search" 
+      value="<?= $escapeAttr($query['search']) ?>"
       placeholder="<?= $translate('Search') ?>">
     <button type="submit"><?= $translate('Search') ?></button>
   </form>
 </div>
-<div class="search-results-block">
-  <?php include ('filter-in-place.phtml'); ?>
 
-  <ul class="resource-list preview">
+<div class="search-results-block tile-container">
+
+  <?php include('filter-in-place.phtml'); ?>
+
+  <ul class="resource-list preview tiles">
     <?php
-    $headingTerm = $siteSetting('browse_heading_property_term', 'dcterms:title');
-    $bodyTerm = $siteSetting('browse_body_property_term', 'dcterms:description');
-    $untitled = $translate('[Untitled]');
+      $headingTerm = $siteSetting('browse_heading_property_term', 'dcterms:title');
+      $bodyTerm = $siteSetting('browse_body_property_term', 'dcterms:description');
+      $untitled = $translate('[Untitled]');
 
-    $sortedResources = array_map(function ($resource) {
-      $outputItem = $resource;
-      $outputItem->scriptoItem = $this->api()->searchOne('scripto_items', ['item_id' => $outputItem->id()])->getContent();
-      $outputItem->mediaCount = $outputItem->scriptoItem->mediaCount();
-      $outputItem->approvedMediaCount = $outputItem->scriptoItem->isApprovedMediaCount();
-      /*$outputItem->percentApproved = 47;*/
-      $outputItem->percentApproved = round(($outputItem->approvedMediaCount / $outputItem->mediaCount) * 100);
-      return $outputItem;
-    }, $resources);
+      $sortedResources = array_map(function ($resource) {
+        $outputItem = $resource;
+        $outputItem->scriptoItem = $this->api()->searchOne('scripto_items', ['item_id' => $outputItem->id()])->getContent();
+        if ($outputItem->scriptoItem) {
+          $outputItem->mediaCount = $outputItem->scriptoItem->mediaCount();
+          $outputItem->approvedMediaCount = $outputItem->scriptoItem->isApprovedMediaCount();
+          /*$outputItem->percentApproved = 47;*/
+          $outputItem->percentApproved = round(($outputItem->approvedMediaCount / $outputItem->mediaCount) * 100);
+        } else {
+          $outputItem->mediaCount = 0;
+          $outputItem->approvedMediaCount = 0;
+          /*$outputItem->percentApproved = 47;*/
+          $outputItem->percentApproved = 0;
+        }
+        return $outputItem;
+      }, $resources);
 
-    usort($sortedResources, function ($a, $b) {
-      return $a->percentApproved - $b->percentApproved;
-    });
-    $options = ["people", "arts", "color", "thing", "cadmia", "alabaster", "english", "fr", "german", "diaries", "letters"];
+      usort($sortedResources, function ($a, $b) {
+        return $a->percentApproved - $b->percentApproved;
+      });
+
+      foreach ($sortedResources as $resource) {
+        $heading = $headingTerm ? $resource->value($headingTerm, ['lang' => $langValue]) : null;
+        $heading = $heading ? $heading->asHtml() : $escape($resource->displayTitle($untitled, $lang));
+        $body = $bodyTerm ? $resource->value($bodyTerm, ['lang' => $langValue]) : null;
+        $body = $body ? $body->asHtml() : $escape($resource->displayDescription(null, $lang));
+
+        $filterString = createFilterString($resource);
+        $media = $resource ? $resource->primaryMedia() : null;
+        $thumbnailUrl = $media ? $media->thumbnailUrl('square'): null;
+        $linkUrl = "/dohmekas/s/transcribe/item/{$resource->id()}";
+
+        echo $this->TileComponent($heading, $linkUrl, $thumbnailUrl, $resource->percentApproved, $filterString );
+
+      }
     ?>
-    <script>console.log(<?= json_encode($sortedResources) ?>)</script>
-    <?php
-    foreach ($sortedResources as $resource):
-      $heading = $headingTerm ? $resource->value($headingTerm, ['lang' => $langValue]) : null;
-      $heading = $heading ? $heading->asHtml() : $escape($resource->displayTitle($untitled, $lang));
-      $body = $bodyTerm ? $resource->value($bodyTerm, ['lang' => $langValue]) : null;
-      $body = $body ? $body->asHtml() : $escape($resource->displayDescription(null, $lang));
-      $filterString = $options[rand(0, count($options))] . " " . $options[rand(0, count($options))];
-      $filterString = createFilterString($resource);
-      $media = $resource->primaryMedia();
-      $linkUrl = "/dohmekas/s/transcribe/item/{$resource->id()}";
-
-      ?>
-<?php echo $this->TileComponent($heading, $linkUrl, $media->thumbnailUrl('square'),  $resource->percentApproved, $filterString ); ?>
-
-    <?php endforeach; ?>
   </ul>
-
 </div>

@@ -1,0 +1,58 @@
+.tile-container {
+  display: flex;
+
+  & .filter-box{
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+
+    & .filter-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-family: "styrene";
+      font-weight: 400;
+      font-weight: 200;
+
+    }
+    .date-filter {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-block: 11px;
+      & #date-slider {
+        /* align-self: center; */
+        margin: 6px;
+        width: 76%;
+      }
+    }
+  }
+  .tiles {
+    flex: 4;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+  }
+}
+@media screen and (max-width: 900px) {
+  .tile-container {
+    flex-direction: column;
+  }
+}
+@media screen and (min-width: 900px) {
+  .tile-container {
+    flex-direction: row;
+    & .filter-box{
+      flex: 1;
+      /* flex-basis: min(300px, 25vw); */
+    }
+  }
+
+}

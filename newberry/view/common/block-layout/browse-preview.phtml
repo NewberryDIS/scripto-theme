@@ -4,76 +4,48 @@ $escape = $this->plugin('escapeHtml');
 
 
 ?>
-<div class="preview-block">
+<div class="preview-block tile-container">
 
-<ul class="resource-list preview">
-<a href="#" class="link-tile">
-<?php echo $escape($this->heading); ?>
-</a>
-<?php
+  <ul class="tiles resource-list preview">
+    <a href="#" class="link-tile">
+      <?php echo $escape($this->heading); ?>
+    </a>
 
-$showThumbnail = in_array('thumbnail', $this->components);
-$showHeading = in_array('resource-heading', $this->components);
-$showBody = in_array('resource-body', $this->components);
-$headingTerm = $this->siteSetting('browse_heading_property_term');
-$bodyTerm = $this->siteSetting('browse_body_property_term');
+    <?php
 
-foreach ($this->resources as $resource):
-    $heading = $headingTerm ? $resource->value($headingTerm, ['default' => $translate('[Untitled]')]) : $resource->displayTitle();
-    $body = $bodyTerm ? $resource->value($bodyTerm) : $resource->displayDescription();
-    
-    // jim safley https://forum.omeka.org/t/scripto-item-completion/22548/3 
-    $scriptoItem = $this->api()->searchOne('scripto_items', ['item_id' => $resource->id()])->getContent();
+    $showThumbnail = in_array('thumbnail', $this->components);
+    $showHeading = in_array('resource-heading', $this->components);
+    $showBody = in_array('resource-body', $this->components);
+    $headingTerm = $this->siteSetting('browse_heading_property_term');
+    $bodyTerm = $this->siteSetting('browse_body_property_term');
 
-    if ($scriptoItem !== null && method_exists($scriptoItem, 'mediaCount') && method_exists($scriptoItem, 'isApprovedMediaCount')) {
+    foreach ($this->resources as $resource):
+      $heading = $headingTerm ? $resource->value($headingTerm, ['default' => $translate('[Untitled]')]) : $resource->displayTitle();
+      $body = $bodyTerm ? $resource->value($bodyTerm) : $resource->displayDescription();
+      
+      // jim safley https://forum.omeka.org/t/scripto-item-completion/22548/3 
+      $scriptoItem = $this->api()->searchOne('scripto_items', ['item_id' => $resource->id()])->getContent();
 
-      $mediaCount = $scriptoItem->mediaCount();
-      $approvedMediaCount = $scriptoItem->isApprovedMediaCount();
-      $percentApproved = round(($approvedMediaCount / $mediaCount) * 100);
-    } else {
-      $percentApproved = 0;
-    }
-?>
+      if ($scriptoItem !== null && method_exists($scriptoItem, 'mediaCount') && method_exists($scriptoItem, 'isApprovedMediaCount')) {
 
-    <li class="tile <?php echo $this->resourceType; ?> resource" >
-        <div class="resource-meta">
-            <?php
-            if ($showHeading):
-                echo $resource->link($heading, null, ['class' => 'resource-title']); 
-            endif; ?>
-            <?php if ($showBody && $body): ?>
-            <div class="description"><?php echo $escape($body); ?></div>
-            <?php endif; ?>
-            <div 
-              class="progress-bar" 
-              style="background-image: 
-                linear-gradient(to right, 
-                  var(--progress-green) 0%, 
-                  var(--progress-green) <?= $percentApproved ?>%, 
-                  var(--progress-bg) <?= $percentApproved ?>%, 
-                  var(--progress-bg) 100%
-                );">
-<span>
-                  <?php echo $percentApproved ?>% Complete
-</span>
-            </div>
-        </div>
-        <?php
-        if ($showThumbnail):
-            echo $resource->linkRaw($this->thumbnail($resource, 'square', ['title' => $heading]), null, ['class' => 'resource-thumbnail']);
-        endif;?>
-    </li>
-<?php endforeach; ?>
+        $mediaCount = $scriptoItem->mediaCount();
+        $approvedMediaCount = $scriptoItem->isApprovedMediaCount();
+        $percentApproved = round(($approvedMediaCount / $mediaCount) * 100);
+      } else {
+        $percentApproved = 0;
+      }
 
-<?php
-if ($this->linkText):
-    echo $this->hyperlink($this->linkText, $this->url(
-        'site/resource', ['controller' => $this->resourceType, 'action' => 'browse'], ['query' => $this->query ], true
-    ), ['class' => 'link-tile'] );
-endif;
-?>
-</ul>
+      $media = $resource->primaryMedia();
+      $linkUrl = "/dohmekas/s/transcribe/item/{$resource->id()}";
 
+      echo $this->TileComponent($heading, $linkUrl, $media->thumbnailUrl('square'),  $percentApproved, null );
 
+      endforeach; 
+
+      if ($this->linkText) {
+        echo $this->hyperlink($this->linkText, $this->url('site/resource', ['controller' => $this->resourceType, 'action' => 'browse'], ['query' => $this->query ], true), ['class' => 'link-tile'] );
+      }
+    ?>
+  </ul>
 </div>
 
