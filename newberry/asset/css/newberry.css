@@ -59,7 +59,7 @@ body:not(.dark) {
   --splash-color: var(--midpark);
   --fg-color: rgb(var(--midnight));
   --fg-color-2: rgb(var(--granite));
-  --bg-color: rgb(var(--lavender));
+  --bg-color: rgb(var(--granite));
   --bg-color-2: var(--midphire);
   --progress-green: var(--parknite);
   --progress-red: var(--mulnite);

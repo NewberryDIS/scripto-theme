@@ -38,7 +38,16 @@ $escape = $this->plugin('escapeHtml');
       $media = $resource->primaryMedia();
       $linkUrl = "/dohmekas/s/transcribe/item/{$resource->id()}";
 
-      echo $this->TileComponent($heading, $linkUrl, $media->thumbnailUrl('square'),  $percentApproved, null );
+      $tileData = [
+        "tileType" => "manuscript",
+        "title" => $heading, 
+        "linkUrl" => $linkUrl,
+        "imageUrl" => $media->thumbnailUrl('square'), 
+        "progress" =>  $percentApproved,
+        "filterString" => [null,null,null,null],
+        "detail" => null 
+      ];
+      echo $this->TileComponent( $tileData );
 
       endforeach; 
 

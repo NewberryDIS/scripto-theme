@@ -10,6 +10,11 @@ header {
   left: 0;
   z-index: 9000;
   background: var(--bg-color);
+    box-shadow: 0 0 7px 7px transparent;
+  transition:  250ms;
+  &.with-shadow {
+    box-shadow: 0 0 7px 7px color-mix(in oklab, var(--midphire) 15%, transparent);
+  }
   & .header-right, .header-left {
     height: 100%;
   }

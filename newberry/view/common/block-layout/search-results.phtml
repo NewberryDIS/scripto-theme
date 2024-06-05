@@ -127,8 +127,15 @@
 
 <div class="search-results-block tile-container">
 
-  <?php include('filter-in-place.phtml'); ?>
-
+  <?php
+    if ($filters["subjects"]){ 
+      include('filter-in-place.phtml'); 
+      $tileType = "manuscript";
+    } else {
+      $tileType = "creator";
+    }
+  ?>
+  <script>console.log(<?= json_encode($resources) ?>)</script>
   <ul class="resource-list preview tiles">
     <?php
       $headingTerm = $siteSetting('browse_heading_property_term', 'dcterms:title');
@@ -161,13 +168,37 @@
         $heading = $heading ? $heading->asHtml() : $escape($resource->displayTitle($untitled, $lang));
         $body = $bodyTerm ? $resource->value($bodyTerm, ['lang' => $langValue]) : null;
         $body = $body ? $body->asHtml() : $escape($resource->displayDescription(null, $lang));
+        $detail = $resource->value("dcterms:abstract");
 
         $filterString = createFilterString($resource);
-        $media = $resource ? $resource->primaryMedia() : null;
-        $thumbnailUrl = $media ? $media->thumbnailUrl('square'): null;
+
+        $thumbnailUrl = $resource->primaryMedia() ? $resource->primaryMedia()->thumbnailUrl('square') : $resource->thumbnailDisplayUrls()["square"];
         $linkUrl = "/dohmekas/s/transcribe/item/{$resource->id()}";
 
-        echo $this->TileComponent($heading, $linkUrl, $thumbnailUrl, $resource->percentApproved, $filterString );
+        $tileData = [
+          "tileType" => $tileType,
+          "title" => $heading, 
+          "linkUrl" => $linkUrl,
+          "imageUrl" => $thumbnailUrl, 
+          "progress" => $resource->percentApproved,
+          "filterString" => $filterString,
+          "detail" => $detail
+        ];
+        if ( $tileType == "creator" && $resource->value("curation:featured") == "@nick"): 
+      ?>
+          <div class="faetured-creator">
+            <h3><?= $heading ?></h3>
+            <img src="<?= $thumbnailUrl ?>" alt="<?= $heading ?>" class="featured-creator-img" />
+            <div class="description">
+              <p>
+                <?= $resource->value("dcterms:description") ?>
+              </p>
+            </div>
+          </div>
+      <?php
+        } else { 
+          echo $this->TileComponent( $tileData );
+        }
 
       }
     ?>

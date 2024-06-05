@@ -39,8 +39,18 @@
           $scriptoData = $scriptoPage->position();
           $status = ( $scriptoPage->completed() ) ? ( 'Ready for Review' ) : ( ( $scriptoPage->edited() ) ? ( "Started / In Progress" ) : ( 'Not Started' ) ); 
           $linkUrl = "/dohmekas/scripto/2/{$resource->id()}/{$media->id()}/edit";
+          $tileData = [
+            "tileType" => "page",
+            "title" => null, 
+            "linkUrl" => $linkUrl,
+            "imageUrl" => $media->thumbnailUrl('square'), 
+            "progress" => $status,
+            "filterString" => [null,null,null,null],
+            "detail" => null
+
+          ];
   
-          echo $this->TileComponent(null, $linkUrl, $media->thumbnailUrl('square'), $status, null );
+          echo $this->TileComponent( $tileData );
           
         } 
       ?>

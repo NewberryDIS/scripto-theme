@@ -1,4 +1,4 @@
-<header>
+<header id="header">
   <section class="header-left">
   <newberry-logo></newberry-logo>
   <div class="bcrumbs">
@@ -37,6 +37,7 @@ echo $site->publicNav()->menu()->renderMenu(null, [
 </section>
 </header>
 <script>
+
 $(document).ready(() => {
   $('.navigation').click((e) => {
     if (e.target !== this ) {
@@ -46,7 +47,14 @@ $(document).ready(() => {
   $('.menu-button').click(() => {
     $('.header-right').toggleClass('show-header-menu');
   })
+  $(window).scroll(function() {
+    var scrollPosition = $(window).scrollTop();
+    if ($(this).scrollTop() > 50){
+      $('header').addClass("with-shadow");
+    } else {
+      $('header').removeClass("with-shadow");
+    }
+  })
 })
-
 
 </script>

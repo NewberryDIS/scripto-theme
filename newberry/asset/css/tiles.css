@@ -1,7 +1,16 @@
 .tile-container {
   display: flex;
+  align-items: start;
+  justify-content: start;
+
+
+/* display: grid; */
+/*   grid-template-columns: ; */
+/*   grid-gap: 10px; */
 
   & .filter-box{
+    position: sticky; 
+    top: 76px;
     flex: 1;
     min-width: 200px;
     display: flex;
@@ -31,7 +40,6 @@
     }
   }
   .tiles {
-    flex: 4;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -39,6 +47,16 @@
     gap: 1rem;
     margin: 0;
     padding: 0;
+  }
+  /* flex won't work, it needs to be grid + grid area to take the featured creator out of the flex flow */
+  .tiles:has(.manuscript) {
+    flex: 4;
+  }
+  .tiles:has(.creator) {
+    flex: 1;
+  }
+  .featured-creator {
+    flex: 1;
   }
 }
 @media screen and (max-width: 900px) {
@@ -50,7 +68,7 @@
   .tile-container {
     flex-direction: row;
     & .filter-box{
-      flex: 1;
+      /* flex: 1; */
       /* flex-basis: min(300px, 25vw); */
     }
   }
