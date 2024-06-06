@@ -162,45 +162,51 @@
       usort($sortedResources, function ($a, $b) {
         return $a->percentApproved - $b->percentApproved;
       });
+        $featuredItem = null;
+       foreach ($sortedResources as $resource) {
+         $heading = $headingTerm ? $resource->value($headingTerm, ['lang' => $langValue]) : null;
+          $heading = $heading ? $heading->asHtml() : $escape($resource->displayTitle($untitled, $lang));
+          $body = $bodyTerm ? $resource->value($bodyTerm, ['lang' => $langValue]) : null;
+          $body = $body ? $body->asHtml() : $escape($resource->displayDescription(null, $lang));
+          $detail = $resource->value("dcterms:abstract");
 
-      foreach ($sortedResources as $resource) {
-        $heading = $headingTerm ? $resource->value($headingTerm, ['lang' => $langValue]) : null;
-        $heading = $heading ? $heading->asHtml() : $escape($resource->displayTitle($untitled, $lang));
-        $body = $bodyTerm ? $resource->value($bodyTerm, ['lang' => $langValue]) : null;
-        $body = $body ? $body->asHtml() : $escape($resource->displayDescription(null, $lang));
-        $detail = $resource->value("dcterms:abstract");
+          $filterString = createFilterString($resource);
 
-        $filterString = createFilterString($resource);
+          $thumbnailUrl = $resource->primaryMedia() ? $resource->primaryMedia()->thumbnailUrl('square') : $resource->thumbnailDisplayUrls()["square"];
+          $linkUrl = "/dohmekas/s/transcribe/item/{$resource->id()}";
 
-        $thumbnailUrl = $resource->primaryMedia() ? $resource->primaryMedia()->thumbnailUrl('square') : $resource->thumbnailDisplayUrls()["square"];
-        $linkUrl = "/dohmekas/s/transcribe/item/{$resource->id()}";
+          $tileData = [
+            "tileType" => $tileType,
+            "title" => $heading, 
+            "linkUrl" => $linkUrl,
+            "imageUrl" => $thumbnailUrl, 
+            "progress" => $resource->percentApproved,
+            "filterString" => $filterString,
+            "detail" => $detail
+          ];
+        
+          if ( $tileType == "creator" && $resource->value("curation:featured") == "@nick") {
+            $featuredItem = $tileData;
+            $featuredItem["desc"] = $resource->value("dcterms:description");
+            $featuredItem["dates"] = $resource->value("dcterms:date");
+            /*echo $heading . " will not be appearing in this array.";*/
+           } else { 
+            echo $this->TileComponent( $tileData ); 
+            }
+          } 
+      ?> 
+    </ul>
+      <?php if ($featuredItem): ?>
 
-        $tileData = [
-          "tileType" => $tileType,
-          "title" => $heading, 
-          "linkUrl" => $linkUrl,
-          "imageUrl" => $thumbnailUrl, 
-          "progress" => $resource->percentApproved,
-          "filterString" => $filterString,
-          "detail" => $detail
-        ];
-        if ( $tileType == "creator" && $resource->value("curation:featured") == "@nick"): 
-      ?>
-          <div class="faetured-creator">
-            <h3><?= $heading ?></h3>
-            <img src="<?= $thumbnailUrl ?>" alt="<?= $heading ?>" class="featured-creator-img" />
-            <div class="description">
-              <p>
-                <?= $resource->value("dcterms:description") ?>
-              </p>
+            <div class="featured-creator">
+              <h3>Featured Creator</h3>
+              <img src="<?= $featuredItem["imageUrl"] ?>" alt="<?= $featuredItem["title"] ?>" class="featured-creator-img" />
+              <section class="text-block">
+                <a href="<?= $featuredItem["linkUrl"] ?>" class="name"><?= $featuredItem["title"] . ", " . $featuredItem["dates"]; ?></a>
+                <p>
+                  <?= $featuredItem["desc"] ?>
+                </p>
+              </section>
             </div>
-          </div>
-      <?php
-        } else { 
-          echo $this->TileComponent( $tileData );
-        }
-
-      }
-    ?>
-  </ul>
-</div>
+          <?php endif ?>
+/div>

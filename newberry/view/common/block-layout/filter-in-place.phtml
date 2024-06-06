@@ -1,12 +1,3 @@
-<style>
-  .filter-show {
-    display: flex;
-  }
-
-  .filter-hide {
-    display: none;
-  }
-</style>
 
 <div class="filter-box">
 
@@ -104,8 +95,13 @@ function updateFilters() {
 
     if (showTile) {
       $(this).removeClass("filter-hide")
+      $(this).removeClass("display-none")
     } else {
       $(this).addClass("filter-hide")
+      setTimeout(() => { 
+       $(this).addClass("display-none")
+     }, 500);
+
     }
   });
   resultsCount = $('.tile:not(.filter-hide)').length

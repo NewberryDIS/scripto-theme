@@ -3,11 +3,6 @@
   align-items: start;
   justify-content: start;
 
-
-/* display: grid; */
-/*   grid-template-columns: ; */
-/*   grid-gap: 10px; */
-
   & .filter-box{
     position: sticky; 
     top: 76px;
@@ -39,26 +34,96 @@
       }
     }
   }
-  .tiles {
+
+  & .featured-creator {
+    /* position: sticky;  */
+    /* top: 76px; */
+    /* max-height: calc(100vh - 100px); */
+    background: var(--bg-color-2);
+  background-image: linear-gradient(
+    60deg,
+    var(--midphire) 0vw,
+    40vw,
+    rgb(var(--sapphire)) 40vw 100vw
+  );
+    border-radius: 11px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin: 0;
-    padding: 0;
-  }
-  /* flex won't work, it needs to be grid + grid area to take the featured creator out of the flex flow */
-  .tiles:has(.manuscript) {
-    flex: 4;
-  }
-  .tiles:has(.creator) {
-    flex: 1;
-  }
-  .featured-creator {
-    flex: 1;
+    flex-direction: column;
+    justify-content: center;;
+    align-items: start;
+      gap: 0;
+    
+    & a, p, h3 {
+      color: var(--fg-color-2);
+    }
+    .text-block {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      padding: 22px 33px 33px 33px;
+    }
+    & .name {
+      /* margin-block:  11px; */
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+      border-block: 1px solid vaR(--fg-color-2);
+      width: 100%;
+      display: block;
+    }
+    & p {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+    & h3 {
+      margin-block:  11px;
+      padding-inline: 33px;
+      width: 100%;
+      text-align: center;
+    }
+    & img {
+      flex-shrink: 1;
+      width: 100%;
+      aspect-ratio: 1.5 / 1;
+      object-fit: cover;
+      object-position: top;
+      margin: 0;
+      padding:0;
+    }
   }
 }
+
+/* layouts */
+
+.tile-container {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 1rem;
+}
+
+.tile-container:has(.manuscript) {
+  grid-template-columns: 1fr 4fr;
+  grid-template-areas: "filters items";
+}
+
+.tile-container:has(.creator) {
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "items featured";
+}
+
+.featured-creator {
+  grid-area: featured;
+}
+
+.tiles {
+  grid-area: items;
+}
+
+.filter-box {
+  grid-area: filters;
+}
+
 @media screen and (max-width: 900px) {
   .tile-container {
     flex-direction: column;
