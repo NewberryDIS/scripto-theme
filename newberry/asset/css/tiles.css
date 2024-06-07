@@ -40,12 +40,12 @@
     /* top: 76px; */
     /* max-height: calc(100vh - 100px); */
     background: var(--bg-color-2);
-  background-image: linear-gradient(
-    60deg,
-    var(--midphire) 0vw,
-    40vw,
-    rgb(var(--sapphire)) 40vw 100vw
-  );
+    background-image: linear-gradient(
+      60deg,
+      var(--midphire) 0vw,
+      50vw,
+      rgb(var(--sapphire)) 50vw 100vw
+    );
     border-radius: 11px;
     display: flex;
     flex-direction: column;

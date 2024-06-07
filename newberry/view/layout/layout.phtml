@@ -41,25 +41,19 @@ $userBar = $this->userBar();
   <?php echo $this->headScript(); ?>
 </head>
 <?php echo $this->htmlElement('body'); ?>
-<!-- 
-          <dark-mode-toggle></dark-mode-toggle> 
-            main 5: 
-              - 10 * 5 home
-              - ( 0.61 * 4 ) * 5
-              - 0.85 * 5 ghall
-            back 5: 
-              - 10 * 5 home
-              - 0.78 * 5 desert
-              - 0.22 * 5 cliff
-              - 0.85 * 5 ghall
-        -->
+
 <a id="skipnav" href="#content"><?php echo $this->translate('Skip to main content'); ?></a>
-<?php include ('header.phtml'); ?>
 <main id="content" class="page-content" aria-label="<?php echo $this->escapeHtml($this->translate('Content')); ?>">
   <div class="wrapper">
     <?php echo $this->content; ?>
   </div>
 </main>
+<script>console.log("this navifation breadcrumbs, layout",  <?= json_encode($this->navigation()->breadcrumbs()); ?>);</script>
+<!-- header is fixed-position, so it is at the top no matter where it appears in the document flow; -->
+<!-- by placing it down here, it gains access to all php variables defined anywhere else in the application  -->
+<!-- notably, the $breadcrumbs variable -->
+<?php include ('header.phtml'); ?>
+<?php include ('footer.phtml'); ?>
 </body>
 
 </html>

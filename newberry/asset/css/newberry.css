@@ -2,6 +2,8 @@ html,
 body {
   margin: 0;
   padding: 0;
+  position: relative;
+  min-height: 100dvh;
 }
 body,
 body * {
@@ -41,14 +43,6 @@ html {
   --xxl: 1536px;
 }
 
-/*  dm on */
-:root {
-  /* --splash-color: var(--sapphire); */
-  /* --bg-color: var(--midnight); */
-  /* --bg-color-2: var(--mulberry); */
-  /* --fg-color-2: var(--lavender); */
-  /* --fg-color: var(--granite); */
-}
 body:not(.dark) {
   /* --splash-rgb: var(--sapphire); */
   /* --fg-rgb: var(--midnight); */
@@ -64,7 +58,6 @@ body:not(.dark) {
   --progress-green: var(--parknite);
   --progress-red: var(--mulnite);
   --progress-bg: rgb(var(--granite));
-  /* --shadow: color-mix(in oklab, var(--midphire) 10%, transparent)); */
     --shadow: color-mix(in oklab, var(--midphire) 10%, transparent);
   --bg-1: linear-gradient(
     60deg,

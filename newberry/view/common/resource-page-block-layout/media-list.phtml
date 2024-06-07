@@ -34,10 +34,10 @@
       <?php 
         foreach ($resourceMedia as $media) {
           $scriptoPage = $this->api()->searchOne('scripto_media', ['media_id' => $media->id(), 'limit' => 1,])->getContent();
-          $completed = $scriptoPage->completed();
-          $approved = $scriptoPage->approved();
-          $scriptoData = $scriptoPage->position();
-          $status = ( $scriptoPage->completed() ) ? ( 'Ready for Review' ) : ( ( $scriptoPage->edited() ) ? ( "Started / In Progress" ) : ( 'Not Started' ) ); 
+          $completed = $scriptoPage ? $scriptoPage->completed() : false;
+          $approved = $scriptoPage ? $scriptoPage->approved() : false;
+          $scriptoData = $scriptoPage ? $scriptoPage->position() : 0;
+          $status = $scriptoPage ? ( $scriptoPage->completed() ) ? ( 'Ready for Review' ) : ( ( $scriptoPage->edited() ) ? ( "Started / In Progress" ) : ( 'Not Started' ) ) : 'Not Started'; 
           $linkUrl = "/dohmekas/scripto/2/{$resource->id()}/{$media->id()}/edit";
           $tileData = [
             "tileType" => "page",

@@ -2,10 +2,16 @@
   <section class="header-left">
   <newberry-logo></newberry-logo>
   <div class="bcrumbs">
-  &gt;
-  <a href="#" class="header-link">Transcribe Home</a>
-  &gt;
-  <a href="https://transcribe.newberry.org/dohmekas/s/transcribe/manuscripts" class="header-link">Manuscripts</a>
+<script>console.log("this from header",  <?= json_encode($this); ?>);</script>
+
+<?php if (isset($breadcrumbs)): ?>
+  <?= $breadcrumbs; ?>
+<?php endif; ?>
+  <!-- 
+    <a href="#" class="header-link">Transcribe Home</a>
+    &gt;
+    <a href="https://transcribe.newberry.org/dohmekas/s/transcribe/manuscripts" class="header-link">Manuscripts</a>
+  -->
 </div>
 </section>
 <section class="header-right">

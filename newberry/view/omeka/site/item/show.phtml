@@ -6,8 +6,16 @@ $this->htmlElement('body')->appendAttribute('class', 'item resource show');
 $filterLocale = (bool) $this->siteSetting('filter_locale_values');
 $lang = $this->lang();
 $valueLang = $filterLocale ? [$lang, ''] : null;
+
+$pageBreadcrumbs = $this->breadcrumbs();
+
 ?>
+
 <?php echo $this->breadcrumbs(); ?>
+<?php if (isset($breadcrumbs)): ?>
+  ""<?= $breadcrumbs; ?>
+<?php endif; ?>
+
 <?php echo $this->pageTitle($item->displayTitle(null, $valueLang), 2); ?>
 <?php $this->trigger('view.show.before'); ?>
 <?php echo $this->resourcePageBlocks($item)->getBlocks(); ?>
