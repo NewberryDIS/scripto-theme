@@ -94,10 +94,13 @@ function updateFilters() {
     let showTile = Object.keys(tileValues).map(k => tileValues[k][1]).every(v => v)
 
     if (showTile) {
+      $(this).removeClass("glow")
       $(this).removeClass("filter-hide")
       $(this).removeClass("display-none")
+      $(this).addClass("glow")
     } else {
       $(this).addClass("filter-hide")
+      $(this).removeClass("glow")
       setTimeout(() => { 
        $(this).addClass("display-none")
      }, 500);

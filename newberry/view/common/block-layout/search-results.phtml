@@ -9,106 +9,106 @@
  * @var array|false $pagination
  */
 
-  $plugins = $this->getHelperPluginManager();
-  $escape = $plugins->get('escapeHtml');
-  $translate = $plugins->get('translate');
-  $thumbnail = $plugins->get('thumbnail');
-  $siteSetting = $plugins->get('siteSetting');
-  $escapeAttr = $plugins->get('escapeHtmlAttr');
+$plugins = $this->getHelperPluginManager();
+$escape = $plugins->get('escapeHtml');
+$translate = $plugins->get('translate');
+$thumbnail = $plugins->get('thumbnail');
+$siteSetting = $plugins->get('siteSetting');
+$escapeAttr = $plugins->get('escapeHtmlAttr');
 
-  $filterLocale = (bool) $siteSetting('filter_locale_values');
-  $lang = $filterLocale ? $this->lang() : null;
-  $langValue = $filterLocale ? [$this->lang(), ''] : null;
+$filterLocale = (bool) $siteSetting('filter_locale_values');
+$lang = $filterLocale ? $this->lang() : null;
+$langValue = $filterLocale ? [$this->lang(), ''] : null;
 
 
-  // get filter values
-  function getFilterValues($resource, $term)
-  {
-    $values = array_map(function ($r) use ($term) {
+// get filter values
+function getFilterValues($resource, $term)
+{
+  $values = array_map(function ($r) use ($term) {
+    return $r->value();
+  }, $resource->value($term, array('all' => true)));
+  return $values;
+}
+
+function dateify($text)
+{
+  // replace non letter or digits by -
+  $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+
+  // remove unwanted characters
+  $text = preg_replace('~[^-\w]+~', '', $text);
+
+  // trim
+  $text = trim($text, '-');
+
+  // remove duplicated - symbols
+  $text = preg_replace('~-+~', '-', $text);
+
+  $text = str_replace('-', ' ', $text);
+
+  // lowercase
+  $text = strtolower($text);
+
+  return $text;
+}
+
+function slugify($text)
+{
+  // replace non letter or digits by -
+  $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+
+  // remove unwanted characters
+  $text = preg_replace('~[^-\w]+~', '', $text);
+
+  // trim
+  $text = trim($text, '-');
+
+  // remove duplicated - symbols
+  $text = preg_replace('~-+~', '-', $text);
+
+  // lowercase
+  $text = strtolower($text);
+
+  return $text;
+}
+
+function createFilterString($resource)
+{
+  $subjects = implode(" ", array_map('slugify', getFilterValues($resource, "dcterms:subject")));
+  $languages = implode(" ", array_map('slugify', getFilterValues($resource, "dcterms:language")));
+  $format = implode(" ", array_map('slugify', getFilterValues($resource, "dcterms:format")));
+  $dates = implode(" ", array_map('dateify', getFilterValues($resource, "dcterms:temporal")));
+
+  return [$subjects, $languages, $format, $dates];
+}
+
+function getFilterLOV($filterType, $resources)
+{
+
+  $values = array_reduce($resources, function ($carry, $resource) use ($filterType) {
+    $resourceValues = array_map(function ($r) {
       return $r->value();
-    }, $resource->value($term, array('all' => true)));
-    return $values;
-  }
+    }, $resource->value($filterType, array('all' => true)));
+    return array_merge($carry, $resourceValues);
+  }, []);
 
-  function dateify($text)
-  {
-    // replace non letter or digits by -
-    $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+  $uniqueValues = array_unique($values);
 
-    // remove unwanted characters
-    $text = preg_replace('~[^-\w]+~', '', $text);
+  asort($uniqueValues);
 
-    // trim
-    $text = trim($text, '-');
+  $slugifiedValues = array_map(function ($value) {
+    return [$value, slugify($value)];
+  }, $uniqueValues);
 
-    // remove duplicated - symbols
-    $text = preg_replace('~-+~', '-', $text);
-
-    $text = str_replace('-', ' ', $text);
-    
-    // lowercase
-    $text = strtolower($text);
-
-    return $text;
-  }
-
-  function slugify($text)
-  {
-    // replace non letter or digits by -
-    $text = preg_replace('~[^\pL\d]+~u', '-', $text);
-
-    // remove unwanted characters
-    $text = preg_replace('~[^-\w]+~', '', $text);
-
-    // trim
-    $text = trim($text, '-');
-
-    // remove duplicated - symbols
-    $text = preg_replace('~-+~', '-', $text);
-
-    // lowercase
-    $text = strtolower($text);
-
-    return $text;
-  }
-
-  function createFilterString($resource)
-  {
-    $subjects = implode(" ", array_map('slugify', getFilterValues($resource, "dcterms:subject")));
-    $languages = implode(" ", array_map('slugify', getFilterValues($resource, "dcterms:language")));
-    $format = implode(" ", array_map('slugify', getFilterValues($resource, "dcterms:format")));
-    $dates = implode(" ", array_map('dateify', getFilterValues($resource, "dcterms:temporal")));
-
-    return [$subjects, $languages, $format, $dates];
-  }
-
-  function getFilterLOV($filterType, $resources)
-  {
-  
-    $values = array_reduce($resources, function ($carry, $resource) use ($filterType) {
-      $resourceValues = array_map(function ($r) {
-        return $r->value();
-      }, $resource->value($filterType, array('all' => true)));
-      return array_merge($carry, $resourceValues);
-    }, []);
-
-    $uniqueValues = array_unique($values);
-
-    asort($uniqueValues);
-
-    $slugifiedValues = array_map(function ($value) {
-      return [$value, slugify($value)];
-    }, $uniqueValues);
-
-    return $slugifiedValues;
-  }
+  return $slugifiedValues;
+}
 
 
-  $filters = [
-    "subjects" => getFilterLOV("dcterms:subject", $resources),
-    "language" => getFilterLOV("dcterms:language", $resources),
-    "format" => getFilterLOV("dcterms:format", $resources),
-  ];
+$filters = [
+  "subjects" => getFilterLOV("dcterms:subject", $resources),
+  "language" => getFilterLOV("dcterms:language", $resources),
+  "format" => getFilterLOV("dcterms:format", $resources),
+];
 
 ?>
 
@@ -116,10 +116,7 @@
 
 <div class="block search-form-block">
   <form id="search-form">
-    <input 
-      type="text" 
-      name="search" 
-      value="<?= $escapeAttr($query['search']) ?>"
+    <input type="text" name="search" value="<?= $escapeAttr($query['search']) ?>"
       placeholder="<?= $translate('Search') ?>">
     <button type="submit"><?= $translate('Search') ?></button>
   </form>
@@ -128,85 +125,86 @@
 <div class="search-results-block tile-container">
 
   <?php
-    if ($filters["subjects"]){ 
-      include('filter-in-place.phtml'); 
-      $tileType = "manuscript";
-    } else {
-      $tileType = "creator";
-    }
+  if ($filters["subjects"]) {
+    include ('filter-in-place.phtml');
+    $tileType = "manuscript";
+  } else {
+    $tileType = "creator";
+  }
   ?>
-  <script>console.log(<?= json_encode($resources) ?>)</script>
   <ul class="resource-list preview tiles">
+    <!-- <div class="tile tiny-tile">.</div> -->
     <?php
-      $headingTerm = $siteSetting('browse_heading_property_term', 'dcterms:title');
-      $bodyTerm = $siteSetting('browse_body_property_term', 'dcterms:description');
-      $untitled = $translate('[Untitled]');
+    $headingTerm = $siteSetting('browse_heading_property_term', 'dcterms:title');
+    $bodyTerm = $siteSetting('browse_body_property_term', 'dcterms:description');
+    $untitled = $translate('[Untitled]');
 
-      $sortedResources = array_map(function ($resource) {
-        $outputItem = $resource;
-        $outputItem->scriptoItem = $this->api()->searchOne('scripto_items', ['item_id' => $outputItem->id()])->getContent();
-        if ($outputItem->scriptoItem) {
-          $outputItem->mediaCount = $outputItem->scriptoItem->mediaCount();
-          $outputItem->approvedMediaCount = $outputItem->scriptoItem->isApprovedMediaCount();
-          /*$outputItem->percentApproved = 47;*/
-          $outputItem->percentApproved = round(($outputItem->approvedMediaCount / $outputItem->mediaCount) * 100);
-        } else {
-          $outputItem->mediaCount = 0;
-          $outputItem->approvedMediaCount = 0;
-          /*$outputItem->percentApproved = 47;*/
-          $outputItem->percentApproved = 0;
-        }
-        return $outputItem;
-      }, $resources);
+    $sortedResources = array_map(function ($resource) {
+      $outputItem = $resource;
+      $outputItem->scriptoItem = $this->api()->searchOne('scripto_items', ['item_id' => $outputItem->id()])->getContent();
+      if ($outputItem->scriptoItem) {
+        $outputItem->mediaCount = $outputItem->scriptoItem->mediaCount();
+        $outputItem->approvedMediaCount = $outputItem->scriptoItem->isApprovedMediaCount();
+        /*$outputItem->percentApproved = 47;*/
+        $outputItem->percentApproved = round(($outputItem->approvedMediaCount / $outputItem->mediaCount) * 100);
+      } else {
+        $outputItem->mediaCount = 0;
+        $outputItem->approvedMediaCount = 0;
+        /*$outputItem->percentApproved = 47;*/
+        $outputItem->percentApproved = 0;
+      }
+      return $outputItem;
+    }, $resources);
 
-      usort($sortedResources, function ($a, $b) {
-        return $a->percentApproved - $b->percentApproved;
-      });
-        $featuredItem = null;
-       foreach ($sortedResources as $resource) {
-         $heading = $headingTerm ? $resource->value($headingTerm, ['lang' => $langValue]) : null;
-          $heading = $heading ? $heading->asHtml() : $escape($resource->displayTitle($untitled, $lang));
-          $body = $bodyTerm ? $resource->value($bodyTerm, ['lang' => $langValue]) : null;
-          $body = $body ? $body->asHtml() : $escape($resource->displayDescription(null, $lang));
-          $detail = $resource->value("dcterms:abstract");
+    usort($sortedResources, function ($a, $b) {
+      return $a->percentApproved - $b->percentApproved;
+    });
+    $featuredItem = null;
+    foreach ($sortedResources as $resource) {
+      $heading = $headingTerm ? $resource->value($headingTerm, ['lang' => $langValue]) : null;
+      $heading = $heading ? $heading->asHtml() : $escape($resource->displayTitle($untitled, $lang));
+      $body = $bodyTerm ? $resource->value($bodyTerm, ['lang' => $langValue]) : null;
+      $body = $body ? $body->asHtml() : $escape($resource->displayDescription(null, $lang));
+      $detail = $resource->value("dcterms:abstract");
 
-          $filterString = createFilterString($resource);
+      $filterString = createFilterString($resource);
 
-          $thumbnailUrl = $resource->primaryMedia() ? $resource->primaryMedia()->thumbnailUrl('square') : $resource->thumbnailDisplayUrls()["square"];
-          $linkUrl = "/dohmekas/s/transcribe/item/{$resource->id()}";
+      $thumbnailUrl = $resource->primaryMedia() ? $resource->primaryMedia()->thumbnailUrl('square') : $resource->thumbnailDisplayUrls()["square"];
+      $linkUrl = "/dohmekas/s/transcribe/item/{$resource->id()}";
 
-          $tileData = [
-            "tileType" => $tileType,
-            "title" => $heading, 
-            "linkUrl" => $linkUrl,
-            "imageUrl" => $thumbnailUrl, 
-            "progress" => $resource->percentApproved,
-            "filterString" => $filterString,
-            "detail" => $detail
-          ];
-        
-          if ( $tileType == "creator" && $resource->value("curation:featured") == "@nick") {
-            $featuredItem = $tileData;
-            $featuredItem["desc"] = $resource->value("dcterms:description");
-            $featuredItem["dates"] = $resource->value("dcterms:date");
-            /*echo $heading . " will not be appearing in this array.";*/
-           } else { 
-            echo $this->TileComponent( $tileData ); 
-            }
-          } 
-      ?> 
-    </ul>
-      <?php if ($featuredItem): ?>
+      $tileData = [
+        "tileType" => $tileType,
+        "title" => $heading,
+        "linkUrl" => $linkUrl,
+        "imageUrl" => $thumbnailUrl,
+        "progress" => $resource->percentApproved,
+        "filterString" => $filterString,
+        "detail" => $detail
+      ];
 
-            <div class="featured-creator">
-              <h3>Featured Creator</h3>
-              <img src="<?= $featuredItem["imageUrl"] ?>" alt="<?= $featuredItem["title"] ?>" class="featured-creator-img" />
-              <section class="text-block">
-                <a href="<?= $featuredItem["linkUrl"] ?>" class="name"><?= $featuredItem["title"] . ", " . $featuredItem["dates"]; ?></a>
-                <p>
-                  <?= $featuredItem["desc"] ?>
-                </p>
-              </section>
-            </div>
-          <?php endif ?>
-  </div>
+      if ($tileType == "creator" && $resource->value("curation:featured") == "@nick") {
+        $featuredItem = $tileData;
+        $featuredItem["desc"] = $resource->value("dcterms:description");
+        $featuredItem["dates"] = $resource->value("dcterms:date");
+        /*echo $heading . " will not be appearing in this array.";*/
+      } else {
+        echo $this->TileComponent($tileData);
+      }
+    }
+    ?>
+  </ul>
+  <?php if ($featuredItem): ?>
+
+    <div class="featured-creator">
+      <h3>Featured Creator</h3>
+      <img src="<?= $featuredItem["imageUrl"] ?>" alt="<?= $featuredItem["title"] ?>" class="featured-creator-img" />
+      <section class="text-block">
+        <a href="<?= $featuredItem["linkUrl"] ?>"
+          class="name"><?= $featuredItem["title"] . ", " . $featuredItem["dates"]; ?></a>
+        <p>
+          <?= $featuredItem["desc"] ?>
+        </p>
+      </section>
+    </div>
+  <?php endif ?>
+</div>

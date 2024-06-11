@@ -1,0 +1,47 @@
+
+.tile.glow::after {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    top: -5px;
+    left: -5px;
+    width: 100% ;
+    height: 100%;
+    top: 0 ;
+
+    left: 0;
+    border-radius:  8px 8px 0 0 ;
+    background: linear-gradient( to right, #ffff, #fffa, #fff3, #fffa, #ffff );
+    background-size: 100%;
+    animation: border 1s linear forwards;
+}
+.tile.glow::after {
+    filter: blur(50px);
+}
+
+@keyframes border {
+
+    0% {
+        opacity: 0.001;
+    }
+
+    10% {
+        background-position: 0 0;
+    }
+    30% {
+        opacity: 0.99;
+        background-position: 0 0;
+    }
+    70% {
+        opacity: 0.99;
+    }
+    90% {
+        background-position:  100% 0;
+    }
+
+    100% {
+        opacity: 0.001;
+    }
+}

@@ -3,8 +3,8 @@
   align-items: start;
   justify-content: start;
 
-  & .filter-box{
-    position: sticky; 
+  & .filter-box {
+    position: sticky;
     top: 76px;
     flex: 1;
     min-width: 200px;
@@ -19,14 +19,15 @@
       font-family: "styrene";
       font-weight: 400;
       font-weight: 200;
-
     }
-    .date-filter {
+
+    & .date-filter {
       width: 90%;
       display: flex;
       flex-direction: column;
       gap: 3px;
       margin-block: 11px;
+
       & #date-slider {
         /* align-self: center; */
         margin: 6px;
@@ -40,29 +41,32 @@
     /* top: 76px; */
     /* max-height: calc(100vh - 100px); */
     background: var(--bg-color-2);
-    background-image: linear-gradient(
-      60deg,
-      var(--midphire) 0vw,
-      50vw,
-      rgb(var(--sapphire)) 50vw 100vw
-    );
+    background-image: linear-gradient(60deg,
+        var(--midphire) 0vw,
+        50vw,
+        rgb(var(--sapphire)) 50vw 100vw);
     border-radius: 11px;
     display: flex;
     flex-direction: column;
-    justify-content: center;;
+    justify-content: center;
+    ;
     align-items: start;
-      gap: 0;
-    
-    & a, p, h3 {
+    gap: 0;
+
+    & a,
+    p,
+    h3 {
       color: var(--fg-color-2);
     }
-    .text-block {
+
+    & .text-block {
       flex: 1;
       display: flex;
       flex-direction: column;
       gap: 11px;
       padding: 22px 33px 33px 33px;
     }
+
     & .name {
       /* margin-block:  11px; */
       font-size: 1.25rem;
@@ -71,16 +75,19 @@
       width: 100%;
       display: block;
     }
+
     & p {
       font-size: 1rem;
       line-height: 1.5rem;
     }
+
     & h3 {
-      margin-block:  11px;
+      margin-block: 11px;
       padding-inline: 33px;
       width: 100%;
       text-align: center;
     }
+
     & img {
       flex-shrink: 1;
       width: 100%;
@@ -88,7 +95,7 @@
       object-fit: cover;
       object-position: top;
       margin: 0;
-      padding:0;
+      padding: 0;
     }
   }
 }
@@ -129,10 +136,12 @@
     flex-direction: column;
   }
 }
+
 @media screen and (min-width: 900px) {
   .tile-container {
     flex-direction: row;
-    & .filter-box{
+
+    & .filter-box {
       /* flex: 1; */
       /* flex-basis: min(300px, 25vw); */
     }

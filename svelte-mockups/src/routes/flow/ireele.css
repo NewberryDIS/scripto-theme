@@ -1,0 +1,314 @@
+body {
+    /* --tile-width: 250px; */
+    --midphire-lab: 23, 7, -31;
+    --midphire-cmyk: 96, 88, 32, 21;
+    --parknite-lab: 64, -12, 3;
+    --parknite-cmyk: 51, 26, 43, 1;
+    --mulnite-lab: 66, 27, 0;
+    --mulnite-cmyk: 18, 51, 22, 0;
+    --flame: 241, 97, 81;
+    --park-green: 32, 84, 62;
+    --tile: 146, 88, 64;
+    --sapphire: 64, 81, 163;
+    --lake: 126, 196, 226;
+    --mulberry: 173, 43, 90;
+    --lavender: 205, 184, 209;
+    --midnight: 17, 26, 42;
+    --granite: 234, 235, 231;
+    --sand: 234, 220, 201;
+    --angle: 70deg;
+    --dist: 66%;
+    --midpark: color-mix(in oklab, rgb(var(--park-green)) 80%, rgb(var(--midnight)));
+    --midphire: color-mix(in oklab, rgb(var(--sapphire)), rgb(var(--midnight)));
+    --parknite: color-mix(in oklab, rgb(var(--park-green)), rgb(var(--granite)));
+    --mulnite: color-mix(in oklab, rgb(var(--mulberry)), rgb(var(--granite)));
+    --sm: 640px;
+    --md: 768px;
+    --lg: 1024px;
+    --xl: 1280px;
+    --xxl: 1536px;
+    --splash-color: var(--midpark);
+    --fg-color: rgb(var(--midnight));
+    --fg-color-2: rgb(var(--granite));
+    --bg-color: rgb(var(--granite));
+    --bg-color-2: var(--midphire);
+    --progress-green: var(--parknite);
+    --progress-red: var(--mulnite);
+    --progress-bg: rgb(var(--granite));
+    --shadow: color-mix(in oklab, var(--midphire) 10%, transparent);
+}
+
+.tile {
+    /* width: var(--tile-width); */
+    /* aspect-ratio: 1 / 1.5; */
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    /* position: relative; */
+    /* border: 1px solid var(--fg-color); */
+    padding: 1rem;
+    /* overflow: hidden; */
+    transition: 250ms;
+    filter: saturate(0.5);
+    /* box-shadow: 0 0 5px 5px color-mix(in oklab, var(--midphire) 10%, transparent); */
+}
+
+img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    /* pointer-events: none; */
+    z-index: -1;
+    transition: 250ms;
+    transform-origin: center;
+}
+
+.detail {
+    font-size: 0.87rem;
+}
+
+.title,
+.detail,
+.link-tile {
+    color: var(--fg-color-2);
+    font-weight: 400;
+    margin: 0;
+}
+
+.text-block {
+    position: absolute;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    padding: 0.5rem;
+    background: var(--bg-color-2);
+}
+
+.title,
+.progress-bar {
+    border-top: 1px solid var(--fg-color);
+}
+
+a,
+.progress-bar,
+.title,
+.detail {
+    font-family: 'styrene';
+    width: 100%;
+}
+
+.title,
+.progress-bar,
+.detail {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.progress-bar {
+    color: var(--fg-color);
+}
+
+.red {
+    --progress-fg: var(--progress-red);
+}
+
+.green {
+    --progress-fg: var(--progress-green);
+}
+
+& .title {
+    display: flex;
+}
+
+& .progress-bar {
+    display: flex;
+}
+
+& .detail {
+    display: none;
+}
+
+.filter-show {
+    display: flex;
+}
+
+.tile:not(.filter-hide) {}
+
+.tile.filter-hide {}
+
+ul,
+li {
+    padding: 0;
+    margin: 0;
+}
+
+.tile-container {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+}
+
+.filter-box {
+    position: sticky;
+    top: 76px;
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.filter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-family: 'styrene';
+    font-weight: 400;
+    font-weight: 200;
+}
+
+.tile-container {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 1rem;
+}
+
+.tile-container:has(.manuscript) {
+    grid-template-columns: 1fr 4fr;
+    grid-template-areas: 'filters items';
+}
+
+.tile-container:has(.creator) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'items featured';
+}
+
+.featured-creator {
+    grid-area: featured;
+}
+
+.tiles {
+    grid-area: items;
+}
+
+.filter-box {
+    grid-area: filters;
+}
+
+/* @media screen and (max-width: 900px) {
+    .tile-container {
+        flex-direction: column;
+    }
+}
+@media screen and (min-width: 900px) {
+    .tile-container {
+        flex-direction: row;
+    }
+    .filter-box {
+        /* flex: 1; */
+/* flex-basis: min(300px, 25vw); */
+/* } */
+/* }  */
+/*=====================================*/
+/* layouts */
+.tile-container {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 1rem;
+}
+
+.tile-container:has(.manuscript) {
+    grid-template-columns: 1fr 4fr;
+    grid-template-areas: 'filters items';
+}
+
+.tile-container:has(.creator) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'items featured';
+}
+
+.featured-creator {
+    grid-area: featured;
+}
+
+.tiles {
+    grid-area: items;
+}
+
+.filter-box {
+    grid-area: filters;
+}
+
+@media screen and (max-width: 900px) {
+    .tile-container {
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .tile-container {
+        flex-direction: row;
+    }
+}
+
+
+.tile.filter-hide {
+    animation: slippy 1s forwards normal;
+}
+
+/* .tile:not(.filter-hide) {
+    animation: slippy 1s 100ms 1 backwards reverse;
+} */
+@keyframes slippy {
+    0% {
+        width: var(--tile-width);
+        height: calc(var(--tile-width) * 1.5);
+        opacity: 1;
+    }
+
+    25% {
+        width: calc(var(--tile-width) / 2);
+        height: calc(var(--tile-width) * 1.5);
+        opacity: 1;
+    }
+
+    50% {
+        width: 0;
+        height: calc(var(--tile-width) * 0.5);
+        opacity: 0.99;
+    }
+
+    75% {
+        width: 0;
+        height: 0;
+        opacity: 0.33;
+    }
+
+    100% {
+        width: 0;
+        height: 0;
+        opacity: 0.0001;
+    }
+}
+
+.display-none {
+    display: none !important;
+}
