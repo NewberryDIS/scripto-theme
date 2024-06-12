@@ -1664,12 +1664,6 @@ body {}
 .resource-list,
 .media-list {
 
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row !important;
-  gap: 1rem;
-  justify-content: center;
-  align-items: start;
 
   & li,
   dd,
@@ -1747,9 +1741,23 @@ body {}
   display: flex;
   justify-content: center;
   height: 33px;
-  font-size;
-  22px;
+  font-size: 22px;
   align-items: center;
-  margin-block: 22px;
+  margin-block: 11px;
   border: 1px solid var(--fg-color);
+}
+.title-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding-inline: 0.5rem;
+}
+.title-bar-links a {
+  font-family: "styrene";
+  padding-inline: 1rem;
+  &:first-child {
+    border-right: 1px solid var(--fg-color);
+
+  }
 }

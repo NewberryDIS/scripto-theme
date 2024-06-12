@@ -7,16 +7,89 @@ $filterLocale = (bool) $this->siteSetting('filter_locale_values');
 $lang = $this->lang();
 $valueLang = $filterLocale ? [$lang, ''] : null;
 
-$pageBreadcrumbs = $this->breadcrumbs();
+$itemType = $item->resourceClass()->label() == "Collection" ? "creator" : "manuscript";
 
+
+$pageBreadcrumbs = $this->breadcrumbs();
+$moreinfo = $item->value("dcterms:creator");
+$viewat = $item->value("dcterms:source");
+$readmore = $item->value("dcterms:conformsTo");
+$aboutCollection = $item->value("dcterms:tableOfContents");
+
+$thumbnailUrl = $resource->primaryMedia() ? $resource->primaryMedia()->thumbnailUrl('square') : $resource->thumbnailDisplayUrls()["square"];
+/*$thumbnailLabel =  $resource->primaryMedia() ? $resource->primaryMedia() : $resource->thumbnailDisplayUrls();*/
+$thumbnailSource = $item->value("dcterms:source", array( 'type' => 'uri' ))->uri();
+$thumbnailLabel = $item->value("dcterms:source", array( 'type' => 'literal' ));
+/*$creatorTileData = {*/
+        /*$tileType = $itemType;*/
+        $title = $item->value('dcterms:title' );
+        $linkUrl = null;
+        $imageUrl = $thumbnailUrl;
+        $progress = null;
+        $filterString = null;
+        $detail = $resource->value("dcterms:abstract");
+        $desc = $resource->value("dcterms:description");
+        $dates = $resource->value("dcterms:date");
+        $featured = null;
+/*}*/
+        $referenceLinks = array_map(function($resource){ 
+          $retval = [
+            "link" => $resource->uri(),
+            "title" => $resource->value()
+          ];
+          return  $retval;
+        }, $resource->value("dcterms:bibliographicCitation",  array('all' => true)));
+/*$items = $this->api()->search('items', ['item_id' => 123])->getContent();*/
 ?>
 
-<?php echo $this->breadcrumbs(); ?>
+<script>console.log("$item", <?= json_encode($item) ?>)</script>
+<script>console.log("$referenceLinks", <?= json_encode( $item->value("dcterms:isReferencedBy", array('all' => true))) ?>)</script>
 <?php if (isset($breadcrumbs)): ?>
+<?php echo $this->breadcrumbs(); ?>
   ""<?= $breadcrumbs; ?>
 <?php endif; ?>
 
-<?php echo $this->pageTitle($item->displayTitle(null, $valueLang), 2); ?>
-<?php $this->trigger('view.show.before'); ?>
-<?php echo $this->resourcePageBlocks($item)->getBlocks(); ?>
-<?php $this->trigger('view.show.after'); ?>
+
+<?php if ($itemType == "manuscript"): ?>
+<div class="title-bar">
+  <?php echo $this->pageTitle($item->displayTitle(null, $valueLang), 2); ?>
+    <div class="title-bar-links">
+    <?php if ($moreinfo): ?>
+      <a href="<?= $moreinfo->uri() ?>" class="more-info">More Information</a>
+    <?php endif;?>
+    <?php if ($viewat): ?>
+      <a href="<?= $viewat->uri() ?>" class="view-at">View at Newberry Digital Collections</a>
+    <?php endif;?>
+  </div>
+</div>
+  <?php echo $this->resourcePageBlocks($item)->getBlocks(); ?>
+<?php elseif ($itemType == "creator"): ?>
+  <div class="creator-wrapper">
+  <div class="creator">
+  <h2><?= $title ?></h2>
+  <p class="dates"><?= $dates ?></p>
+  <p class="detail"><?= $detail ?></p>
+  <p class="desc"><?= $desc ?><a class="read-more" href="<?= $readmore->uri() ?>" target="_blank">Read more at collection guide</a></p>
+  <p class="coll"><?= $aboutCollection ?><a class="read-more" href="<?= $readmore->uri() ?>" target="_blank">Read more at collection guide</a></p>
+<dl>
+<dt>Related Resources: </dt>
+<?php
+foreach ($referenceLinks as $item) {
+  $link = $item['link'];
+  $title = $item['title'];
+
+  echo "<dd><a href='$link' title='$title'  target='_blank' >$title</a></dd>";
+}
+?>
+</dl>
+
+  <img src="<?= $imageUrl ?>" alt="<?= $title ?>" />
+  <figcaption><a href="<?= $thumbnailSource ?>" target="_blank"> <?= $thumbnailLabel ?></a></figcaption>
+    
+
+  </div>
+<div class="tiles">
+
+</div>
+  </div>
+<?php endif ?>

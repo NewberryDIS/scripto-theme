@@ -5,15 +5,20 @@ use Laminas\View\Helper\AbstractHelper;
 
 class TileComponent extends AbstractHelper
 {
-  public function __invoke( $tileData ) 
+   public function __invoke( $tileData ) 
   {
-    ['tileType' => $tileType, 'title' => $title, 'linkUrl' => $linkUrl, 'imageUrl' => $imageUrl, 'progress' => $progress, 'filterString' => $filterString, 'detail' => $detail] = $tileData;
+    ['tileType' => $tileType, 'title' => $title, 'linkUrl' => $linkUrl, 'imageUrl' => $imageUrl, 'progress' => $progress, 'filterString' => $filterString, 'detail' => $detail, 'desc' => $desc, 'dates' => $dates, "featured" => $featured ] = $tileData;
+
+
     if (is_string($progress)) {
       $progColor = ($progress === "Ready for Review") ?  "green" : "red" ;
     } else { 
       $progColor = "green";
     }
-
+    if ($featured) {
+      $tileType = $tileType . " featured";
+      $detail = trunc($desc);
+    }
     $progressText = is_string($progress) ? $progress : "{$progress}% Complete";
     $progressPercent = is_string($progress) ? "100" : $progress;
 
@@ -39,4 +44,15 @@ class TileComponent extends AbstractHelper
 
     return $html;
   }
+
 }
+
+    function trunc(string $text, int $length = 400): string {
+      if (strlen($text) <= $length) {
+          return $text;
+      }
+      $text = substr($text, 0, $length);
+      $text = substr($text, 0, strrpos($text, " "));
+      $text .= "...";
+      return $text;
+    }

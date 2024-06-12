@@ -37,7 +37,7 @@
           $completed = $scriptoPage ? $scriptoPage->completed() : false;
           $approved = $scriptoPage ? $scriptoPage->approved() : false;
           $scriptoData = $scriptoPage ? $scriptoPage->position() : 0;
-          $status = $scriptoPage ? ( $scriptoPage->completed() ) ? ( 'Ready for Review' ) : ( ( $scriptoPage->edited() ) ? ( "Started / In Progress" ) : ( 'Not Started' ) ) : 'Not Started'; 
+          $status = $scriptoPage ? ( $scriptoPage->completed() ) ? ( 'Ready for review' ) : ( ( $scriptoPage->edited() ) ? ( "In progress" ) : ( 'Not started' ) ) : 'Not started'; 
           $linkUrl = "/dohmekas/scripto/2/{$resource->id()}/{$media->id()}/edit";
           $tileData = [
             "tileType" => "page",
@@ -46,7 +46,11 @@
             "imageUrl" => $media->thumbnailUrl('square'), 
             "progress" => $status,
             "filterString" => [null,null,null,null],
-            "detail" => null
+            "detail" => null,
+        "desc" => $resource->value("dcterms:description"),
+        "dates" => $resource->value("dcterms:date"),
+        "featured" => $resource->value("curation:featured") === "@nick"
+
 
           ];
   

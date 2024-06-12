@@ -20,6 +20,23 @@ $filterLocale = (bool) $siteSetting('filter_locale_values');
 $lang = $filterLocale ? $this->lang() : null;
 $langValue = $filterLocale ? [$this->lang(), ''] : null;
 
+// zip featured and unfeatured arrays 
+// 1st featured will be 
+function array_zip($a1, $a2) {
+  $output_array = [];
+  $a1counter = 0;
+  $a2counter = 0;
+
+  foreach ($a1 as $i) {
+    if ( ($a1counter === 2 || $a1counter % 7 === 2) && $a2[$array2counter]  ){
+      array_push( $output, $a2[$array2counter] );
+      $array1counter++;
+      $array2counter++;
+    }
+    array_push( $output, $a1[$a1counter] );
+  }
+  return $output_array;
+}
 
 // get filter values
 function getFilterValues($resource, $term)
@@ -131,6 +148,7 @@ $filters = [
   } else {
     $tileType = "creator";
   }
+
   ?>
   <ul class="resource-list preview tiles">
     <!-- <div class="tile tiny-tile">.</div> -->
@@ -159,6 +177,16 @@ $filters = [
     usort($sortedResources, function ($a, $b) {
       return $a->percentApproved - $b->percentApproved;
     });
+
+    /*$unfeatured = array_filter($sortedResources, function ($resource) {*/
+    /*  return $resource->value("curation:featured") != "@nick";*/
+    /*});*/
+    /**/
+    /*$featured = array_filter($sortedResources, function ($resource) {*/
+    /*  return $resource->value("curation:featured") == "@nick";*/
+    /*});*/
+    /**/
+    /*$sortedResources = array_zip($unfeatured, $featured);*/
     $featuredItem = null;
     foreach ($sortedResources as $resource) {
       $heading = $headingTerm ? $resource->value($headingTerm, ['lang' => $langValue]) : null;
@@ -179,32 +207,17 @@ $filters = [
         "imageUrl" => $thumbnailUrl,
         "progress" => $resource->percentApproved,
         "filterString" => $filterString,
-        "detail" => $detail
+        "detail" => $detail,
+        "desc" => $resource->value("dcterms:description"),
+        "dates" => $resource->value("dcterms:date"),
+        "featured" => $resource->value("curation:featured") == "@nick",
       ];
 
-      if ($tileType == "creator" && $resource->value("curation:featured") == "@nick") {
-        $featuredItem = $tileData;
-        $featuredItem["desc"] = $resource->value("dcterms:description");
-        $featuredItem["dates"] = $resource->value("dcterms:date");
-        /*echo $heading . " will not be appearing in this array.";*/
-      } else {
-        echo $this->TileComponent($tileData);
+      if (false) {
+      echo '<script>console.log("' . $heading . '", ' . json_encode($tileData) . ")</script>";
       }
+      echo $this->TileComponent($tileData);
     }
     ?>
   </ul>
-  <?php if ($featuredItem): ?>
-
-    <div class="featured-creator">
-      <h3>Featured Creator</h3>
-      <img src="<?= $featuredItem["imageUrl"] ?>" alt="<?= $featuredItem["title"] ?>" class="featured-creator-img" />
-      <section class="text-block">
-        <a href="<?= $featuredItem["linkUrl"] ?>"
-          class="name"><?= $featuredItem["title"] . ", " . $featuredItem["dates"]; ?></a>
-        <p>
-          <?= $featuredItem["desc"] ?>
-        </p>
-      </section>
-    </div>
-  <?php endif ?>
 </div>

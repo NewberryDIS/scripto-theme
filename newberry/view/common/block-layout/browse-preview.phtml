@@ -45,7 +45,10 @@ $escape = $this->plugin('escapeHtml');
         "imageUrl" => $media->thumbnailUrl('square'), 
         "progress" =>  $percentApproved,
         "filterString" => [null,null,null,null],
-        "detail" => null 
+        "detail" => null,
+        "desc" => $resource->value("dcterms:description"),
+        "dates" => $resource->value("dcterms:date"),
+        "featured" => $resource->value("curation:featured") === "@nick"
       ];
       echo $this->TileComponent( $tileData );
 
