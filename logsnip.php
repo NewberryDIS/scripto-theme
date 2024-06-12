@@ -1,2 +1,2 @@
 
-<script>console.log("", <?php json_encode($data) ?>)</script>
+<script>console.log("", <?= json_encode($data) ?>)</script>
