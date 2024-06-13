@@ -25,8 +25,9 @@ class TileComponent extends AbstractHelper
     $html = <<<HTML
       <a href="$linkUrl" class="tile $tileType $progColor" data-subjects="$filterString[0]"
         data-language="$filterString[1]" data-format="$filterString[2]"
-        data-dates="$filterString[3]">
-        <img src="$imageUrl" alt="$title" />
+        data-dates="$filterString[3]" style="background-image: url($imageUrl);">
+        <h5 class="feature-tag">Featured Creator</h5>
+        <div class="text-block">
           <h4 class="title">$title</h4>
           <p class="detail">$detail</p>
           <div class="progress-bar" 
@@ -39,6 +40,7 @@ class TileComponent extends AbstractHelper
               );">
             <span>$progressText</span>
           </div>
+        </div>
       </a>
     HTML;
 

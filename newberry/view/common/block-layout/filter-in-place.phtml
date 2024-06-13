@@ -40,7 +40,7 @@ let filters = {
 
 function updateFilters() {
 
-  console.log(filters)
+  /*console.log(filters)*/
 
   filters.subjects = $("#subjects input:checked").map(function () {
     return $(this).val();
@@ -89,7 +89,7 @@ function updateFilters() {
       }
     }
 
-    console.log("tileValues ", tileValues)
+    /*console.log("tileValues ", tileValues)*/
 
     let showTile = Object.keys(tileValues).map(k => tileValues[k][1]).every(v => v)
 

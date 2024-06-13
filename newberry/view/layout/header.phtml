@@ -3,7 +3,9 @@
   <newberry-logo></newberry-logo>
   <div class="bcrumbs">
 <script>console.log("this from header",  <?= json_encode($this); ?>);</script>
-
+<div class="grid">
+<div class="another-thing">.</div>
+</div>
 <?php if (isset($breadcrumbs)): ?>
   <?= $breadcrumbs; ?>
 <?php endif; ?>

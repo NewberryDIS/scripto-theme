@@ -47,9 +47,6 @@ a {
  * Basic styling
  */
 body {
-  --tile-width: 333px;
-  --tile-width: 250px;
-  --tile-ratio: 1 / 1.5;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -1760,4 +1757,14 @@ body {}
     border-right: 1px solid var(--fg-color);
 
   }
+}
+
+header .grid {
+  grid-areas: "fuckyou fuckthis";
+}
+.another-thing { 
+  grid-area: "fuckthis";
+}
+.breadcrumb-holder {
+  grid-area: "fuckyou";
 }
