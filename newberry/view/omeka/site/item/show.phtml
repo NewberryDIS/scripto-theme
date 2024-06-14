@@ -1,4 +1,5 @@
 <?php
+$this->headLink()->prependStylesheet($this->assetUrl('css/creator.css'));
 //quinn (added line 10)
 $translate = $this->plugin('translate');
 $this->headLink()->appendStylesheet($this->assetUrl('css/resource-page-blocks.css', 'Omeka'));
@@ -68,9 +69,17 @@ $thumbnailLabel = $item->value("dcterms:source", array( 'type' => 'literal' ));
     </div>
     <?php echo $this->resourcePageBlocks($item)->getBlocks(); ?>
   <?php elseif ($itemType == "creator"): ?>
+<?php 
+        $everyoneLovesIiif = str_replace("https://collections.newberry.org/asset-management/", "https://collections.newberry.org/IIIF3/Image/", $thumbnailSource) . "/full/600,/0/default.jpg";
+        
+        ?>
     <div class="creator-wrapper">
       <div class="creator">
         <h2><?= $title ?></h2>
+        <figure>
+          <img src="<?= $everyoneLovesIiif ?>" alt="<?= $title ?>" />
+          <figcaption><a href="<?= $thumbnailSource ?>" target="_blank"> <?= $thumbnailLabel ?></a></figcaption>
+        </figure>
         <p class="dates"><?= $dates ?></p>
         <p class="detail"><?= $detail ?></p>
         <p class="desc"><?= $desc ?><a class="read-more" href="<?= $readmore->uri() ?>" target="_blank">Read more at collection guide</a></p>
@@ -86,10 +95,6 @@ $thumbnailLabel = $item->value("dcterms:source", array( 'type' => 'literal' ));
             }
           ?>
         </dl>
-        <figure>
-          <img src="<?= $imageUrl ?>" alt="<?= $title ?>" />
-          <figcaption><a href="<?= $thumbnailSource ?>" target="_blank"> <?= $thumbnailLabel ?></a></figcaption>
-        </figure>
 
       </div>
       <div class="tiles">
