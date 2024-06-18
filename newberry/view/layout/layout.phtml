@@ -48,10 +48,7 @@ $userBar = $this->userBar();
     <?php echo $this->content; ?>
   </div>
 </main>
-<script>console.log("this navifation breadcrumbs, layout",  <?= json_encode($this->navigation()->breadcrumbs()); ?>);</script>
-<!-- header is fixed-position, so it is at the top no matter where it appears in the document flow; -->
-<!-- by placing it down here, it gains access to all php variables defined anywhere else in the application  -->
-<!-- notably, the $breadcrumbs variable -->
+<script>console.log("this navifation , layout",  <?= json_encode($this->navigation()); ?>);</script>
 <?php include ('header.phtml'); ?>
 <?php include ('footer.phtml'); ?>
 </body>

@@ -2,13 +2,19 @@
   <section class="header-left">
   <newberry-logo></newberry-logo>
   <div class="bcrumbs">
-<script>console.log("this from header",  <?= json_encode($this); ?>);</script>
 <div class="grid">
 <div class="another-thing">.</div>
 </div>
-<?php if (isset($breadcrumbs)): ?>
-  <?= $breadcrumbs; ?>
+<?php 
+
+$poop = $this->scripto()->postTitle();
+if ($poop): ?>
+  <script>console.log(<?= $poop; ?>)</script>
+<?php else: ?>
+
+  <script>console.log("no poop ")</script>
 <?php endif; ?>
+  <script>console.log(<?= $title; ?>)</script>
   <!-- 
     <a href="#" class="header-link">Transcribe Home</a>
     &gt;

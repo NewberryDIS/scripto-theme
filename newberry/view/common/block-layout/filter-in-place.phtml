@@ -108,13 +108,13 @@ function updateFilters() {
     }
   });
   resultsCount = $('.tile:not(.filter-hide)').length
-  $('#results-count').text(`${resultsCount} results.`)
+  $('#results-count').text(`${resultsCount} result${resultsCount == 1 ? "" : "s"}.`);
 };
 
 $(document).ready(function () {
 
   resultsCount = $('.tile:not(.filter-hide)').length;
-  $('#results-count').text(`${resultsCount} results.`);
+  $('#results-count').text(`${resultsCount} result${resultsCount == 1 ? "" : "s"}.`);
 
   $( "#date-slider" ).slider({
     range: true,
