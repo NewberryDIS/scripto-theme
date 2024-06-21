@@ -12,21 +12,10 @@ $this->headLink()->appendStylesheet($this->scripto()->publicAppStylesheet());
 $this->headScript()->prependFile($this->assetUrl('vendor/jquery/jquery.min.js', 'Omeka'));
 $this->headScript()->appendFile($this->assetUrl('vendor/tablesaw/tablesaw.stackonly.jquery.js', 'Omeka'));
 $this->headScript()->appendFile($this->assetUrl('js/scripto.js', 'Scripto'));
-$this->headScript()->appendFile($this->assetUrl('js/dark-mode-toggle.js'));
-$this->headScript()->appendFile($this->assetUrl('js/newberry-logo.js' ));
 $this->headScript()->appendFile($this->assetUrl('js/public-app.js', 'Scripto'));
 ?>
 <?php echo $this->doctype(); ?>
 <?php echo $this->htmlElement('html')->setAttribute('lang', $this->lang()); ?>
-<script>
-console.log('af')
-$(document).ready({
-console.log('af')
-const saveBtn = $('input.save')
-  $( saveBtn ).attr('id','savee')
-  $( saveBtn ).attr('hx-get', '/htmx/getter.php')
-})
-</script>
     <head>
         <?php echo $this->headMeta(); ?>
         <?php echo $this->headTitle(); ?>
@@ -34,36 +23,17 @@ const saveBtn = $('input.save')
         <?php echo $this->headStyle(); ?>
         <?php echo $this->headScript(); ?>
     </head>
-    <header class="site-header" role="banner">
-        <div class="wrapper">
-            <nav class="top-nav">
-                <input type="checkbox" id="nav-trigger" class="nav-trigger" aria-label="<?php echo $this->translate('Toggle menu'); ?>"/>
-                <label for="nav-trigger">
-                    <span class="menu-icon"></span>
-                </label>
-                <div class="trigger">
-                    <div class="site-nav">
-                        <?php echo $this->scripto()->publicAppProjectLink(); ?>
-                        <?php echo $this->scripto()->publicAppSiteLink(); ?>
-                        <?php echo $this->scripto()->loginBar(); ?>
-                        <?php if (!$this->scripto()->apiClient()->userIsLoggedIn()): ?>
-                        <?php echo $this->hyperlink($this->translate('Create account'), $this->url('scripto', ['action' => 'create-account'], true), ['class' => 'page-link']); ?>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </header>
+
     <body>
         <main id="content" class="page-content" aria-label="<?php echo $this->escapeHtml($this->translate('Content')); ?>">
             <div class="wrapper">
                 <?php echo $this->messages(); ?>
                 <article class="post">
-                    <div class="post-content">
                         <?php echo $this->content; ?>
-                    </div>
                 </article>
             </div>
         </main>
+        <?php include ('header.phtml'); ?>
+        <?php include ('footer.phtml'); ?>
     </body>
 </html>

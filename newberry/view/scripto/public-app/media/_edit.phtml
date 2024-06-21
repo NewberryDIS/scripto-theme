@@ -8,7 +8,22 @@ $this->scripto()->postSubtitle(sprintf($this->translate('Original title: %s'), $
 ?>
 <?php echo $this->form()->openTag($mediaForm); ?>
 <?php echo $this->formElement($mediaForm->get('mediapublicappform_csrf')); ?>
-    <div id="wikitext fart" class="resource-content">
+    <div class="media-head">
+        <?php echo $this->scripto()->watchlistToggle($sMedia); ?>
+        <div class="protection-field">
+            <?php $editAccess = $sMedia->editAccess(0); ?>
+            <div class="current-protection"><strong><?php echo $this->translate('Protection: '); ?></strong><?php echo $this->translate($editAccess['label']); ?></div>
+            <div class="protection-expiration"><strong><?php echo $this->translate('Expiration: '); ?></strong><?php echo $editAccess['expiry'] ? $this->i18n()->dateFormat($editAccess['expiry'], 'short', 'short') : $this->translate('Never'); ?></div>
+        </div>
+        <div class="status-field">
+            <div class="current-status"><strong><?php echo $this->translate('Status: '); ?></strong><?php echo $this->translate($sMedia->status()); ?></div>
+            <label for="mark_complete"><?php echo $this->translate('Mark this revision as complete'); ?></label>
+            <?php echo $this->formCheckbox($mediaForm->get('mark_complete')); ?>
+        </div>
+        <input type="submit" class="save" value="<?php echo $this->escapeHtml($this->translate('Save')); ?>">
+        <?php echo $sMedia->link($this->translate('Cancel'), 'show', ['class' => 'button']); ?>
+    </div>
+    <div id="wikitext" class="resource-content">
         <div id="wikitext-layout" class="horizontal">
             <h3><?php echo sprintf($this->scripto()->translate($project->mediaType(), '%s: Media #%s'), $item->displayTitle(), $sMedia->position()); ?></h3>
             <button type="button" id="fullscreen"><span class="go-fullscreen"><?php echo $this->translate('Go full screen'); ?></span><span class="exit-fullscreen"><?php echo $this->translate('Exit full screen'); ?></span></button>
