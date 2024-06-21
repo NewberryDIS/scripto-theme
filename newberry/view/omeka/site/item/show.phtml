@@ -43,18 +43,6 @@ $thumbnailLabel = $item->value("dcterms:source", array( 'type' => 'literal' ));
 /*$items = $this->api()->search('items', ['item_id' => 123])->getContent();*/
 ?>
 
-<script>console.log("$item", <?= json_encode($item) ?>)</script>
-<script>console.log("$referenceLinks", <?= json_encode( $item->value("dcterms:isReferencedBy", array('all' => true))) ?>)</script>
-
-<div class="breadcrumbs-holder">
-  <?php echo $this->breadcrumbs(); ?>
-</div>
-
-<?php if (isset($breadcrumbs)): ?>
-  ""<?= $breadcrumbs; ?>
-<?php endif; ?>
-
-
   <?php if ($itemType == "manuscript"): ?>
     <div class="title-bar">
       <?php echo $this->pageTitle($item->displayTitle(null, $valueLang), 2); ?>
@@ -97,7 +85,7 @@ $thumbnailLabel = $item->value("dcterms:source", array( 'type' => 'literal' ));
         </dl>
 
       </div>
-      <div class="tiles">
+      <div class="creator-tiles">
         <?php echo $this->resourcePageBlocks($item)->getBlocks(); ?>
       </div>
     </div>

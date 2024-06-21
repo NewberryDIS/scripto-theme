@@ -1,20 +1,7 @@
 <header id="header">
   <section class="header-left">
   <newberry-logo></newberry-logo>
-  <div class="bcrumbs">
-<div class="grid">
-<div class="another-thing">.</div>
-</div>
-<?php 
-
-$poop = $this->scripto()->postTitle();
-if ($poop): ?>
-  <script>console.log(<?= $poop; ?>)</script>
-<?php else: ?>
-
-  <script>console.log("no poop ")</script>
-<?php endif; ?>
-  <script>console.log(<?= $title; ?>)</script>
+  <div class="bcrumbs" id="breadcrumbs">
   <!-- 
     <a href="#" class="header-link">Transcribe Home</a>
     &gt;
@@ -36,20 +23,14 @@ if ($poop): ?>
   <nav class="site-nav">
     <div class="trigger">
 <?php
-  if ($site){
-
 echo $site->publicNav()->menu()->renderMenu(null, [
   'maxDepth' => $this->themeSetting('nav_depth') - 1
 ]);
-  }
 ?>
-<?php if ($site): ?>
       <?php if ($this->themeSetting('show_search') == 1): ?>
         <div id="search">
           <?php echo $this->partial('common/search-form'); ?>
         </div>
-<script>console.log(" json_encode($site->menu());" )</script>
-      <?php endif; ?>
       <?php endif; ?>
     </div>
   </nav>

@@ -1,8 +1,15 @@
 .creator-wrapper {
   display: flex;
-  & .creator, .tiles {
-    width: 100%;
-    flex: 1;
+  flex-direction: column;
+  gap: 33px;
+  & .creator-tiles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* width: 100%; */
+    /* flex: 1; */
+
   }
   & .creator {
     figure {

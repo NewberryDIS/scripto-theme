@@ -29,6 +29,12 @@ if ($logo):
   $title = '<img src="' . $this->escapeHtml($logo) . '">';
 endif;
 $userBar = $this->userBar();
+
+$isHeader = false;
+if (str_ends_with($_SERVER['REQUEST_URI'], "header")) {
+$isHeader = true;
+}
+
 ?>
 <?php echo $this->doctype(); ?>
 <?php echo $this->htmlElement('html'); ?>
@@ -43,12 +49,13 @@ $userBar = $this->userBar();
 <?php echo $this->htmlElement('body'); ?>
 
 <a id="skipnav" href="#content"><?php echo $this->translate('Skip to main content'); ?></a>
+<?php if (!$isHeader): ?>
 <main id="content" class="page-content" aria-label="<?php echo $this->escapeHtml($this->translate('Content')); ?>">
   <div class="wrapper">
     <?php echo $this->content; ?>
   </div>
 </main>
-<script>console.log("this navifation , layout",  <?= json_encode($this->navigation()); ?>);</script>
+<?php endif; ?>
 <?php include ('header.phtml'); ?>
 <?php include ('footer.phtml'); ?>
 </body>
